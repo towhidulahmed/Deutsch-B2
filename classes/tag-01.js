@@ -1,4 +1,4 @@
-/* Stunde 1: Adjektive mit Ergänzungen (Kursbuch S. 101–103, Übungen 107 und 108) */
+/* Tag 1: Adjektive mit Ergänzungen (Kursbuch S. 101–103, Übungen 107 und 108) */
 B2.addClass({
   id: "s01",
   nr: 1,
@@ -64,7 +64,7 @@ B2.addClass({
       title: "3. Adjektive mit Präposition",
       html:
         '<div class="prose"><p>Hier ist die Präposition fest. Der Kasus kommt von der Präposition. Bei <b>an, auf, über</b> musst du ihn mitlernen, denn diese Präpositionen können Akk oder Dat haben. Die Merkhilfe zeigt, welche Bedeutungen oft zusammengehören.</p></div>' +
-        '<div class="table-wrap"><table><thead><tr><th>Präposition</th><th>Kasus</th><th>Adjektive aus der Stunde</th><th>Merkhilfe</th></tr></thead><tbody>' +
+        '<div class="table-wrap"><table><thead><tr><th>Präposition</th><th>Kasus</th><th>Adjektive aus dem Unterricht</th><th>Merkhilfe</th></tr></thead><tbody>' +
         '<tr><td class="de"><b>über</b></td><td><span class="case akk">Akk</span></td><td>entsetzt, erfreut, erstaunt, froh, glücklich, traurig</td><td>Gefühl als Reaktion auf etwas</td></tr>' +
         '<tr><td class="de"><b>auf</b></td><td><span class="case akk">Akk</span></td><td>angewiesen, gespannt, neidisch, stolz</td><td>Blick auf jemanden oder etwas</td></tr>' +
         '<tr><td class="de"><b>um</b></td><td><span class="case akk">Akk</span></td><td>besorgt</td><td>Sorge</td></tr>' +

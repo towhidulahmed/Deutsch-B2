@@ -1,6 +1,6 @@
 # Deutsch B2 Lernseite
 
-A study site for the German B2 course. Each class has a summary, grammar notes, vocabulary, flashcards, exercises that check your answers, and personal notes. It is plain HTML, CSS and JavaScript, so there is nothing to install or build.
+A study site for the German B2 course. Each course day has a summary, grammar notes, vocabulary, flashcards, exercises that check your answers, and personal notes. It is plain HTML, CSS and JavaScript, so there is nothing to install or build.
 
 ## Use it
 
@@ -16,9 +16,9 @@ Once installed it opens full screen and works without internet. The speaker butt
 
 Notes, flashcard progress and exercise answers are saved only on your own device. Classmates who use the same link each have their own.
 
-## Add a new class
+## Add a new day
 
-1. Copy `classes/stunde-01.js` to `classes/stunde-02.js`.
+1. Copy `classes/tag-01.js` to `classes/tag-02.js`.
 2. In the new file, set `id` to `"s02"` (letters and digits only) and `nr` to `2`, then fill in:
    - `title`, `date`, `topic`, `tags`
    - `summary`: HTML paragraphs
@@ -27,10 +27,10 @@ Notes, flashcard progress and exercise answers are saved only on your own device
    - `vocab`: list of `{ de, gram, en, ex }` (`gram` is optional, for example `"+ Dativ"`)
    - `exercises`: list of `{ title, intro, items: [{ q }] }`. In `q`, write each gap as `[[answer]]`. Separate accepted answers with `|`. Use `[[-]]` where nothing belongs.
    - `homework`: optional text
-3. In `index.html`, add this line under the existing class line:
+3. In `index.html`, add this line under the existing day line:
 
    ```html
-   <script src="classes/stunde-02.js"></script>
+   <script src="classes/tag-02.js"></script>
    ```
 
 Optional fields:

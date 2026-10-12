@@ -190,7 +190,7 @@
     });
     var titles = { wortschatz: "Wortschatz", karteikarten: "Karteikarten", notizen: "Notizen" };
     var c = h && byId(h.split("-")[0]);
-    document.title = (c ? "Stunde " + c.nr + ": " + c.title : titles[h] || "Deutsch B2 Lernseite") + (c || titles[h] ? " · Deutsch B2" : "");
+    document.title = (c ? "Tag " + c.nr + ": " + c.title : titles[h] || "Deutsch B2 Lernseite") + (c || titles[h] ? " · Deutsch B2" : "");
   }
 
   /* ---------- home ---------- */
@@ -200,19 +200,19 @@
     var known = store.get("b2known", {});
     var nKnown = vocab.filter(function (v) { return known[cardKey(v)]; }).length;
     var html = '<section class="hero"><span class="eyebrow">Deutsch · Niveau B2</span>' +
-      "<h1>Alle Unterrichtsstunden auf einen Blick</h1>" +
-      '<p class="lede">Zusammenfassung, Grammatik, Wortschatz, Karteikarten und Übungen zu jeder Stunde. Alle Beispiele stammen aus dem Unterricht. Deine Notizen bleiben auf deinem Gerät.</p>' +
-      '<div class="stats"><div><strong>' + cls.length + "</strong>Stunden</div><div><strong>" + vocab.length + "</strong>Wörter</div><div><strong>" + nKnown + "</strong>Karten gewusst</div></div></section>";
+      "<h1>Alle Kurstage auf einen Blick</h1>" +
+      '<p class="lede">Zusammenfassung, Grammatik, Wortschatz, Karteikarten und Übungen zu jedem Kurstag. Alle Beispiele stammen aus dem Unterricht. Deine Notizen bleiben auf deinem Gerät.</p>' +
+      '<div class="stats"><div><strong>' + cls.length + "</strong>Tage</div><div><strong>" + vocab.length + "</strong>Wörter</div><div><strong>" + nKnown + "</strong>Karten gewusst</div></div></section>";
     html += '<div id="install-slot"></div>';
-    html += '<section class="class-list" aria-label="Stunden">';
+    html += '<section class="class-list" aria-label="Kurstage">';
     cls.slice().reverse().forEach(function (c) {
       var nv = (c.vocab || []).length, nk = cardsKnown(c), best = drillBest(c);
-      html += '<a class="class-card" href="#' + esc(c.id) + '"><span class="class-no">Stunde ' + c.nr + "</span><div><h3>" + esc(c.title) + '</h3><div class="meta">' + esc(c.date || "") + (c.topic ? " · " + esc(c.topic) : "") + "</div>" +
+      html += '<a class="class-card" href="#' + esc(c.id) + '"><span class="class-no">Tag ' + c.nr + "</span><div><h3>" + esc(c.title) + '</h3><div class="meta">' + esc(c.date || "") + (c.topic ? " · " + esc(c.topic) : "") + "</div>" +
         '<div class="progress-line"><span class="pill' + (nv && nk === nv ? " done" : "") + '">Karten ' + nk + "/" + nv + "</span>" +
         (c.drills && c.drills.length ? '<span class="pill' + (best && best.score === best.total ? " done" : "") + '">Schnelltest ' + (best ? best.score + "/" + best.total : "offen") + "</span>" : "") +
         '</div></div><span class="go" aria-hidden="true">→</span></a>';
     });
-    if (!cls.length) html += '<p class="muted">Noch keine Stunden eingetragen.</p>';
+    if (!cls.length) html += '<p class="muted">Noch keine Tage eingetragen.</p>';
     html += "</section>";
     app.innerHTML = html;
     renderInstall($("#install-slot"));
@@ -221,10 +221,10 @@
   /* ---------- class page ---------- */
   function renderClass(app, c, tab) {
     if (!TABS.some(function (t) { return t[0] === tab; })) tab = "ueberblick";
-    var html = '<header class="lesson-head"><a class="back" href="#start">← Alle Stunden</a><span class="eyebrow">Stunde ' + c.nr + (c.date ? " · " + esc(c.date) : "") + "</span><h1>" + esc(c.title) + "</h1>";
+    var html = '<header class="lesson-head"><a class="back" href="#start">← Alle Tage</a><span class="eyebrow">Tag ' + c.nr + (c.date ? " · " + esc(c.date) : "") + "</span><h1>" + esc(c.title) + "</h1>";
     if (c.tags && c.tags.length) html += '<div class="tags">' + c.tags.map(function (t) { return '<span class="tag">' + esc(t) + "</span>"; }).join("") + "</div>";
     html += "</header>";
-    html += '<div class="tabs-wrap"><nav class="tabs" role="tablist" aria-label="Bereiche der Stunde">' + TABS.map(function (t) {
+    html += '<div class="tabs-wrap"><nav class="tabs" role="tablist" aria-label="Bereiche des Tages">' + TABS.map(function (t) {
       return '<button role="tab" id="tab-' + t[0] + '" aria-controls="panel" aria-selected="' + (t[0] === tab) + '" tabindex="' + (t[0] === tab ? 0 : -1) + '" data-tab="' + t[0] + '">' + t[1] + "</button>";
     }).join("") + "</nav></div>";
     html += '<section class="panel" id="panel" role="tabpanel"><div class="panel-body" id="panel-body"></div><div class="next-row" id="next-row"></div></section>';
@@ -292,7 +292,7 @@
     if (nv) steps.push(["karten", "Wörter mit Karteikarten lernen", nk + " von " + nv + " gewusst"]);
     if (nDr || nEx) steps.push(["uebungen", "Üben", [nDr ? "Schnelltest" + (best ? " " + best.score + "/" + best.total : "") : "", nEx ? nEx + " Übung" + (nEx > 1 ? "en" : "") : ""].filter(Boolean).join(" · ")]);
     steps.push(["notizen", "Eigene Notizen schreiben", "Fragen, eigene Beispielsätze"]);
-    html += '<div class="block"><h2>So lernst du diese Stunde</h2><ol class="path">' + steps.map(function (s, i) {
+    html += '<div class="block"><h2>So lernst du diesen Tag</h2><ol class="path">' + steps.map(function (s, i) {
       return '<li><button type="button" data-go="' + s[0] + '"><span class="step">' + (i + 1) + '</span><span class="path-text"><b>' + s[1] + '</b><span class="muted">' + esc(s[2]) + '</span></span><span class="go" aria-hidden="true">→</span></button></li>';
     }).join("") + "</ol></div>";
     p.innerHTML = html;
@@ -300,7 +300,7 @@
   }
 
   function panelGrammar(p, c) {
-    if (!c.grammar || !c.grammar.length) { p.innerHTML = '<p class="muted">Keine Grammatik in dieser Stunde.</p>'; return; }
+    if (!c.grammar || !c.grammar.length) { p.innerHTML = '<p class="muted">Keine Grammatik an diesem Tag.</p>'; return; }
     var toc = c.grammar.length > 2 ? '<nav class="toc" aria-label="Themen">' + c.grammar.map(function (g, i) {
       return '<button type="button" class="chip" data-sec="' + i + '">' + esc(g.title) + "</button>";
     }).join("") + "</nav>" : "";
@@ -313,12 +313,12 @@
 
   function vocabTable(list, showClass) {
     if (!list.length) return '<p class="muted">Keine Treffer. Versuch ein anderes Wort.</p>';
-    return '<div class="table-wrap"><table class="stack"><thead><tr><th>Deutsch</th><th>Bedeutung</th><th>Beispiel aus dem Unterricht</th>' + (showClass ? "<th>Stunde</th>" : "") + "</tr></thead><tbody>" +
+    return '<div class="table-wrap"><table class="stack"><thead><tr><th>Deutsch</th><th>Bedeutung</th><th>Beispiel aus dem Unterricht</th>' + (showClass ? "<th>Tag</th>" : "") + "</tr></thead><tbody>" +
       list.map(function (v) {
         return '<tr><td><span class="word-cell">' + sayButton(v.de + (v.ex ? ". " + v.ex : ""), v.de + " anhören") + '<span><span class="de">' + esc(v.de) + "</span>" + (v.gram ? ' <span class="gram">' + esc(v.gram) + "</span>" : "") + "</span></span></td>" +
           '<td data-label="Bedeutung">' + esc(v.en) + "</td>" +
           '<td class="ex-cell" data-label="Beispiel">' + esc(v.ex || "") + "</td>" +
-          (showClass ? '<td data-label="Stunde"><a href="#' + v.cls.id + '-wortschatz">Stunde ' + v.cls.nr + "</a></td>" : "") + "</tr>";
+          (showClass ? '<td data-label="Tag"><a href="#' + v.cls.id + '-wortschatz">Tag ' + v.cls.nr + "</a></td>" : "") + "</tr>";
       }).join("") + "</tbody></table></div>";
   }
   function filterVocab(list, q) {
@@ -549,7 +549,7 @@
   }
   function panelExercises(p, c) {
     var hasDrills = c.drills && c.drills.length, hasEx = c.exercises && c.exercises.length;
-    if (!hasDrills && !hasEx) { p.innerHTML = '<p class="muted">Keine Übungen in dieser Stunde.</p>'; return; }
+    if (!hasDrills && !hasEx) { p.innerHTML = '<p class="muted">Keine Übungen an diesem Tag.</p>'; return; }
     var html = (c.drills || []).map(function (d, di) { return '<article class="block drill" data-drill="' + di + '"></article>'; }).join("");
     html += (c.exercises || []).map(function (ex, ei) {
       var items = ex.items.map(function (it, ii) {
@@ -646,7 +646,7 @@
   /* ---------- notes ---------- */
   function panelNotes(p, c) {
     var key = "b2note:" + c.id;
-    p.innerHTML = '<div class="block"><h2>Meine Notizen zu Stunde ' + c.nr + '</h2><p class="muted">Wird automatisch auf diesem Gerät gespeichert. Andere sehen deine Notizen nicht.</p>' +
+    p.innerHTML = '<div class="block"><h2>Meine Notizen zu Tag ' + c.nr + '</h2><p class="muted">Wird automatisch auf diesem Gerät gespeichert. Andere sehen deine Notizen nicht.</p>' +
       '<textarea class="notes-box" id="note-' + esc(c.id) + '" placeholder="Eigene Beispielsätze, Fragen an die Lehrkraft, Eselsbrücken …"></textarea><span class="saved" id="saved" aria-live="polite"></span></div>';
     var ta = $(".notes-box", p), t;
     ta.value = store.get(key, "");
@@ -657,12 +657,12 @@
 
   /* ---------- global pages ---------- */
   function renderAllVocab(app) {
-    app.innerHTML = '<header class="lesson-head"><span class="eyebrow">Alle Stunden</span><h1>Wortschatz</h1></header><section class="panel" id="panel"></section>';
+    app.innerHTML = '<header class="lesson-head"><span class="eyebrow">Alle Tage</span><h1>Wortschatz</h1></header><section class="panel" id="panel"></section>';
     vocabUI($("#panel"), allVocab(), true);
   }
   function renderAllCards(app) {
-    app.innerHTML = '<header class="lesson-head"><span class="eyebrow">Alle Stunden gemischt</span><h1>Karteikarten</h1></header><section class="panel" id="panel"></section>';
-    cardsUI($("#panel"), allVocab(), function (v) { return "Stunde " + v.cls.nr; });
+    app.innerHTML = '<header class="lesson-head"><span class="eyebrow">Alle Tage gemischt</span><h1>Karteikarten</h1></header><section class="panel" id="panel"></section>';
+    cardsUI($("#panel"), allVocab(), function (v) { return "Tag " + v.cls.nr; });
   }
 
   function backupData() {
@@ -678,12 +678,12 @@
       var n = (store.get("b2note:" + c.id, "") || "").trim();
       if (!n) return;
       any = true;
-      text += "Stunde " + c.nr + ": " + c.title + "\n" + n + "\n\n";
-      html += '<article class="block note-item"><h2><a href="#' + c.id + '-notizen">Stunde ' + c.nr + ": " + esc(c.title) + "</a></h2><pre>" + esc(n) + "</pre></article>";
+      text += "Tag " + c.nr + ": " + c.title + "\n" + n + "\n\n";
+      html += '<article class="block note-item"><h2><a href="#' + c.id + '-notizen">Tag ' + c.nr + ": " + esc(c.title) + "</a></h2><pre>" + esc(n) + "</pre></article>";
     });
     if (!any) {
-      html += '<div class="callout">Noch keine Notizen. Öffne eine Stunde und schreib im Tab „Notizen“.</div>';
-      html += '<div class="class-list">' + cls.map(function (c) { return '<a class="class-card" href="#' + c.id + '-notizen"><span class="class-no">Stunde ' + c.nr + "</span><div><h3>" + esc(c.title) + '</h3></div><span class="go" aria-hidden="true">→</span></a>'; }).join("") + "</div>";
+      html += '<div class="callout">Noch keine Notizen. Öffne einen Tag und schreib im Tab „Notizen“.</div>';
+      html += '<div class="class-list">' + cls.map(function (c) { return '<a class="class-card" href="#' + c.id + '-notizen"><span class="class-no">Tag ' + c.nr + "</span><div><h3>" + esc(c.title) + '</h3></div><span class="go" aria-hidden="true">→</span></a>'; }).join("") + "</div>";
     } else {
       html += '<div class="toolbar">' + (navigator.share ? '<button class="btn primary" id="share-notes">Teilen</button>' : "") +
         '<button class="btn' + (navigator.share ? "" : " primary") + '" id="copy-notes">Kopieren</button>' +
