@@ -1,4 +1,4 @@
-# Class media stays private and never goes into this repo
+# Large media files are not part of the site
 *.mp4
 *.mov
 *.m4a

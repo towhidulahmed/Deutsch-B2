@@ -12,15 +12,11 @@ A study site for the German B2 course. Each class has a summary, grammar notes, 
 - **iPhone / iPad (Safari):** open the site, tap **Share**, then **Add to Home Screen**.
 - **Android (Chrome):** open the site and tap **Install** on the home page banner, or use the menu → **Install app**.
 
-Once installed it opens full screen and works without internet.
+Once installed it opens full screen and works without internet. The speaker buttons read German words aloud with your device's German voice.
 
 Notes, flashcard progress and exercise answers are saved only on your own device. Classmates who use the same link each have their own.
 
 ## Add a new class
-
-The easy way is to put the new class material in the course folder and ask Claude to add the class.
-
-By hand:
 
 1. Copy `classes/stunde-01.js` to `classes/stunde-02.js`.
 2. In the new file, set `id` to `"s02"` (letters and digits only) and `nr` to `2`, then fill in:
@@ -37,4 +33,9 @@ By hand:
    <script src="classes/stunde-02.js"></script>
    ```
 
-4. In `sw.js`, add `"classes/stunde-02.js"` to the `SHELL` list and change `CACHE` to the next version (`"b2-v2"`), so installed apps pick up the new class.
+Optional fields:
+
+- `drills`: quick tap quizzes, `{ title, intro, options: [...], items: [{ q, hint, a, ex }] }`. `a` is one option or a list of accepted options.
+- In an exercise item, `note` is a hint that appears after checking.
+
+Installed apps pick up new classes automatically the next time they open with internet.

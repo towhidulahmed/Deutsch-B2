@@ -1,6 +1,6 @@
-/* Offline support. Pages and class files are served from the cache right away and
-   refreshed in the background, so new classes show up on the next start. */
-var CACHE = "b2-v2";
+/* Offline support. When online, pages and class files always come fresh from the
+   server (new classes appear right away); offline, the last saved copy is used. */
+var CACHE = "b2-v3";
 var SHELL = [
   "./",
   "index.html",
@@ -22,6 +22,17 @@ self.addEventListener("activate", function (e) {
   }).then(function () { return self.clients.claim(); }));
 });
 
+function fromNetwork(req, cache, ms) {
+  return new Promise(function (resolve, reject) {
+    var t = setTimeout(reject, ms);
+    fetch(req).then(function (res) {
+      clearTimeout(t);
+      if (res && (res.ok || res.type === "opaque")) cache.put(req, res.clone());
+      resolve(res);
+    }, function (err) { clearTimeout(t); reject(err); });
+  });
+}
+
 self.addEventListener("fetch", function (e) {
   var req = e.request;
   if (req.method !== "GET") return;
@@ -31,13 +42,15 @@ self.addEventListener("fetch", function (e) {
   if (!sameOrigin && !fonts) return;
 
   e.respondWith(caches.open(CACHE).then(function (cache) {
-    return cache.match(req, { ignoreSearch: sameOrigin }).then(function (hit) {
-      var net = fetch(req).then(function (res) {
-        if (res && (res.ok || res.type === "opaque")) cache.put(req, res.clone());
-        return res;
-      }).catch(function () { return hit; });
-      if (hit) { e.waitUntil(net); return hit; }
-      return net;
+    if (fonts) {
+      // Fonts never change: cache first.
+      return cache.match(req).then(function (hit) { return hit || fromNetwork(req, cache, 10000); });
+    }
+    // Site files: network first (4 s), then the saved copy.
+    return fromNetwork(req, cache, 4000).catch(function () {
+      return cache.match(req, { ignoreSearch: true }).then(function (hit) {
+        return hit || (req.mode === "navigate" ? cache.match("index.html") : Response.error());
+      });
     });
   }));
 });
