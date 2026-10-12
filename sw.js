@@ -1,6 +1,6 @@
 /* Offline support. Pages and class files are served from the cache right away and
    refreshed in the background, so new classes show up on the next start. */
-var CACHE = "b2-v1";
+var CACHE = "b2-v2";
 var SHELL = [
   "./",
   "index.html",

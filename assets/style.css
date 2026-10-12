@@ -89,7 +89,7 @@ svg { flex: none; }
 }
 .mainnav svg { width: 18px; height: 18px; fill: currentColor; }
 .mainnav a[aria-current="page"] { color: var(--pen); background: var(--pen-soft); font-weight: 600; }
-.theme-btn { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border-radius: 999px; }
+.btn.theme-btn { display: grid; place-items: center; flex: none; width: 42px; height: 42px; min-height: 0; padding: 0; border-radius: 50%; line-height: 0; }
 .theme-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
 /* Phones: main links move to a bottom tab bar */
