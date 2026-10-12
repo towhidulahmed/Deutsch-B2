@@ -1,0 +1,22 @@
+{
+  "name": "Deutsch B2 Lernseite",
+  "short_name": "Deutsch B2",
+  "description": "Zusammenfassungen, Grammatik, Wortschatz, Karteikarten und Übungen zum Deutschkurs B2.",
+  "lang": "de",
+  "start_url": "./#start",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6f7f9",
+  "theme_color": "#2442a8",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Karteikarten", "url": "./#karteikarten", "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Wortschatz", "url": "./#wortschatz", "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
