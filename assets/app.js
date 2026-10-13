@@ -468,8 +468,8 @@
         '<div class="drill-top"><span class="fc-progress">Frage ' + (pos + 1) + " / " + queue.length + (q.retry ? ' · <span class="again">noch einmal</span>' : "") + "</span>" +
         (best ? '<span class="fc-progress">Bestwert ' + best.score + "/" + best.total + "</span>" : "") + "</div>" +
         '<div class="fc-bar wide"><span style="width:' + Math.round(pos / queue.length * 100) + '%"></span></div>' +
-        '<div class="drill-q"><span class="drill-word">' + esc(q.it.q) + ' <span class="blank">___</span></span>' + (q.it.hint ? '<span class="drill-hint">' + esc(q.it.hint) + "</span>" : "") + "</div>" +
-        '<div class="opts" role="group" aria-label="Antworten">' + d.options.map(function (o, oi) {
+        '<div class="drill-q"><span class="drill-word">' + esc(q.it.q) + (d.blank === false ? "" : ' <span class="blank">___</span>') + "</span>" + (q.it.hint ? '<span class="drill-hint">' + esc(q.it.hint) + "</span>" : "") + "</div>" +
+        '<div class="opts' + (d.options.length <= 4 ? " few" : "") + '" role="group" aria-label="Antworten">' + d.options.map(function (o, oi) {
           return '<button class="opt" type="button" data-opt="' + esc(o) + '"><kbd>' + ((oi + 1) % 10) + "</kbd>" + esc(o) + "</button>";
         }).join("") + "</div>" +
         '<div class="drill-fb" aria-live="polite"></div>';

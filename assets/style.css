@@ -387,6 +387,7 @@ s { color: var(--bad); text-decoration-thickness: 1.5px; }
 .drill-hint { font-size: 0.9rem; color: var(--ink-soft); }
 .opts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
 @media (max-width: 640px) { .opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.opts.few { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 .opt {
   position: relative; font: inherit; font-size: 0.95rem; font-weight: 500; cursor: pointer; color: var(--ink);
   background: var(--sheet); border: 1.5px solid var(--rule); border-radius: 10px; min-height: 48px; padding: 8px 10px;

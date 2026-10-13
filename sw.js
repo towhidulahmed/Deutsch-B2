@@ -9,7 +9,8 @@ var SHELL = [
   "assets/app.js",
   "assets/icons/icon-192.png",
   "assets/icons/apple-touch-icon.png",
-  "classes/tag-01.js"
+  "classes/tag-01.js",
+  "classes/tag-02.js"
 ];
 
 self.addEventListener("install", function (e) {
