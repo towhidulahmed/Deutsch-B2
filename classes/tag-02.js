@@ -140,14 +140,21 @@ B2.addClass({
         '<tr><td>Höfliche Bitten oder Fragen</td><td><b>Könntest</b> du mir bitte helfen?</td></tr>' +
         '<tr><td>Ratschläge und Vorschläge</td><td>Du <b>solltest</b> zum Arzt gehen.</td></tr>' +
         '<tr><td>Indirekte Rede (statt Konj. I)</td><td>Die Ärztin hat gesagt, ich <b>sollte</b> mich schonen.</td></tr>' +
+        '<tr><td>Vermutungen, vorsichtige Aussagen</td><td>Wo ist mein Handy? Das <b>dürfte</b> auf dem Schreibtisch liegen. (= wahrscheinlich)</td></tr>' +
+        '<tr><td>Reue, verpasste Chancen, Kritik</td><td>Ich <b>hätte</b> ein anderes Gericht <b>bestellen sollen</b>. · Wir <b>hätten</b> den früheren Zug <b>nehmen sollen</b>.</td></tr>' +
+        '<tr><td>Irreale Vergleiche (als, als ob)</td><td>Er tut so, <b>als wäre</b> er ein Genie. (= als ob er ein Genie <b>wäre</b>)</td></tr>' +
         '</tbody></table></div>' +
+        '<div class="callout"><strong>Mehr Beispiele</strong><br>Wunsch: <em>Ich <b>wünschte</b>, ich <b>hätte</b> mehr Zeit für meine Hobbys!</em><br>Bitte: <em><b>Könntest</b> du mir einen Kaffee machen?</em><br>Vorschlag: <em>Wir <b>sollten</b> das Projekt verschieben.</em><br>Wenn-Satz: <em>Wenn ich mehr Zeit <b>hätte</b>, <b>würde</b> ich öfter Sport <b>machen</b>.</em></div>' +
+        '<div class="callout"><strong>Achtung beim irrealen Vergleich</strong><br>Nach <em>als</em> kommt das Verb direkt danach: <em>als <b>wäre</b> er …</em>. Nach <em>als ob</em> steht das Verb am Ende: <em>als ob er ein Genie <b>wäre</b></em>.</div>' +
         '<div class="callout"><strong>Konjunktiv I oder II?</strong><br><em>ich kann</em> = Indikativ (real). <em>ich könne</em> = Konjunktiv I (indirekte Rede). <em>ich könnte</em> = Konjunktiv II (vielleicht, höflich, irreal). In der gesprochenen Sprache hört man den Konjunktiv II viel öfter als den Konjunktiv I.</div>'
     },
     {
       title: "8. Konjunktiv II: Bildung",
       html:
         '<div class="prose"><p><b>Option 1: würde + Infinitiv.</b> So macht man es bei fast allen regelmäßigen und vielen unregelmäßigen Verben: <em>ich würde gehen, du würdest gehen, er/sie/es würde gehen</em>.</p>' +
-        '<p><b>Option 2: die eigene Form des Verbs.</b> Sie kommt vom <b>Präteritum</b>, und a, o, u bekommen einen <b>Umlaut</b>: <em>kam → käme</em>, <em>hatte → hätte</em>, <em>gab → gäbe</em>. Das nimmt man bei <em>sein, haben</em>, den Modalverben und ein paar wichtigen unregelmäßigen Verben.</p></div>' +
+        '<p><b>Option 2: die eigene Form des Verbs.</b> In drei Schritten, Beispiel <em>können</em>: Präteritum <em>ich konnte</em> → Stamm <em>konnt-</em> → Umlaut <em>könnt-</em> → Endung: <em>ich könnte, du könntest, er könnte, wir könnten, ihr könntet, sie könnten</em>. Die Endungen sind <b>-e, -est, -e, -en, -et, -en</b>.</p>' +
+        '<p><b>Warum so oft würde?</b> Bei regelmäßigen Verben ist die eigene Form genau gleich wie das Präteritum: <em>ich machte</em> kann Präteritum oder Konjunktiv II sein. Damit man nichts verwechselt, sagt man <em>ich würde machen</em>. Die würde-Form klingt außerdem normaler und gesprochener, die eigene Form oft gehobener oder schriftlicher. Die Bedeutung ist meistens gleich: <em>Ich <b>würde</b> gerne besser Deutsch <b>sprechen</b>.</em></p>' +
+        '<p><b>Eigene Form oder würde?</b> Fast immer die eigene Form: <em>sein → wäre</em>, <em>haben → hätte</em> und die Modalverben <em>könnte, müsste, sollte, dürfte, wollte</em> und <em>möchte</em> (von mögen). Bei a, o, u kommt ein Umlaut dazu: <em>kam → käme</em>, <em>hatte → hätte</em>, <em>gab → gäbe</em>. Bei manchen Verben hört man beides: <em>es gäbe / es würde geben</em>, <em>ich ginge / ich würde gehen</em>, <em>ich käme / ich würde kommen</em>. Die eigene Form ist kürzer und gehobener, die würde-Form gesprochener.</p></div>' +
         '<div class="table-wrap"><table><thead><tr><th>Person</th><th>sein</th><th>haben</th></tr></thead><tbody>' +
         '<tr><td>ich</td><td>wäre</td><td>hätte</td></tr><tr><td>du</td><td>wärst</td><td>hättest</td></tr><tr><td>er/sie/es</td><td>wäre</td><td>hätte</td></tr>' +
         '<tr><td>wir</td><td>wären</td><td>hätten</td></tr><tr><td>ihr</td><td>wärt</td><td>hättet</td></tr><tr><td>sie/Sie</td><td>wären</td><td>hätten</td></tr>' +
@@ -318,6 +325,12 @@ B2.addClass({
     {"de": "Wenn ich Hunger habe, dann koche ich etwas.", "gram": "irreal machen (Konj. II)", "en": "Wenn ich Hunger hätte, dann würde ich etwas kochen."},
     {"de": "Wenn ich krank bin, dann bleibe ich zu Hause und ruhe mich aus.", "gram": "irreal machen (Konj. II)", "en": "Wenn ich krank wäre, dann würde ich zu Hause bleiben und mich ausruhen."},
     {"de": "Wenn ich gut Deutsch sprechen kann, dann suche ich mir sofort einen Job.", "gram": "irreal machen (Konj. II)", "en": "Wenn ich gut Deutsch sprechen könnte, dann würde ich mir sofort einen Job suchen."},
+    {"de": "Konj. II Bildung: können", "gram": "Präteritum → Stamm → Umlaut → Endung", "en": "konnte → konnt- → könnt- → ich könnte"},
+    {"de": "Konj. II: mögen (ich)", "gram": "eigene Form", "en": "ich möchte", "ex": "Ich möchte einen Kaffee."},
+    {"de": "Vermutung: Das Handy liegt wahrscheinlich auf dem Schreibtisch.", "gram": "mit Konj. II von dürfen", "en": "Das dürfte auf dem Schreibtisch liegen."},
+    {"de": "Kritik: Wir haben den späteren Zug genommen. Das war falsch.", "gram": "hätte + Infinitiv + sollen", "en": "Wir hätten den früheren Zug nehmen sollen."},
+    {"de": "Irrealer Vergleich: Er ist kein Genie, aber er tut so.", "gram": "als + Konj. II", "en": "Er tut so, als wäre er ein Genie.", "ex": "= als ob er ein Genie wäre"},
+    {"de": "Wunsch: Ich habe zu wenig Zeit für meine Hobbys.", "gram": "Ich wünschte, …", "en": "Ich wünschte, ich hätte mehr Zeit für meine Hobbys!"},
     {"de": "Konj. II Vergangenheit: ich + gerne kommen", "gram": "hätte/wäre + Partizip II", "en": "ich wäre gerne gekommen", "ex": "Bewegung: wäre"},
     {"de": "Konj. II Vergangenheit: du + mir das sagen können", "gram": "hätte + Infinitiv + Modalverb", "en": "Du hättest mir das sagen können."}
   ],
