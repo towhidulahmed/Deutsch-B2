@@ -5,7 +5,7 @@ B2.addClass({
   title: "Adjektive mit Ergänzungen",
   date: "12. Oktober 2026",
   topic: "Kursbuch S. 101–103",
-  tags: ["Grammatik", "Akkusativ", "Dativ", "Präpositionen", "Übung 107 · 108"],
+  tags: ["Akkusativ", "Dativ", "Präpositionen", "Übung 107 · 108"],
 
   summary:
     "<p>Viele Adjektive stehen nicht allein. Sie brauchen eine <span class=\"mark\">Ergänzung</span>: eine Maßangabe im Akkusativ (<em>einen Monat alt</em>), eine Person im Dativ (<em>Es ist <b>mir</b> egal</em>) oder eine feste Präposition (<em>stolz <b>auf</b></em>, <em>abhängig <b>von</b></em>).</p>" +

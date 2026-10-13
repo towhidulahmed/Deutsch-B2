@@ -182,11 +182,10 @@
   var TABS = [
     ["ueberblick", "Überblick"],
     ["grammatik", "Grammatik"],
-    ["wortschatz", "Wortschatz"],
-    ["karten", "Karteikarten"],
-    ["uebungen", "Übungen"],
-    ["notizen", "Notizen"]
+    ["uebungen", "Übungen"]
   ];
+  // Wortschatz, Karten and Notizen live in the main navigation only (with the day picker).
+  var TOOLS = { wortschatz: "wortschatz", karten: "karteikarten", notizen: "notizen" };
   function tabLabel(key) { for (var i = 0; i < TABS.length; i++) if (TABS[i][0] === key) return TABS[i][1]; return key; }
 
   function route() {
@@ -201,6 +200,7 @@
     if (h === "notizen") return renderAllNotes(app);
     var parts = h.split("-");
     var c = byId(parts[0]);
+    if (c && TOOLS[parts[1]]) { store.set("b2day", c.id); location.replace("#" + TOOLS[parts[1]]); return; }
     if (c) return renderClass(app, c, parts[1] || store.get("b2tab:" + c.id, "ueberblick"));
     renderHome(app);
   }
@@ -326,7 +326,9 @@
       return '<li><button type="button" data-go="' + s[0] + '"><span class="step">' + (i + 1) + '</span><span class="path-text"><b>' + s[1] + '</b><span class="muted">' + esc(s[2]) + '</span></span><span class="go" aria-hidden="true">→</span></button></li>';
     }).join("") + "</ol></div>";
     p.innerHTML = html;
-    $$("[data-go]", p).forEach(function (b) { b.addEventListener("click", function () { switchTab(app, c, b.dataset.go, true); }); });
+    $$("[data-go]", p).forEach(function (b) { b.addEventListener("click", function () {
+      if (TOOLS[b.dataset.go]) location.hash = "#" + c.id + "-" + b.dataset.go; else switchTab(app, c, b.dataset.go, true);
+    }); });
   }
 
   function panelGrammar(p, c) {
@@ -709,15 +711,19 @@
     var cls = sorted().filter(function (c) { return d === "alle" || c.id === d; });
     var html = dayHead("Nur auf deinem Gerät", "Meine Notizen", d);
     var any = false, text = "";
-    cls.forEach(function (c) {
+    var single = d !== "alle" && byId(d);
+    if (single) html += '<div id="note-slot"></div>';
+    else cls.forEach(function (c) {
       var n = (store.get("b2note:" + c.id, "") || "").trim();
       if (!n) return;
       any = true;
       text += "Tag " + c.nr + ": " + c.title + "\n" + n + "\n\n";
       html += '<article class="block note-item"><h2><a href="#' + c.id + '-notizen">Tag ' + c.nr + ": " + esc(c.title) + "</a></h2><pre>" + esc(n) + "</pre></article>";
     });
-    if (!any) {
-      html += '<div class="callout">Noch keine Notizen. Öffne einen Tag und schreib im Tab „Notizen“.</div>';
+    if (single) {
+      // the editor is drawn below
+    } else if (!any) {
+      html += '<div class="callout">Noch keine Notizen. Wähl oben einen Tag und schreib los.</div>';
       html += '<div class="class-list">' + cls.map(function (c) { return '<a class="class-card" href="#' + c.id + '-notizen"><span class="class-no">Tag ' + c.nr + "</span><div><h3>" + esc(c.title) + '</h3></div><span class="go" aria-hidden="true">→</span></a>'; }).join("") + "</div>";
     } else {
       html += '<div class="toolbar">' + (navigator.share ? '<button class="btn primary" id="share-notes">Teilen</button>' : "") +
@@ -728,6 +734,7 @@
       '<div class="toolbar"><button class="btn" id="backup">Sicherung speichern</button><label class="btn" for="restore-file">Sicherung laden</label><input type="file" id="restore-file" class="sr-only" accept="application/json,.json"><span class="saved" id="backup-msg" aria-live="polite"></span></div></section>';
     app.innerHTML = html;
     wireDays(app, function () { renderAllNotes(app); });
+    if (single) panelNotes($("#note-slot"), single);
 
     var msg = function (t) { $("#backup-msg").textContent = t; };
     $("#backup").addEventListener("click", function () {
@@ -760,7 +767,7 @@
       r.readAsText(f);
     });
 
-    if (!any) return;
+    if (!any || single) return;
     var done = function (m) { $("#copied").textContent = m; };
     var sh = $("#share-notes");
     if (sh) sh.addEventListener("click", function () { navigator.share({ title: "Meine B2-Notizen", text: text }).catch(function () {}); });

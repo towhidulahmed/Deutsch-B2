@@ -5,7 +5,7 @@ B2.addClass({
   title: "Konjunktiv I, indirekte Rede und Konjunktiv II",
   date: "13. Oktober 2026",
   topic: "Verb + Endung, Kapitel 7, S. 57–59",
-  tags: ["Grammatik", "Konjunktiv I", "Konjunktiv II", "Indirekte Rede"],
+  tags: ["Konjunktiv I", "Konjunktiv II", "Indirekte Rede"],
 
   summary:
     '<p>Mit dem <span class="mark">Konjunktiv I</span> sagen wir, was <b>jemand anderes</b> gesagt hat (<b>indirekte Rede</b>). Es ist nicht unsere Meinung, sondern die Meinung von einer anderen Person: <em>Petra meint, sie <b>habe</b> schon etwas anderes vor.</em></p>' +
