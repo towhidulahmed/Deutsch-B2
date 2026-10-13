@@ -22,6 +22,27 @@
   function sorted() { return CLASSES.slice().sort(function (a, b) { return a.nr - b.nr; }); }
   function classVocab(c) { return (c.vocab || []).map(function (v) { return Object.assign({ cls: c }, v); }); }
   function allVocab() { var out = []; sorted().forEach(function (c) { out = out.concat(classVocab(c)); }); return out; }
+  // One day picker for every page: the chosen day is remembered (b2day).
+  function curDay() { var d = store.get("b2day", "alle"); return d !== "alle" && !byId(d) ? "alle" : d; }
+  function dayBar(active, withAll) {
+    var cls = sorted();
+    var chip = function (id, label, title) {
+      return '<button type="button" class="chip day-chip" data-day="' + esc(id) + '" aria-pressed="' + (id === active) + '"' + (title ? ' title="' + esc(title) + '"' : "") + ">" + esc(label) + "</button>";
+    };
+    return '<nav class="daybar" aria-label="Tag wählen">' + (withAll ? chip("alle", "Alle Tage") : "") +
+      cls.map(function (c) { return chip(c.id, "Tag " + c.nr, c.title); }).join("") + "</nav>";
+  }
+  function wireDays(app, pick) {
+    $$("[data-day]", app).forEach(function (b) {
+      b.addEventListener("click", function () { store.set("b2day", b.dataset.day); pick(b.dataset.day); });
+    });
+    var on = $('.daybar [aria-pressed="true"]', app);
+    if (on && on.scrollIntoView) on.scrollIntoView({ block: "nearest", inline: "center" });
+  }
+  function dayHead(kicker, title, d) {
+    var c = d !== "alle" && byId(d);
+    return '<header class="lesson-head"><span class="eyebrow">' + (c ? "Tag " + c.nr : kicker) + "</span><h1>" + title + "</h1>" + dayBar(d, true) + "</header>";
+  }
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function cardKey(v) { return v.cls.id + "|" + v.de; }
   // Search ignores case and umlaut spelling (ü = u = ue).
@@ -221,7 +242,8 @@
   /* ---------- class page ---------- */
   function renderClass(app, c, tab) {
     if (!TABS.some(function (t) { return t[0] === tab; })) tab = "ueberblick";
-    var html = '<header class="lesson-head"><a class="back" href="#start">← Alle Tage</a><span class="eyebrow">Tag ' + c.nr + (c.date ? " · " + esc(c.date) : "") + "</span><h1>" + esc(c.title) + "</h1>";
+    store.set("b2day", c.id);
+    var html = '<header class="lesson-head">' + (sorted().length > 1 ? dayBar(c.id, false) : '<a class="back" href="#start">← Alle Tage</a>') + '<span class="eyebrow">Tag ' + c.nr + (c.date ? " · " + esc(c.date) : "") + "</span><h1>" + esc(c.title) + "</h1>";
     if (c.tags && c.tags.length) html += '<div class="tags">' + c.tags.map(function (t) { return '<span class="tag">' + esc(t) + "</span>"; }).join("") + "</div>";
     html += "</header>";
     html += '<div class="tabs-wrap"><nav class="tabs" role="tablist" aria-label="Bereiche des Tages">' + TABS.map(function (t) {
@@ -241,6 +263,14 @@
       var n = tabs[(idx + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length];
       n.focus(); switchTab(app, c, n.dataset.tab);
     });
+    $$("[data-day]", app).forEach(function (b) {
+      b.addEventListener("click", function () {
+        var cur = $('.tabs [aria-selected="true"]', app);
+        location.hash = "#" + b.dataset.day + "-" + (cur ? cur.dataset.tab : "ueberblick"); // same section, other day
+      });
+    });
+    var onDay = $('.daybar [aria-pressed="true"]', app);
+    if (onDay && onDay.scrollIntoView) onDay.scrollIntoView({ block: "nearest", inline: "center" });
     var bar = $(".tabs", app);
     bar.addEventListener("scroll", function () { fadeEdges(bar); }, { passive: true });
     var active = $('.tabs [aria-selected="true"]', app);
@@ -657,12 +687,16 @@
 
   /* ---------- global pages ---------- */
   function renderAllVocab(app) {
-    app.innerHTML = '<header class="lesson-head"><span class="eyebrow">Alle Tage</span><h1>Wortschatz</h1></header><section class="panel" id="panel"></section>';
-    vocabUI($("#panel"), allVocab(), true);
+    var d = curDay();
+    app.innerHTML = dayHead("Alle Tage", "Wortschatz", d) + '<section class="panel" id="panel"></section>';
+    wireDays(app, function () { runCleanups(); renderAllVocab(app); });
+    vocabUI($("#panel"), allVocab().filter(function (v) { return d === "alle" || v.cls.id === d; }), d === "alle");
   }
   function renderAllCards(app) {
-    app.innerHTML = '<header class="lesson-head"><span class="eyebrow">Alle Tage gemischt</span><h1>Karteikarten</h1></header><section class="panel" id="panel"></section>';
-    cardsUI($("#panel"), allVocab(), function (v) { return "Tag " + v.cls.nr; });
+    var d = curDay();
+    app.innerHTML = dayHead("Alle Tage gemischt", "Karteikarten", d) + '<section class="panel" id="panel"></section>';
+    wireDays(app, function () { runCleanups(); renderAllCards(app); });
+    cardsUI($("#panel"), allVocab().filter(function (v) { return d === "alle" || v.cls.id === d; }), d === "alle" ? function (v) { return "Tag " + v.cls.nr; } : null);
   }
 
   function backupData() {
@@ -671,8 +705,9 @@
     return { app: "deutsch-b2", version: 1, saved: new Date().toISOString(), data: data };
   }
   function renderAllNotes(app) {
-    var cls = sorted();
-    var html = '<header class="lesson-head"><span class="eyebrow">Nur auf deinem Gerät</span><h1>Meine Notizen</h1></header>';
+    var d = curDay();
+    var cls = sorted().filter(function (c) { return d === "alle" || c.id === d; });
+    var html = dayHead("Nur auf deinem Gerät", "Meine Notizen", d);
     var any = false, text = "";
     cls.forEach(function (c) {
       var n = (store.get("b2note:" + c.id, "") || "").trim();
@@ -692,6 +727,7 @@
     html += '<section class="block"><h2>Lernstand sichern</h2><p class="muted">Notizen, Karteikarten und Übungen werden nur auf diesem Gerät gespeichert. Safari und die installierte App speichern getrennt. Mit einer Sicherungsdatei nimmst du alles auf ein anderes Gerät oder in die App mit.</p>' +
       '<div class="toolbar"><button class="btn" id="backup">Sicherung speichern</button><label class="btn" for="restore-file">Sicherung laden</label><input type="file" id="restore-file" class="sr-only" accept="application/json,.json"><span class="saved" id="backup-msg" aria-live="polite"></span></div></section>';
     app.innerHTML = html;
+    wireDays(app, function () { renderAllNotes(app); });
 
     var msg = function (t) { $("#backup-msg").textContent = t; };
     $("#backup").addEventListener("click", function () {

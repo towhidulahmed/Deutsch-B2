@@ -367,6 +367,11 @@ html.no-speech .say { display: none; }
 
 /* ---------- grammar contents ---------- */
 .toc { display: flex; flex-wrap: wrap; gap: 6px; }
+/* Day picker: same on every page */
+.daybar { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding: 2px 0; margin-inline: -2px; }
+.daybar::-webkit-scrollbar { display: none; }
+.day-chip { flex: none; min-height: 38px; padding: 7px 14px; font-weight: 500; border: 1.5px solid transparent; }
+.day-chip[aria-pressed="true"] { background: var(--pen); color: var(--pen-ink); }
 .chip {
   font: inherit; font-size: 0.85rem; cursor: pointer; color: var(--pen); background: var(--pen-soft);
   border: 0; border-radius: 999px; padding: 6px 12px; min-height: 34px; text-align: left;
