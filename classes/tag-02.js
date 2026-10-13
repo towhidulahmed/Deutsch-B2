@@ -71,7 +71,14 @@ B2.addClass({
         '</tbody></table></div>' +
         '<div class="callout"><strong>Wie erkenne ich die Vergangenheit?</strong><br>Am <b>Partizip II</b> (<em>besorgt, hingefallen, eingeladen, gesagt</em>). Das ist wie im Englischen <em>I have <b>done</b></em>: <em>done</em> ist das Partizip.</div>' +
         '<div class="callout"><strong>Achtung: Der Einleitungssatz bestimmt die Zeit nicht</strong><br><em>Claudia <b>hat gesagt</b>, sie <b>könne</b> heute nicht kommen.</em> „hat gesagt“ ist Vergangenheit, aber <em>könne</em> ist Gegenwart. Für die Tabelle zählt nur die Konjunktivform.</div>' +
-        '<div class="callout"><strong>Präsens als Zukunft</strong><br>Im Deutschen ist das normal: <em>Am Wochenende <b>fahre</b> ich nach Berlin.</em> Darum steht <em>Sie seien das ganze Wochenende mit dem Umzug beschäftigt</em> in der Gegenwart, auch wenn das Wochenende erst kommt.</div>'
+        '<div class="callout"><strong>Präsens als Zukunft</strong><br>Im Deutschen ist das normal: <em>Am Wochenende <b>fahre</b> ich nach Berlin.</em> Darum steht <em>Sie seien das ganze Wochenende mit dem Umzug beschäftigt</em> in der Gegenwart, auch wenn das Wochenende erst kommt.</div>' +
+        '<div class="callout"><strong>Übung 1B (S. 57, Hausaufgabe): Lösung</strong></div>' +
+        '<div class="table-wrap"><table><thead><tr><th></th><th>Konjunktiv I</th><th>Konjunktiv II</th></tr></thead><tbody>' +
+        '<tr><td>Gegenwart</td><td>0 sie habe vor · 3 er müsse · 5 sie seien · 8 er sei (ungünstig) · 9 sie liege</td><td>1 sie hätten · 5 sie könnten · 7 sie würden feiern</td></tr>' +
+        '<tr><td>Vergangenheit</td><td>2 er sei eingeladen worden · 4 sie habe besorgt · 9 sie sei hingefallen</td><td>6 wir hätten gesagt · 7 sie hätten geplant</td></tr>' +
+        '<tr><td>Zukunft</td><td>8 sie werde versuchen</td><td>–</td></tr>' +
+        '</tbody></table></div>' +
+        '<div class="callout"><strong>Warum steht bei 10 kein Konjunktiv?</strong><br><em>Michael hat gemeint, dass er Partys doof <b>findet</b>.</em> In der Umgangssprache ist in der indirekten Rede auch der Indikativ möglich. Darum kommt <em>findet</em> nicht in die Tabelle.</div>'
     },
     {
       title: "4. Wenn Konjunktiv I = Indikativ: Konjunktiv II",
@@ -197,10 +204,39 @@ B2.addClass({
     { de: "etwas vertragen", gram: "verträgt, hat vertragen", en: "to cope with, to tolerate", ex: "Sie wurde gefragt, ob sie Stress vertrage." },
     { de: "der Herd", gram: "Pl. die Herde", en: "stove, cooker", ex: "Nicht jedes Haus hat einen Gasherd." },
     { de: "einschenken", gram: "trennbar", en: "to pour (a drink)", ex: "Kannst du uns bitte Tee einschenken?" },
-    { de: "der Aufzug", gram: "Pl. die Aufzüge", en: "lift, elevator", ex: "Der alte Aufzug ist von 1965." }
+    { de: "der Aufzug", gram: "Pl. die Aufzüge", en: "lift, elevator", ex: "Der alte Aufzug ist von 1965." },
+    { de: "das Cerankochfeld", gram: "Pl. die Cerankochfelder", en: "ceramic glass hob", ex: "Ich habe ein Cerankochfeld, aber ich möchte demnächst Induktion." },
+    { de: "die Induktion", gram: "das Induktionskochfeld", en: "induction (hob)", ex: "Heute haben viele Leute ein Cerankochfeld oder Induktion." },
+    { de: "der Gasherd", gram: "Pl. die Gasherde", en: "gas stove", ex: "Gibt es keine Gasherde in Deutschland?" },
+    { de: "das Teeglas", gram: "Pl. die Teegläser", en: "tea glass", ex: "Die Türken trinken aus kleinen Teegläsern." },
+    { de: "der Zimt", en: "cinnamon", ex: "Kardamom und Zimt machst du in den Tee, oder?" },
+    { de: "der Kardamom", en: "cardamom", ex: "Kardamom und Zimt machst du in den Tee, oder?" },
+    { de: "der Safran", en: "saffron", ex: "Mit Safran wird das Essen gelb oder rot." }
   ],
 
   drills: [
+    {
+      title: "Übung 1B (Hausaufgabe): In die Tabelle einordnen",
+      intro: "Wohin gehört die Form? Konjunktiv I oder II, und welche Zeit?",
+      blank: false,
+      options: ["KI Gegenwart", "KI Vergangenheit", "KI Zukunft", "KII Gegenwart", "KII Vergangenheit"],
+      items: [
+        { q: "0 · sie habe vor", a: "KI Gegenwart", ex: "Petra meint, sie <b>habe</b> schon etwas anderes vor." },
+        { q: "1 · sie hätten keine Zeit", a: "KII Gegenwart", ex: "sie haben = Indikativ, darum Konjunktiv II: <b>hätten</b>." },
+        { q: "2 · er sei eingeladen worden", a: "KI Vergangenheit", ex: "sei + Partizip II + worden: Passiv in der Vergangenheit." },
+        { q: "3 · er müsse lernen", a: "KI Gegenwart", ex: "<b>müsse</b> ist Konjunktiv I. Konjunktiv II wäre <b>müsste</b>." },
+        { q: "4 · sie habe Karten besorgt", a: "KI Vergangenheit", ex: "habe + Partizip II (<b>besorgt</b>)." },
+        { q: "5 · sie könnten nicht kommen", a: "KII Gegenwart", ex: "<b>könnten</b>: Präteritum konnten + Umlaut." },
+        { q: "5 · sie seien beschäftigt", a: "KI Gegenwart", ex: "Präsens als Zukunft: das Wochenende kommt erst, die Form ist trotzdem Gegenwart." },
+        { q: "6 · wir hätten nichts gesagt", a: "KII Vergangenheit", ex: "hätten + Partizip II (<b>gesagt</b>)." },
+        { q: "7 · sie würden feiern", a: "KII Gegenwart", ex: "würde + Infinitiv = Konjunktiv II Gegenwart." },
+        { q: "7 · sie hätten geplant", a: "KII Vergangenheit", ex: "hätten + Partizip II (<b>geplant</b>)." },
+        { q: "8 · der Termin sei ungünstig", a: "KI Gegenwart", ex: "Sabine hat gemailt, dass der Termin ungünstig <b>sei</b>." },
+        { q: "8 · sie werde versuchen", a: "KI Zukunft", ex: "werde + Infinitiv." },
+        { q: "9 · sie sei hingefallen", a: "KI Vergangenheit", ex: "sei + Partizip II (<b>hingefallen</b>)." },
+        { q: "9 · sie liege im Krankenhaus", a: "KI Gegenwart", ex: "Sie liegt jetzt noch im Krankenhaus." }
+      ]
+    },
     {
       title: "Schnelltest: Konjunktiv I, II oder Indikativ?",
       intro: "Welche Form ist das? Falsche Antworten kommen am Ende noch einmal.",
@@ -332,7 +368,13 @@ B2.addClass({
         { q: "B (ich + Konj. II): Man hat mich gefragt, was ich für Gehaltsvorstellungen [[hätte]]." },
         { q: "B (ich + Konj. II): Man hat mich gefragt, ob ich zeitlich flexibel einsetzbar [[wäre]]." },
         { q: "B (ich + Konj. II): Man hat mich gefragt, warum ich in meiner alten Firma [[gekündigt hätte]]." },
-        { q: "B (ich + Konj. II): Man hat mich gefragt, was ich über die neue Firma [[wüsste]]." }
+        { q: "B (ich + Konj. II): Man hat mich gefragt, wann ich anfangen [[könnte]]." },
+        { q: "B (ich + Konj. II): Man hat mich gefragt, was ich über die neue Firma [[wüsste]]." },
+        { q: "B (ich + Konj. II): Man hat mich gefragt, welche Fachzeitschriften ich [[kennen würde|kennte]]." },
+        { q: "B (ich + Konj. II): Man hat mich gefragt, warum ich mich um den Job [[beworben hätte]]." },
+        { q: "B (ich + Konj. II): Man hat mich gefragt, wie ich mir meine Arbeit [[vorstellen würde|vorstellte]]." },
+        { q: "B (ich + Konj. II): Man hat mich gefragt, ob ich Stress [[vertragen würde|vertrüge]]." },
+        { q: "B (ich + Konj. II): Man hat mich gefragt, was ich unter beruflichem Erfolg [[verstehen würde|verstünde|verstände]]." }
       ]
     },
     {
