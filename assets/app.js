@@ -22,6 +22,9 @@
   function sorted() { return CLASSES.slice().sort(function (a, b) { return a.nr - b.nr; }); }
   function classVocab(c) { return (c.vocab || []).map(function (v) { return Object.assign({ cls: c }, v); }); }
   function allVocab() { var out = []; sorted().forEach(function (c) { out = out.concat(classVocab(c)); }); return out; }
+  // Flashcards = vocabulary + grammar form cards (c.cards, only in Karten, not in Wortschatz).
+  function classCards(c) { return classVocab(c).concat((c.cards || []).map(function (v) { return Object.assign({ cls: c, form: true }, v); })); }
+  function allCards() { var out = []; sorted().forEach(function (c) { out = out.concat(classCards(c)); }); return out; }
   // One day picker for every page: the chosen day is remembered (b2day).
   function curDay() { var d = store.get("b2day", "alle"); return d !== "alle" && !byId(d) ? "alle" : d; }
   function dayBar(active, withAll) {
@@ -170,7 +173,7 @@
   /* ---------- progress ---------- */
   function cardsKnown(c) {
     var known = store.get("b2known", {});
-    return (c.vocab || []).filter(function (v) { return known[c.id + "|" + v.de]; }).length;
+    return classCards(c).filter(function (v) { return known[cardKey(v)]; }).length;
   }
   function drillBest(c) {
     var best = null;
@@ -219,7 +222,7 @@
     var cls = sorted();
     var vocab = allVocab();
     var known = store.get("b2known", {});
-    var nKnown = vocab.filter(function (v) { return known[cardKey(v)]; }).length;
+    var nKnown = allCards().filter(function (v) { return known[cardKey(v)]; }).length;
     var html = '<section class="hero"><span class="eyebrow">Deutsch · Niveau B2</span>' +
       "<h1>Alle Kurstage auf einen Blick</h1>" +
       '<p class="lede">Zusammenfassung, Grammatik, Wortschatz, Karteikarten und Übungen zu jedem Kurstag. Alle Beispiele stammen aus dem Unterricht. Deine Notizen bleiben auf deinem Gerät.</p>' +
@@ -227,7 +230,7 @@
     html += '<div id="install-slot"></div>';
     html += '<section class="class-list" aria-label="Kurstage">';
     cls.slice().reverse().forEach(function (c) {
-      var nv = (c.vocab || []).length, nk = cardsKnown(c), best = drillBest(c);
+      var nv = classCards(c).length, nk = cardsKnown(c), best = drillBest(c);
       html += '<a class="class-card" href="#' + esc(c.id) + '"><span class="class-no">Tag ' + c.nr + "</span><div><h3>" + esc(c.title) + '</h3><div class="meta">' + esc(c.date || "") + (c.topic ? " · " + esc(c.topic) : "") + "</div>" +
         '<div class="progress-line"><span class="pill' + (nv && nk === nv ? " done" : "") + '">Karten ' + nk + "/" + nv + "</span>" +
         (c.drills && c.drills.length ? '<span class="pill' + (best && best.score === best.total ? " done" : "") + '">Schnelltest ' + (best ? best.score + "/" + best.total : "offen") + "</span>" : "") +
@@ -310,7 +313,7 @@
   }
 
   function panelOverview(p, c, app) {
-    var nv = (c.vocab || []).length, nk = cardsKnown(c), best = drillBest(c);
+    var nv = classCards(c).length, nk = cardsKnown(c), best = drillBest(c);
     var nEx = (c.exercises || []).length, nDr = (c.drills || []).length;
     var html = '<div class="prose">' + (c.summary || "") + "</div>";
     if (c.keyPoints && c.keyPoints.length) {
@@ -372,8 +375,14 @@
   function panelVocab(p, c) { vocabUI(p, classVocab(c), false); }
 
   /* ---------- flashcards ---------- */
-  function cardsUI(p, list, title) {
+  function cardsUI(p, full, title) {
     var known = store.get("b2known", {});
+    // Deck: words, grammar forms, or both (only offered when there are form cards).
+    var hasForms = full.some(function (v) { return v.form; });
+    var kind = hasForms ? store.get("b2deck", "alle") : "alle";
+    var list;
+    function pick() { list = full.filter(function (v) { return kind === "alle" || (kind === "formen") === !!v.form; }); }
+    pick();
     var mode = "alle";
     var deck = [], again = {}, i = 0, flipped = false, reverse = store.get("b2reverse", false);
 
@@ -400,6 +409,7 @@
     function draw() {
       var nKnown = list.filter(function (v) { return known[cardKey(v)]; }).length;
       var settings = '<div class="toolbar fc-settings">' +
+        (hasForms ? '<select id="fc-kind" aria-label="Welcher Stapel"><option value="alle"' + (kind === "alle" ? " selected" : "") + '>Wörter und Formen</option><option value="woerter"' + (kind === "woerter" ? " selected" : "") + '>Nur Wörter</option><option value="formen"' + (kind === "formen" ? " selected" : "") + ">Nur Grammatik-Formen</option></select>" : "") +
         '<select id="fc-mode" aria-label="Welche Karten"><option value="alle"' + (mode === "alle" ? " selected" : "") + '>Alle Karten</option><option value="offen"' + (mode === "offen" ? " selected" : "") + ">Nur noch nicht gewusst</option></select>" +
         '<label class="check"><input type="checkbox" id="fc-rev"' + (reverse ? " checked" : "") + "> Bedeutung zuerst</label>" +
         '<span class="muted">' + nKnown + " / " + list.length + " gewusst</span></div>";
@@ -426,6 +436,7 @@
       }
       p.innerHTML = html;
       $("#fc-mode", p).addEventListener("change", function (e) { mode = e.target.value; build(); });
+      var kindSel = $("#fc-kind", p); if (kindSel) kindSel.addEventListener("change", function (e) { kind = e.target.value; store.set("b2deck", kind); pick(); build(); });
       $("#fc-rev", p).addEventListener("change", function (e) { reverse = e.target.checked; store.set("b2reverse", reverse); flipped = false; draw(); });
       var againBtn = $("#fc-again", p); if (againBtn) againBtn.addEventListener("click", function () { mode = "alle"; build(); });
       var openBtn = $("#fc-open", p); if (openBtn) openBtn.addEventListener("click", function () { mode = "offen"; build(); });
@@ -469,7 +480,7 @@
     onCleanup(function () { document.removeEventListener("keydown", onKey); });
     build();
   }
-  function panelCards(p, c) { cardsUI(p, classVocab(c)); }
+  function panelCards(p, c) { cardsUI(p, classCards(c)); }
 
   /* ---------- quick quiz (tap the right option) ---------- */
   function drillUI(box, c, d, di) {
@@ -698,7 +709,7 @@
     var d = curDay();
     app.innerHTML = dayHead("Alle Tage gemischt", "Karteikarten", d) + '<section class="panel" id="panel"></section>';
     wireDays(app, function () { runCleanups(); renderAllCards(app); });
-    cardsUI($("#panel"), allVocab().filter(function (v) { return d === "alle" || v.cls.id === d; }), d === "alle" ? function (v) { return "Tag " + v.cls.nr; } : null);
+    cardsUI($("#panel"), allCards().filter(function (v) { return d === "alle" || v.cls.id === d; }), d === "alle" ? function (v) { return "Tag " + v.cls.nr; } : null);
   }
 
   function backupData() {

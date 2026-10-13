@@ -45,6 +45,15 @@ B2.addClass({
       title: "2. Bildung des Konjunktiv I",
       html:
         '<div class="prose"><p>Infinitivstamm + Endung <b>-e, -est, -e, -en, -et, -en</b>. Es gibt keinen Vokalwechsel und keinen Umlaut: <em>er hat → er habe</em>, <em>er muss → er müsse</em>, <em>es gibt → es gebe</em>. Am häufigsten braucht man die 3. Person Singular.</p></div>' +
+        '<div class="table-wrap"><table><thead><tr><th>Person</th><th>Endung</th><th>Beispiel: machen</th><th>Indikativ</th></tr></thead><tbody>' +
+        '<tr><td>ich</td><td>-e</td><td>ich mache</td><td>ich mache*</td></tr>' +
+        '<tr><td>du</td><td>-est</td><td>du machest</td><td>du machst</td></tr>' +
+        '<tr><td><b>er/sie/es</b></td><td><b>-e</b></td><td><b>er mache</b></td><td>er macht</td></tr>' +
+        '<tr><td>wir</td><td>-en</td><td>wir machen</td><td>wir machen*</td></tr>' +
+        '<tr><td>ihr</td><td>-et</td><td>ihr machet</td><td>ihr macht</td></tr>' +
+        '<tr><td>sie/Sie</td><td>-en</td><td>sie machen</td><td>sie machen*</td></tr>' +
+        '</tbody></table></div>' +
+        '<div class="callout"><strong>Merke: er mache, nicht er macht</strong><br>Die 3. Person Singular ist die wichtigste Form, weil man in der indirekten Rede meistens über eine andere Person spricht: <em>Er sagt, er <b>mache</b> heute Sport.</em> Bei ich, wir und sie/Sie ist der Konjunktiv I gleich wie der Indikativ (*).</div>' +
         '<div class="table-wrap"><table><thead><tr><th>Person</th><th>sein</th><th>haben</th><th>werden</th><th>können</th><th>müssen</th></tr></thead><tbody>' +
         '<tr><td>ich</td><td><b>sei</b></td><td>habe*</td><td>werde*</td><td>könne</td><td>müsse</td></tr>' +
         '<tr><td>du</td><td><b>seist</b></td><td>habest</td><td>werdest</td><td>könnest</td><td>müssest</td></tr>' +
@@ -94,7 +103,22 @@ B2.addClass({
         '<div class="callout"><strong>es gebe oder es gäbe?</strong><br>Im Laden: <em>Der Verkäufer hat gesagt, es <b>gebe</b> keine Kartoffeln mehr.</em> (Konjunktiv I, super korrekt) · <em>es <b>gäbe</b></em> (Konjunktiv II) · <em>es <b>würde</b> keine Kartoffeln mehr <b>geben</b></em> (am einfachsten). Alle drei sind richtig.</div>'
     },
     {
-      title: "5. Direkte und indirekte Rede",
+      title: "5. Indirekte Rede in der Praxis: welche Form?",
+      html:
+        '<div class="prose"><p>In der Praxis mischt man Konjunktiv I und II. <b>Fett</b> = Konjunktiv I, normal = Konjunktiv II. Die Regel: Man nimmt den Konjunktiv I, wenn er anders klingt als der Indikativ. Sonst nimmt man den Konjunktiv II (bei normalen Verben: <em>würde</em> + Infinitiv).</p></div>' +
+        '<div class="table-wrap"><table><thead><tr><th></th><th>sein</th><th>haben</th><th>Modalverben</th><th>andere Verben</th></tr></thead><tbody>' +
+        '<tr><td>ich</td><td><b>sei</b></td><td>hätte</td><td><b>könne</b></td><td>würde machen</td></tr>' +
+        '<tr><td>du</td><td><b>sei(e)st</b></td><td>hättest</td><td>könntest</td><td>würdest machen</td></tr>' +
+        '<tr><td>er/sie/es</td><td><b>sei</b></td><td><b>habe</b></td><td><b>könne</b></td><td><b>mache</b></td></tr>' +
+        '<tr><td>wir</td><td><b>seien</b></td><td>hätten</td><td>könnten</td><td>würden machen</td></tr>' +
+        '<tr><td>ihr</td><td><b>sei(e)t</b></td><td>hättet</td><td>könntet</td><td>würdet machen</td></tr>' +
+        '<tr><td>sie/Sie</td><td><b>seien</b></td><td>hätten</td><td>könnten</td><td>würden machen</td></tr>' +
+        '</tbody></table></div>' +
+        '<div class="callout"><strong>So liest du die Tabelle</strong><br><b>sein</b>: immer Konjunktiv I, alle Formen sind eigene Formen.<br><b>haben</b>: nur <em>er/sie/es habe</em> ist anders als der Indikativ (er hat). Sonst <em>hätte</em>.<br><b>Modalverben</b>: <em>ich/er könne</em> ist eigen (ich kann). <em>du könnest, ihr könnet</em> klingen sehr altmodisch, darum <em>könntest, könntet</em>.<br><b>andere Verben</b>: nur <em>er mache</em> ist eigen. Sonst <em>würde + Infinitiv</em>.</div>' +
+        '<div class="callout"><strong>Wichtig: die meisten Sätze stehen in der 3. Person</strong><br>Darum brauchst du vor allem <em>er/sie/es sei, habe, könne, mache</em> und <em>sie seien, hätten, könnten, würden machen</em>.</div>'
+    },
+    {
+      title: "6. Direkte und indirekte Rede",
       html:
         '<div class="prose"><p><b>Direkte Rede</b>: Die Person spricht selbst. Wir schreiben einen <b>Doppelpunkt</b> und <b>Anführungszeichen</b> („Gänsefüßchen“). <b>Indirekte Rede</b>: Ich erzähle, was die Person gesagt hat. Dann ändern sich die <b>Pronomen</b>.</p></div>' +
         '<div class="table-wrap"><table><thead><tr><th>Indirekte Rede</th><th>Direkte Rede</th></tr></thead><tbody>' +
@@ -108,7 +132,7 @@ B2.addClass({
         '<div class="callout"><strong>Pronomen umdrehen</strong><br>Wenn Tobias spricht, sagt er <em>ihr</em> und <em>mir</em>. Wenn ich über Tobias spreche, sage ich <em>wir</em> und <em>ihm</em>. In der direkten Rede steht das Verb wieder auf <b>Position 2</b>: <em>Ich <b>bin</b> hingefallen und <b>liege</b> im Krankenhaus.</em> (Das zweite <em>ich</em> kann man weglassen.)</div>'
     },
     {
-      title: "6. Konjunktiv II: Verwendung",
+      title: "7. Konjunktiv II: Verwendung",
       html:
         '<div class="table-wrap"><table><thead><tr><th>Verwendung</th><th>Beispiel</th></tr></thead><tbody>' +
         '<tr><td>Wünsche und Träume</td><td>Ich <b>wäre</b> gerne reich.</td></tr>' +
@@ -120,7 +144,7 @@ B2.addClass({
         '<div class="callout"><strong>Konjunktiv I oder II?</strong><br><em>ich kann</em> = Indikativ (real). <em>ich könne</em> = Konjunktiv I (indirekte Rede). <em>ich könnte</em> = Konjunktiv II (vielleicht, höflich, irreal). In der gesprochenen Sprache hört man den Konjunktiv II viel öfter als den Konjunktiv I.</div>'
     },
     {
-      title: "7. Konjunktiv II: Bildung",
+      title: "8. Konjunktiv II: Bildung",
       html:
         '<div class="prose"><p><b>Option 1: würde + Infinitiv.</b> So macht man es bei fast allen regelmäßigen und vielen unregelmäßigen Verben: <em>ich würde gehen, du würdest gehen, er/sie/es würde gehen</em>.</p>' +
         '<p><b>Option 2: die eigene Form des Verbs.</b> Sie kommt vom <b>Präteritum</b>, und a, o, u bekommen einen <b>Umlaut</b>: <em>kam → käme</em>, <em>hatte → hätte</em>, <em>gab → gäbe</em>. Das nimmt man bei <em>sein, haben</em>, den Modalverben und ein paar wichtigen unregelmäßigen Verben.</p></div>' +
@@ -133,10 +157,31 @@ B2.addClass({
         '<tr><td>wollen · sollen</td><td><b>wollte · sollte</b> (ohne Umlaut, gleich wie Präteritum)</td></tr>' +
         '<tr><td>kommen · gehen · wissen · geben</td><td><b>käme · ginge · wüsste · gäbe</b></td></tr>' +
         '</tbody></table></div>' +
+        '<div class="table-wrap"><table><thead><tr><th>Modalverben</th><th>können</th><th>dürfen</th><th>wollen</th><th>sollen</th><th>müssen</th></tr></thead><tbody>' +
+        '<tr><td>ich</td><td>könnte</td><td>dürfte</td><td>wollte</td><td>sollte</td><td>müsste</td></tr>' +
+        '<tr><td>du</td><td>könntest</td><td>dürftest</td><td>wolltest</td><td>solltest</td><td>müsstest</td></tr>' +
+        '<tr><td>er/sie/es</td><td>könnte</td><td>dürfte</td><td>wollte</td><td>sollte</td><td>müsste</td></tr>' +
+        '<tr><td>wir</td><td>könnten</td><td>dürften</td><td>wollten</td><td>sollten</td><td>müssten</td></tr>' +
+        '<tr><td>ihr</td><td>könntet</td><td>dürftet</td><td>wolltet</td><td>solltet</td><td>müsstet</td></tr>' +
+        '<tr><td>sie/Sie</td><td>könnten</td><td>dürften</td><td>wollten</td><td>sollten</td><td>müssten</td></tr>' +
+        '</tbody></table></div>' +
+        '<div class="callout"><strong>wollte und sollte: gleich wie das Präteritum</strong><br>Präteritum: <em>Gestern <b>wollte</b> ich ins Kino gehen.</em><br>Konjunktiv II: <em>Wenn ich ins Kino gehen <b>wollte</b> (= wollen würde), dann <b>würde</b> ich online ein Ticket <b>kaufen</b>.</em><br>Nur der Satz zeigt, was gemeint ist. Bei <em>könnte, dürfte, müsste</em> sieht man es am Umlaut.</div>' +
+        '<div class="callout"><strong>Die wichtigsten Formen im Konjunktiv II</strong><br>1. <b>dürften, könnten, müssten, sollten, wollten</b> (Modalverben)<br>2. <b>hätten, wären</b> (von haben und sein)<br>3. <b>würden + Infinitiv</b> (z. B. würden gehen, würden machen): für fast alle anderen Verben</div>' +
         '<div class="callout"><strong>Klingt altmodisch</strong><br><em>Claudia hat gesagt, sie rauchte jetzt eine.</em> Diese Form benutzt heute kaum jemand. Besser: <em>sie <b>würde</b> jetzt eine <b>rauchen</b></em>. Auch <em>ich würde wieder gesund sein</em> klingt nicht schön. Besser: <em>ich <b>wäre</b> wieder gesund</em>.</div>'
     },
     {
-      title: "8. Konjunktiv II in der Vergangenheit",
+      title: "9. Wenn-Sätze: real oder irreal",
+      html:
+        '<div class="prose"><p>Real (Indikativ): Das passiert wirklich oder kann passieren. Irreal (Konjunktiv II): Das ist nur gedacht, ein Wunsch oder eine Vorstellung. Im Wenn-Satz steht das Verb am Ende, im Hauptsatz danach steht <em>würde</em> direkt nach <em>dann</em>.</p></div>' +
+        '<div class="table-wrap"><table><thead><tr><th>Real (Indikativ)</th><th>Irreal (Konjunktiv II)</th></tr></thead><tbody>' +
+        '<tr><td>Wenn ich Hunger <b>habe</b>, dann <b>koche</b> ich etwas.</td><td>Wenn ich Hunger <b>hätte</b>, dann <b>würde</b> ich etwas <b>kochen</b>.</td></tr>' +
+        '<tr><td>Wenn ich krank <b>bin</b>, dann <b>bleibe</b> ich zu Hause und <b>ruhe</b> mich <b>aus</b>.</td><td>Wenn ich krank <b>wäre</b>, dann <b>würde</b> ich zu Hause <b>bleiben</b> und mich <b>ausruhen</b>.</td></tr>' +
+        '<tr><td>Wenn ich gut Deutsch sprechen <b>kann</b>, dann <b>suche</b> ich mir sofort einen Job.</td><td>Wenn ich gut Deutsch sprechen <b>könnte</b>, dann <b>würde</b> ich mir sofort einen Job <b>suchen</b>.</td></tr>' +
+        '</tbody></table></div>' +
+        '<div class="callout"><strong>So baust du den Satz um</strong><br>haben → <b>hätte</b>, sein → <b>wäre</b>, können → <b>könnte</b>. Alle anderen Verben: <b>würde + Infinitiv</b> am Satzende (<em>koche → würde … kochen</em>). Bei trennbaren Verben kommt das Präfix zurück an den Infinitiv: <em>ruhe mich aus → würde mich ausruhen</em>.</div>'
+    },
+    {
+      title: "10. Konjunktiv II in der Vergangenheit",
       html:
         '<div class="prose"><p>Für <b>vergangene irreale Handlungen</b> nimmt man <b>hätte</b> oder <b>wäre</b> + <b>Partizip II</b>. <em>wäre</em> bei Verben der Bewegung (wie im Perfekt mit <em>sein</em>).</p></div>' +
         '<div class="ex-list">' +
@@ -146,7 +191,7 @@ B2.addClass({
         '</div>'
     },
     {
-      title: "9. Häufige Fehler",
+      title: "11. Häufige Fehler",
       html:
         '<div class="table-wrap"><table><thead><tr><th>Falsch</th><th>Richtig</th><th>Warum</th></tr></thead><tbody>' +
         '<tr><td><s>Er müsse lernen.</s> = Konjunktiv II</td><td>Er <b>müsse</b> = Konjunktiv I · er <b>müsste</b> = Konjunktiv II</td><td>Konjunktiv I hat keinen Vokalwechsel, nur Stamm + e.</td></tr>' +
@@ -212,6 +257,69 @@ B2.addClass({
     { de: "der Zimt", en: "cinnamon", ex: "Kardamom und Zimt machst du in den Tee, oder?" },
     { de: "der Kardamom", en: "cardamom", ex: "Kardamom und Zimt machst du in den Tee, oder?" },
     { de: "der Safran", en: "saffron", ex: "Mit Safran wird das Essen gelb oder rot." }
+  ],
+
+  // Grammatik-Formen: erscheinen nur bei den Karteikarten, nicht im Wortschatz.
+  cards: [
+    {"de": "Konj. I: die Endungen", "gram": "Infinitivstamm + …", "en": "-e, -est, -e, -en, -et, -en", "ex": "machen: ich mache, du machest, er mache, wir machen, ihr machet, sie machen"},
+    {"de": "Konj. I: ich / er + sein", "gram": "Konjunktiv I", "en": "ich / er sei"},
+    {"de": "Konj. I: du + sein", "gram": "Konjunktiv I", "en": "du seist (seiest)"},
+    {"de": "Konj. I: wir / sie + sein", "gram": "Konjunktiv I", "en": "wir / sie seien"},
+    {"de": "Konj. I: ihr + sein", "gram": "Konjunktiv I", "en": "ihr seiet"},
+    {"de": "Konj. I: er/sie/es + haben", "gram": "Konjunktiv I", "en": "er habe", "ex": "Die Ärztin hat gesagt, er habe eine Bronchitis."},
+    {"de": "Konj. I: er/sie/es + werden", "gram": "Konjunktiv I", "en": "er werde", "ex": "Der Arzt hat gesagt, sie werde bald keine Medikamente mehr brauchen."},
+    {"de": "Konj. I: er/sie/es + können", "gram": "Konjunktiv I", "en": "er könne", "ex": "Claudia hat gesagt, sie könne heute nicht kommen."},
+    {"de": "Konj. I: er/sie/es + müssen", "gram": "Konjunktiv I", "en": "er müsse", "ex": "Max meint, er müsse für die Deutschprüfung lernen."},
+    {"de": "Konj. I: er/sie/es + machen", "gram": "Konjunktiv I", "en": "er mache", "ex": "Er sagt, er mache heute Sport."},
+    {"de": "Konj. I: er/sie/es + geben", "gram": "Konjunktiv I", "en": "es gebe", "ex": "Der Arzt hat gesagt, es gebe ein neues Medikament."},
+    {"de": "Konj. I: er/sie/es + liegen", "gram": "Konjunktiv I", "en": "sie liege", "ex": "Pia hat gesagt, dass sie im Krankenhaus liege."},
+    {"de": "Konj. I: er/sie/es + wissen", "gram": "Konjunktiv I", "en": "er wisse", "ex": "Man wollte erfahren, was sie über die neue Firma wisse."},
+    {"de": "Konj. II: ich / er + sein", "gram": "Konjunktiv II", "en": "ich / er wäre"},
+    {"de": "Konj. II: du + sein", "gram": "Konjunktiv II", "en": "du wärst"},
+    {"de": "Konj. II: wir / sie + sein", "gram": "Konjunktiv II", "en": "wir / sie wären"},
+    {"de": "Konj. II: ihr + sein", "gram": "Konjunktiv II", "en": "ihr wärt"},
+    {"de": "Konj. II: ich / er + haben", "gram": "Konjunktiv II", "en": "ich / er hätte"},
+    {"de": "Konj. II: du + haben", "gram": "Konjunktiv II", "en": "du hättest"},
+    {"de": "Konj. II: wir / sie + haben", "gram": "Konjunktiv II", "en": "wir / sie hätten"},
+    {"de": "Konj. II: ihr + haben", "gram": "Konjunktiv II", "en": "ihr hättet"},
+    {"de": "Konj. II: ich / er + können", "gram": "Konjunktiv II", "en": "ich / er könnte"},
+    {"de": "Konj. II: du + können", "gram": "Konjunktiv II", "en": "du könntest"},
+    {"de": "Konj. II: wir / sie + können", "gram": "Konjunktiv II", "en": "wir / sie könnten"},
+    {"de": "Konj. II: ihr + können", "gram": "Konjunktiv II", "en": "ihr könntet"},
+    {"de": "Konj. II: ich / er + dürfen", "gram": "Konjunktiv II", "en": "ich / er dürfte"},
+    {"de": "Konj. II: du + dürfen", "gram": "Konjunktiv II", "en": "du dürftest"},
+    {"de": "Konj. II: wir / sie + dürfen", "gram": "Konjunktiv II", "en": "wir / sie dürften"},
+    {"de": "Konj. II: ihr + dürfen", "gram": "Konjunktiv II", "en": "ihr dürftet"},
+    {"de": "Konj. II: ich / er + wollen", "gram": "Konjunktiv II", "en": "ich / er wollte"},
+    {"de": "Konj. II: du + wollen", "gram": "Konjunktiv II", "en": "du wolltest"},
+    {"de": "Konj. II: wir / sie + wollen", "gram": "Konjunktiv II", "en": "wir / sie wollten"},
+    {"de": "Konj. II: ihr + wollen", "gram": "Konjunktiv II", "en": "ihr wolltet"},
+    {"de": "Konj. II: ich / er + sollen", "gram": "Konjunktiv II", "en": "ich / er sollte"},
+    {"de": "Konj. II: du + sollen", "gram": "Konjunktiv II", "en": "du solltest"},
+    {"de": "Konj. II: wir / sie + sollen", "gram": "Konjunktiv II", "en": "wir / sie sollten"},
+    {"de": "Konj. II: ihr + sollen", "gram": "Konjunktiv II", "en": "ihr solltet"},
+    {"de": "Konj. II: ich / er + müssen", "gram": "Konjunktiv II", "en": "ich / er müsste"},
+    {"de": "Konj. II: du + müssen", "gram": "Konjunktiv II", "en": "du müsstest"},
+    {"de": "Konj. II: wir / sie + müssen", "gram": "Konjunktiv II", "en": "wir / sie müssten"},
+    {"de": "Konj. II: ihr + müssen", "gram": "Konjunktiv II", "en": "ihr müsstet"},
+    {"de": "Konj. II: kommen", "gram": "eigene Form", "en": "ich käme", "ex": "Wenn ich Zeit hätte, käme ich vorbei."},
+    {"de": "Konj. II: gehen", "gram": "eigene Form", "en": "ich ginge", "ex": "Ich ginge gern mit. (häufiger: ich würde gern mitgehen)"},
+    {"de": "Konj. II: wissen", "gram": "eigene Form", "en": "ich wüsste", "ex": "Wenn ich das wüsste!"},
+    {"de": "Konj. II: geben", "gram": "eigene Form", "en": "es gäbe", "ex": "Der Arzt hat gesagt, es gäbe ein neues Medikament."},
+    {"de": "Konj. II: werden", "gram": "eigene Form", "en": "ich würde", "ex": "ich würde gehen, du würdest gehen, er würde gehen"},
+    {"de": "Indirekte Rede: ich + haben", "gram": "welche Form?", "en": "ich hätte", "ex": "ich habe = Indikativ, darum Konjunktiv II"},
+    {"de": "Indirekte Rede: er/sie/es + haben", "gram": "welche Form?", "en": "er habe", "ex": "Konjunktiv I, weil anders als er hat"},
+    {"de": "Indirekte Rede: wir / sie + haben", "gram": "welche Form?", "en": "sie hätten", "ex": "sie haben = Indikativ, darum Konjunktiv II"},
+    {"de": "Indirekte Rede: ich + können", "gram": "welche Form?", "en": "ich könne", "ex": "Konjunktiv I, weil anders als ich kann"},
+    {"de": "Indirekte Rede: du + können", "gram": "welche Form?", "en": "du könntest", "ex": "du könnest klingt altmodisch, darum Konjunktiv II"},
+    {"de": "Indirekte Rede: er/sie/es + machen", "gram": "welche Form?", "en": "er mache", "ex": "Konjunktiv I, weil anders als er macht"},
+    {"de": "Indirekte Rede: ich + machen", "gram": "welche Form?", "en": "ich würde machen", "ex": "ich mache = Indikativ, darum würde + Infinitiv"},
+    {"de": "Indirekte Rede: wir / sie + machen", "gram": "welche Form?", "en": "sie würden machen", "ex": "sie machen = Indikativ, darum würde + Infinitiv"},
+    {"de": "Wenn ich Hunger habe, dann koche ich etwas.", "gram": "irreal machen (Konj. II)", "en": "Wenn ich Hunger hätte, dann würde ich etwas kochen."},
+    {"de": "Wenn ich krank bin, dann bleibe ich zu Hause und ruhe mich aus.", "gram": "irreal machen (Konj. II)", "en": "Wenn ich krank wäre, dann würde ich zu Hause bleiben und mich ausruhen."},
+    {"de": "Wenn ich gut Deutsch sprechen kann, dann suche ich mir sofort einen Job.", "gram": "irreal machen (Konj. II)", "en": "Wenn ich gut Deutsch sprechen könnte, dann würde ich mir sofort einen Job suchen."},
+    {"de": "Konj. II Vergangenheit: ich + gerne kommen", "gram": "hätte/wäre + Partizip II", "en": "ich wäre gerne gekommen", "ex": "Bewegung: wäre"},
+    {"de": "Konj. II Vergangenheit: du + mir das sagen können", "gram": "hätte + Infinitiv + Modalverb", "en": "Du hättest mir das sagen können."}
   ],
 
   drills: [
