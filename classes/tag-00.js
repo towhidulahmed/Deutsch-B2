@@ -653,6 +653,342 @@ B2.addClass({
       "en": "sie/Sie · ihnen/Ihnen"
     }
   ],
+  // Gespräche zum Lesen und Auswendiglernen (Seite „Gespräche“).
+  "dialogues": [
+    {
+      "title": "Beim Arzt: einen Termin machen",
+      "situation": "Am Telefon mit der Praxis. Übt: Dativ (mir, Ihnen), Präpositionen mit Zeit.",
+      "lines": [
+        {
+          "s": "Praxis",
+          "de": "Praxis Dr. Weber, guten Morgen. Was kann ich für Sie tun?",
+          "en": "Dr Weber's practice, good morning. How can I help you?"
+        },
+        {
+          "s": "Sie",
+          "de": "Guten Morgen. Ich hätte gern einen Termin. Mir geht es seit drei Tagen nicht gut.",
+          "en": "Good morning. I'd like an appointment. I haven't been feeling well for three days."
+        },
+        {
+          "s": "Praxis",
+          "de": "Was fehlt Ihnen denn?",
+          "en": "What's wrong?"
+        },
+        {
+          "s": "Sie",
+          "de": "Mir tut der Hals weh und ich habe Fieber.",
+          "en": "My throat hurts and I have a fever."
+        },
+        {
+          "s": "Praxis",
+          "de": "Passt Ihnen morgen um 9 Uhr?",
+          "en": "Does tomorrow at 9 suit you?"
+        },
+        {
+          "s": "Sie",
+          "de": "Morgen früh muss ich leider arbeiten. Geht es auch am Nachmittag?",
+          "en": "Unfortunately I have to work tomorrow morning. Is the afternoon possible too?"
+        },
+        {
+          "s": "Praxis",
+          "de": "Ja, um Viertel nach drei. Waren Sie schon einmal bei uns?",
+          "en": "Yes, at quarter past three. Have you been to us before?"
+        },
+        {
+          "s": "Sie",
+          "de": "Nein, ich bin zum ersten Mal bei Ihnen.",
+          "en": "No, it's my first time with you."
+        },
+        {
+          "s": "Praxis",
+          "de": "Dann bringen Sie bitte Ihre Versichertenkarte mit.",
+          "en": "Then please bring your health insurance card."
+        },
+        {
+          "s": "Sie",
+          "de": "Mache ich. Vielen Dank und bis morgen!",
+          "en": "I will. Thank you and see you tomorrow!"
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Ich hätte gern einen Termin.",
+          "en": "I'd like an appointment."
+        },
+        {
+          "de": "Mir tut … weh.",
+          "en": "My … hurts."
+        },
+        {
+          "de": "Was fehlt Ihnen?",
+          "en": "What's wrong with you?"
+        },
+        {
+          "de": "Passt Ihnen …?",
+          "en": "Does … suit you?"
+        },
+        {
+          "de": "Geht es auch am Nachmittag?",
+          "en": "Is the afternoon possible too?"
+        },
+        {
+          "de": "Ich bin krankgeschrieben.",
+          "en": "I'm on sick leave."
+        }
+      ]
+    },
+    {
+      "title": "Nach dem Weg fragen",
+      "situation": "Auf der Straße. Übt: Präpositionen mit Dativ und Akkusativ.",
+      "lines": [
+        {
+          "s": "Sie",
+          "de": "Entschuldigung, können Sie mir helfen? Ich suche den Bahnhof.",
+          "en": "Excuse me, can you help me? I'm looking for the station."
+        },
+        {
+          "s": "Passant",
+          "de": "Ja, gern. Gehen Sie hier geradeaus bis zur Ampel.",
+          "en": "Yes, sure. Go straight ahead here as far as the traffic light."
+        },
+        {
+          "s": "Sie",
+          "de": "Bis zur Ampel, okay.",
+          "en": "As far as the traffic light, okay."
+        },
+        {
+          "s": "Passant",
+          "de": "An der Ampel gehen Sie nach links und dann über die Brücke.",
+          "en": "At the traffic light turn left and then go over the bridge."
+        },
+        {
+          "s": "Sie",
+          "de": "Und nach der Brücke?",
+          "en": "And after the bridge?"
+        },
+        {
+          "s": "Passant",
+          "de": "Dann sehen Sie den Bahnhof schon. Er liegt gegenüber dem Rathaus.",
+          "en": "Then you'll already see the station. It's opposite the town hall."
+        },
+        {
+          "s": "Sie",
+          "de": "Ist das weit? Kann ich zu Fuß gehen?",
+          "en": "Is it far? Can I walk?"
+        },
+        {
+          "s": "Passant",
+          "de": "Etwa zehn Minuten zu Fuß. Sie können aber auch mit dem Bus fahren.",
+          "en": "About ten minutes on foot. But you can also take the bus."
+        },
+        {
+          "s": "Sie",
+          "de": "Vielen Dank für Ihre Hilfe!",
+          "en": "Thanks a lot for your help!"
+        },
+        {
+          "s": "Passant",
+          "de": "Gern geschehen.",
+          "en": "You're welcome."
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Können Sie mir helfen? Ich suche …",
+          "en": "Can you help me? I'm looking for …"
+        },
+        {
+          "de": "Gehen Sie geradeaus bis zur Ampel.",
+          "en": "Go straight on as far as the traffic light."
+        },
+        {
+          "de": "an der Kreuzung links / rechts",
+          "en": "left / right at the crossroads"
+        },
+        {
+          "de": "gegenüber dem Rathaus",
+          "en": "opposite the town hall"
+        },
+        {
+          "de": "Ist das weit? / Kann ich zu Fuß gehen?",
+          "en": "Is it far? / Can I walk?"
+        },
+        {
+          "de": "Gern geschehen.",
+          "en": "You're welcome."
+        }
+      ]
+    },
+    {
+      "title": "Small Talk: Wie war dein Wochenende?",
+      "situation": "Montag im Kurs. Übt: Perfekt und Präteritum.",
+      "lines": [
+        {
+          "s": "Lena",
+          "de": "Hallo! Wie war dein Wochenende?",
+          "en": "Hi! How was your weekend?"
+        },
+        {
+          "s": "Omar",
+          "de": "Sehr schön, danke. Am Samstag bin ich mit Freunden nach Frankfurt gefahren.",
+          "en": "Very nice, thanks. On Saturday I went to Frankfurt with friends."
+        },
+        {
+          "s": "Lena",
+          "de": "Oh, toll! Was habt ihr dort gemacht?",
+          "en": "Oh, great! What did you do there?"
+        },
+        {
+          "s": "Omar",
+          "de": "Wir haben die Altstadt angeschaut und am Main gegessen. Und du?",
+          "en": "We looked at the old town and ate by the river Main. And you?"
+        },
+        {
+          "s": "Lena",
+          "de": "Ich war leider krank. Ich hatte Kopfschmerzen und bin zu Hause geblieben.",
+          "en": "Unfortunately I was ill. I had a headache and stayed at home."
+        },
+        {
+          "s": "Omar",
+          "de": "Oh nein! Geht es dir jetzt besser?",
+          "en": "Oh no! Are you feeling better now?"
+        },
+        {
+          "s": "Lena",
+          "de": "Ja, zum Glück. Am Sonntag konnte ich schon wieder spazieren gehen.",
+          "en": "Yes, luckily. On Sunday I could already go for a walk again."
+        },
+        {
+          "s": "Omar",
+          "de": "Das freut mich. Hast du die Hausaufgaben gemacht?",
+          "en": "I'm glad. Did you do the homework?"
+        },
+        {
+          "s": "Lena",
+          "de": "Nein, ich habe sie ganz vergessen! Kannst du sie mir kurz zeigen?",
+          "en": "No, I completely forgot! Can you quickly show it to me?"
+        },
+        {
+          "s": "Omar",
+          "de": "Klar, hier. Wir können sie in der Pause zusammen machen.",
+          "en": "Sure, here. We can do it together in the break."
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Wie war dein Wochenende?",
+          "en": "How was your weekend?"
+        },
+        {
+          "de": "Was habt ihr gemacht?",
+          "en": "What did you (pl.) do?"
+        },
+        {
+          "de": "Ich bin zu Hause geblieben.",
+          "en": "I stayed at home."
+        },
+        {
+          "de": "Geht es dir besser?",
+          "en": "Are you feeling better?"
+        },
+        {
+          "de": "Das freut mich. / Das tut mir leid.",
+          "en": "I'm glad. / I'm sorry."
+        },
+        {
+          "de": "Kannst du sie mir zeigen?",
+          "en": "Can you show it to me?"
+        }
+      ]
+    },
+    {
+      "title": "In der Bäckerei",
+      "situation": "Beim Einkaufen. Übt: Akkusativ (einen, ein, eine) und höfliche Formen.",
+      "lines": [
+        {
+          "s": "Verkäuferin",
+          "de": "Guten Tag! Was darf es sein?",
+          "en": "Hello! What can I get you?"
+        },
+        {
+          "s": "Sie",
+          "de": "Guten Tag. Ich hätte gern ein Vollkornbrot und vier Brötchen.",
+          "en": "Hello. I'd like a wholemeal bread and four rolls."
+        },
+        {
+          "s": "Verkäuferin",
+          "de": "Gern. Soll ich Ihnen das Brot schneiden?",
+          "en": "Sure. Shall I slice the bread for you?"
+        },
+        {
+          "s": "Sie",
+          "de": "Ja, bitte. Und haben Sie auch einen Apfelkuchen?",
+          "en": "Yes, please. And do you also have an apple cake?"
+        },
+        {
+          "s": "Verkäuferin",
+          "de": "Heute leider nicht, aber wir haben einen frischen Käsekuchen.",
+          "en": "Not today, unfortunately, but we have a fresh cheesecake."
+        },
+        {
+          "s": "Sie",
+          "de": "Dann nehme ich ein Stück Käsekuchen.",
+          "en": "Then I'll take a piece of cheesecake."
+        },
+        {
+          "s": "Verkäuferin",
+          "de": "Zum Mitnehmen oder zum Hieressen?",
+          "en": "To take away or to eat here?"
+        },
+        {
+          "s": "Sie",
+          "de": "Zum Mitnehmen, bitte. Was macht das?",
+          "en": "To take away, please. How much is that?"
+        },
+        {
+          "s": "Verkäuferin",
+          "de": "Das macht zusammen 8,40 Euro. Brauchen Sie eine Tüte?",
+          "en": "That's 8.40 euros altogether. Do you need a bag?"
+        },
+        {
+          "s": "Sie",
+          "de": "Nein, danke. Kann ich mit Karte zahlen?",
+          "en": "No, thanks. Can I pay by card?"
+        },
+        {
+          "s": "Verkäuferin",
+          "de": "Natürlich. Einen schönen Tag noch!",
+          "en": "Of course. Have a nice day!"
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Was darf es sein?",
+          "en": "What can I get you?"
+        },
+        {
+          "de": "Ich hätte gern … / Ich nehme …",
+          "en": "I'd like … / I'll take …"
+        },
+        {
+          "de": "Zum Mitnehmen oder zum Hieressen?",
+          "en": "To take away or to eat here?"
+        },
+        {
+          "de": "Was macht das? / Das macht zusammen …",
+          "en": "How much is that? / That's … altogether."
+        },
+        {
+          "de": "Kann ich mit Karte zahlen?",
+          "en": "Can I pay by card?"
+        },
+        {
+          "de": "Einen schönen Tag noch!",
+          "en": "Have a nice day!"
+        }
+      ]
+    }
+  ],
   "drills": [
     {
       "title": "Schnelltest: Welcher Fall nach der Präposition?",

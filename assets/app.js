@@ -23,7 +23,12 @@
   function classVocab(c) { return (c.vocab || []).map(function (v) { return Object.assign({ cls: c }, v); }); }
   function allVocab() { var out = []; sorted().forEach(function (c) { out = out.concat(classVocab(c)); }); return out; }
   // Flashcards = vocabulary + grammar form cards (c.cards, only in Karten, not in Wortschatz).
-  function classCards(c) { return classVocab(c).concat((c.cards || []).map(function (v) { return Object.assign({ cls: c, form: true }, v); })); }
+  function classPhrases(c) {
+    var out = [];
+    (c.dialogues || []).forEach(function (d) { (d.phrases || []).forEach(function (ph) { out.push({ cls: c, phrase: true, de: ph.de, en: ph.en, ex: d.title }); }); });
+    return out;
+  }
+  function classCards(c) { return classVocab(c).concat((c.cards || []).map(function (v) { return Object.assign({ cls: c, form: true }, v); }), classPhrases(c)); }
   function allCards() { var out = []; sorted().forEach(function (c) { out = out.concat(classCards(c)); }); return out; }
   // One day picker for every page: the chosen day is remembered (b2day).
   function curDay() { var d = store.get("b2day", "alle"); return d !== "alle" && !byId(d) ? "alle" : d; }
@@ -189,8 +194,9 @@
     ["grammatik", "Grammatik"],
     ["uebungen", "Übungen"]
   ];
-  // Wortschatz, Karten and Notizen live in the main navigation only (with the day picker).
-  var TOOLS = { wortschatz: "wortschatz", karten: "karteikarten", notizen: "notizen" };
+  // Wortschatz, Karten and Gespräche live in the main navigation only (with the day picker).
+  // (notizen: the old notes page, now redirected to Gespräche)
+  var TOOLS = { wortschatz: "wortschatz", karten: "karteikarten", gespraeche: "gespraeche", notizen: "gespraeche" };
   function tabLabel(key) { for (var i = 0; i < TABS.length; i++) if (TABS[i][0] === key) return TABS[i][1]; return key; }
 
   function route() {
@@ -202,7 +208,8 @@
     if (!h || h === "start") return renderHome(app);
     if (h === "wortschatz") return renderAllVocab(app);
     if (h === "karteikarten") return renderAllCards(app);
-    if (h === "notizen") return renderAllNotes(app);
+    if (h === "gespraeche") return renderDialogues(app);
+    if (h === "notizen") { location.replace("#gespraeche"); return; }
     var parts = h.split("-");
     var c = byId(parts[0]);
     if (c && TOOLS[parts[1]]) { store.set("b2day", c.id); location.replace("#" + TOOLS[parts[1]]); return; }
@@ -214,7 +221,7 @@
     $$(".mainnav a").forEach(function (a) {
       if (a.getAttribute("href") === "#" + key) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
-    var titles = { wortschatz: "Wortschatz", karteikarten: "Karteikarten", notizen: "Notizen" };
+    var titles = { wortschatz: "Wortschatz", karteikarten: "Karteikarten", gespraeche: "Gespräche" };
     var c = h && byId(h.split("-")[0]);
     document.title = (c ? "Tag " + c.nr + ": " + c.title : titles[h] || "Deutsch B2 Lernseite") + (c || titles[h] ? " · Deutsch B2" : "");
   }
@@ -227,7 +234,7 @@
     var nKnown = allCards().filter(function (v) { return known[cardKey(v)]; }).length;
     var html = '<section class="hero"><span class="eyebrow">Deutsch · Niveau B2</span>' +
       "<h1>Alle Kurstage auf einen Blick</h1>" +
-      '<p class="lede">Zusammenfassung, Grammatik, Wortschatz, Karteikarten und Übungen zu jedem Kurstag. Die Beispiele stammen aus dem Unterricht, Tag 0 wiederholt die Grundlagen. Deine Notizen bleiben auf deinem Gerät.</p>' +
+      '<p class="lede">Zusammenfassung, Grammatik, Wortschatz, Karteikarten und Übungen zu jedem Kurstag. Die Beispiele stammen aus dem Unterricht, Tag 0 wiederholt die Grundlagen. Zu jedem Tag gibt es Gespräche aus dem Alltag zum Auswendiglernen.</p>' +
       '<div class="stats"><div><strong>' + cls.length + "</strong>Tage</div><div><strong>" + vocab.length + "</strong>Wörter</div><div><strong>" + nKnown + "</strong>Karten gewusst</div></div></section>";
     html += '<div id="install-slot"></div>';
     html += '<section class="class-list" aria-label="Kurstage">';
@@ -240,8 +247,10 @@
     });
     if (!cls.length) html += '<p class="muted">Noch keine Tage eingetragen.</p>';
     html += "</section>";
+    html += '<div id="backup-slot"></div>';
     app.innerHTML = html;
     renderInstall($("#install-slot"));
+    renderBackup($("#backup-slot"), function () { renderHome(app); });
   }
 
   /* ---------- class page ---------- */
@@ -307,7 +316,7 @@
   function drawPanel(app, c, tab) {
     var body = $("#panel-body"), next = $("#next-row");
     $("#panel").setAttribute("aria-labelledby", "tab-" + tab);
-    ({ ueberblick: panelOverview, grammatik: panelGrammar, wortschatz: panelVocab, karten: panelCards, uebungen: panelExercises, notizen: panelNotes })[tab](body, c, app);
+    ({ ueberblick: panelOverview, grammatik: panelGrammar, wortschatz: panelVocab, karten: panelCards, uebungen: panelExercises })[tab](body, c, app);
     var idx = TABS.map(function (t) { return t[0]; }).indexOf(tab);
     var nt = tab === "ueberblick" ? null : TABS[idx + 1]; // the overview has its own learning path
     next.innerHTML = nt ? '<button class="btn next-btn" type="button">Weiter: ' + nt[1] + " →</button>" : "";
@@ -326,7 +335,8 @@
     if (c.grammar && c.grammar.length) steps.push(["grammatik", "Grammatik lesen", c.grammar.length + " Themen"]);
     if (nv) steps.push(["karten", "Wörter mit Karteikarten lernen", nk + " von " + nv + " gewusst"]);
     if (nDr || nEx) steps.push(["uebungen", "Üben", [nDr ? "Schnelltest" + (best ? " " + best.score + "/" + best.total : "") : "", nEx ? nEx + " Übung" + (nEx > 1 ? "en" : "") : ""].filter(Boolean).join(" · ")]);
-    steps.push(["notizen", "Eigene Notizen schreiben", "Fragen, eigene Beispielsätze"]);
+    var nDl = (c.dialogues || []).length;
+    if (nDl) steps.push(["gespraeche", "Gespräche lesen und auswendig lernen", nDl + " Gespräch" + (nDl > 1 ? "e" : "") + " aus dem Alltag"]);
     html += '<div class="block"><h2>So lernst du diesen Tag</h2><ol class="path">' + steps.map(function (s, i) {
       return '<li><button type="button" data-go="' + s[0] + '"><span class="step">' + (i + 1) + '</span><span class="path-text"><b>' + s[1] + '</b><span class="muted">' + esc(s[2]) + '</span></span><span class="go" aria-hidden="true">→</span></button></li>';
     }).join("") + "</ol></div>";
@@ -380,10 +390,13 @@
   function cardsUI(p, full, title) {
     var known = store.get("b2known", {});
     // Deck: words, grammar forms, or both (only offered when there are form cards).
-    var hasForms = full.some(function (v) { return v.form; });
-    var kind = hasForms ? store.get("b2deck", "alle") : "alle";
+    var kindOf = function (v) { return v.form ? "formen" : v.phrase ? "saetze" : "woerter"; };
+    var kinds = ["woerter", "formen", "saetze"].filter(function (k) { return full.some(function (v) { return kindOf(v) === k; }); });
+    var hasForms = kinds.length > 1;
+    var kind = store.get("b2deck", "alle");
+    if (kind !== "alle" && kinds.indexOf(kind) < 0) kind = "alle";
     var list;
-    function pick() { list = full.filter(function (v) { return kind === "alle" || (kind === "formen") === !!v.form; }); }
+    function pick() { list = full.filter(function (v) { return kind === "alle" || kindOf(v) === kind; }); }
     pick();
     var mode = "alle";
     var deck = [], again = {}, i = 0, flipped = false, reverse = store.get("b2reverse", false);
@@ -411,8 +424,11 @@
     function draw() {
       var nKnown = list.filter(function (v) { return known[cardKey(v)]; }).length;
       var settings = '<div class="toolbar fc-settings">' +
-        (hasForms ? '<select id="fc-kind" aria-label="Welcher Stapel"><option value="alle"' + (kind === "alle" ? " selected" : "") + '>Wörter und Formen</option><option value="woerter"' + (kind === "woerter" ? " selected" : "") + '>Nur Wörter</option><option value="formen"' + (kind === "formen" ? " selected" : "") + ">Nur Grammatik-Formen</option></select>" : "") +
-        '<select id="fc-mode" aria-label="Welche Karten"><option value="alle"' + (mode === "alle" ? " selected" : "") + '>Alle Karten</option><option value="offen"' + (mode === "offen" ? " selected" : "") + ">Nur noch nicht gewusst</option></select>" +
+        (hasForms ? '<select id="fc-kind" aria-label="Welcher Stapel"><option value="alle"' + (kind === "alle" ? " selected" : "") + ">Alle Karten</option>" +
+          [["woerter", "Nur Wörter"], ["formen", "Nur Grammatik-Formen"], ["saetze", "Nur Sätze aus den Gesprächen"]].filter(function (o) { return kinds.indexOf(o[0]) >= 0; }).map(function (o) {
+            return '<option value="' + o[0] + '"' + (kind === o[0] ? " selected" : "") + ">" + o[1] + "</option>";
+          }).join("") + "</select>" : "") +
+        '<select id="fc-mode" aria-label="Welche Karten"><option value="alle"' + (mode === "alle" ? " selected" : "") + '>Alle</option><option value="offen"' + (mode === "offen" ? " selected" : "") + ">Nur noch nicht gewusst</option></select>" +
         '<label class="check"><input type="checkbox" id="fc-rev"' + (reverse ? " checked" : "") + "> Bedeutung zuerst</label>" +
         '<span class="muted">' + nKnown + " / " + list.length + " gewusst</span></div>";
       var html = "";
@@ -688,18 +704,6 @@
     });
   }
 
-  /* ---------- notes ---------- */
-  function panelNotes(p, c) {
-    var key = "b2note:" + c.id;
-    p.innerHTML = '<div class="block"><h2>Meine Notizen zu Tag ' + c.nr + '</h2><p class="muted">Wird automatisch auf diesem Gerät gespeichert. Andere sehen deine Notizen nicht.</p>' +
-      '<textarea class="notes-box" id="note-' + esc(c.id) + '" placeholder="Eigene Beispielsätze, Fragen an die Lehrkraft, Eselsbrücken …"></textarea><span class="saved" id="saved" aria-live="polite"></span></div>';
-    var ta = $(".notes-box", p), t;
-    ta.value = store.get(key, "");
-    var save = function () { $("#saved").textContent = store.set(key, ta.value) ? "Gespeichert" : "Speichern auf diesem Gerät nicht möglich"; };
-    ta.addEventListener("input", function () { clearTimeout(t); $("#saved").textContent = "…"; t = setTimeout(save, 400); });
-    ta.addEventListener("blur", function () { clearTimeout(t); save(); });
-  }
-
   /* ---------- global pages ---------- */
   function renderAllVocab(app) {
     var d = curDay();
@@ -719,36 +723,11 @@
     try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (/^b2/.test(k)) data[k] = localStorage.getItem(k); } } catch (e) {}
     return { app: "deutsch-b2", version: 1, saved: new Date().toISOString(), data: data };
   }
-  function renderAllNotes(app) {
-    var d = curDay();
-    var cls = sorted().filter(function (c) { return d === "alle" || c.id === d; });
-    var html = dayHead("Nur auf deinem Gerät", "Meine Notizen", d);
-    var any = false, text = "";
-    var single = d !== "alle" && byId(d);
-    if (single) html += '<div id="note-slot"></div>';
-    else cls.forEach(function (c) {
-      var n = (store.get("b2note:" + c.id, "") || "").trim();
-      if (!n) return;
-      any = true;
-      text += "Tag " + c.nr + ": " + c.title + "\n" + n + "\n\n";
-      html += '<article class="block note-item"><h2><a href="#' + c.id + '-notizen">Tag ' + c.nr + ": " + esc(c.title) + "</a></h2><pre>" + esc(n) + "</pre></article>";
-    });
-    if (single) {
-      // the editor is drawn below
-    } else if (!any) {
-      html += '<div class="callout">Noch keine Notizen. Wähl oben einen Tag und schreib los.</div>';
-      html += '<div class="class-list">' + cls.map(function (c) { return '<a class="class-card" href="#' + c.id + '-notizen"><span class="class-no">Tag ' + c.nr + "</span><div><h3>" + esc(c.title) + '</h3></div><span class="go" aria-hidden="true">→</span></a>'; }).join("") + "</div>";
-    } else {
-      html += '<div class="toolbar">' + (navigator.share ? '<button class="btn primary" id="share-notes">Teilen</button>' : "") +
-        '<button class="btn' + (navigator.share ? "" : " primary") + '" id="copy-notes">Kopieren</button>' +
-        '<span class="saved" id="copied" aria-live="polite"></span></div>';
-    }
-    html += '<section class="block"><h2>Lernstand sichern</h2><p class="muted">Notizen, Karteikarten und Übungen werden nur auf diesem Gerät gespeichert. Safari und die installierte App speichern getrennt. Mit einer Sicherungsdatei nimmst du alles auf ein anderes Gerät oder in die App mit.</p>' +
+  /* ---------- backup (on Home) ---------- */
+  function renderBackup(slot, rerender) {
+    if (!slot) return;
+    slot.innerHTML = '<section class="block"><h2>Lernstand sichern</h2><p class="muted">Karteikarten, Schnelltests und Übungen werden nur auf diesem Gerät gespeichert. Safari und die installierte App speichern getrennt. Mit einer Sicherungsdatei nimmst du alles auf ein anderes Gerät oder in die App mit.</p>' +
       '<div class="toolbar"><button class="btn" id="backup">Sicherung speichern</button><label class="btn" for="restore-file">Sicherung laden</label><input type="file" id="restore-file" class="sr-only" accept="application/json,.json"><span class="saved" id="backup-msg" aria-live="polite"></span></div></section>';
-    app.innerHTML = html;
-    wireDays(app, function () { renderAllNotes(app); });
-    if (single) panelNotes($("#note-slot"), single);
-
     var msg = function (t) { $("#backup-msg").textContent = t; };
     $("#backup").addEventListener("click", function () {
       var json = JSON.stringify(backupData());
@@ -773,21 +752,63 @@
           if (!obj || obj.app !== "deutsch-b2" || !obj.data) throw new Error("bad");
           var n = 0;
           Object.keys(obj.data).forEach(function (k) { if (/^b2/.test(k)) { localStorage.setItem(k, obj.data[k]); n++; } });
-          renderAllNotes(app);
+          rerender();
           $("#backup-msg").textContent = "Wiederhergestellt (" + n + " Einträge)";
         } catch (err) { msg("Das ist keine Sicherung dieser Lernseite."); }
       };
       r.readAsText(f);
     });
+  }
 
-    if (!any || single) return;
-    var done = function (m) { $("#copied").textContent = m; };
-    var sh = $("#share-notes");
-    if (sh) sh.addEventListener("click", function () { navigator.share({ title: "Meine B2-Notizen", text: text }).catch(function () {}); });
-    $("#copy-notes").addEventListener("click", function () {
-      if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { done("Kopiert"); }, function () { done("Kopieren nicht möglich. Bitte Text markieren und kopieren."); });
-      else done("Kopieren nicht möglich. Bitte Text markieren und kopieren.");
+  /* ---------- Gespräche (dialogues to read and memorise) ---------- */
+  function renderDialogues(app) {
+    var d = curDay();
+    var cls = sorted().filter(function (c) { return (d === "alle" || c.id === d) && c.dialogues && c.dialogues.length; });
+    var showEn = store.get("b2dlgEn", true), role = store.get("b2dlgRole", "keine");
+    var html = dayHead("Alltag", "Gespräche", d) +
+      '<section class="panel" id="panel"><div class="block dlg-controls">' +
+      '<p class="muted">Lies die Gespräche laut, lerne die Sätze auswendig und übe dann eine Rolle: Ihre Sätze werden versteckt, tippe darauf, um sie zu sehen.</p>' +
+      '<div class="toolbar"><label class="check"><input type="checkbox" id="dlg-en"' + (showEn ? " checked" : "") + "> Englisch zeigen</label>" +
+      '<div class="seg" role="group" aria-label="Rolle üben">' +
+      [["keine", "Alles lesen"], ["1", "Rolle 1 üben"], ["2", "Rolle 2 üben"]].map(function (o) {
+        return '<button type="button" class="chip" data-role="' + o[0] + '" aria-pressed="' + (role === o[0]) + '">' + o[1] + "</button>";
+      }).join("") + "</div></div></div>";
+    if (!cls.length) html += '<p class="muted">Für diesen Tag gibt es noch keine Gespräche.</p>';
+    cls.forEach(function (c) {
+      if (d === "alle") html += '<h2 class="dlg-day">Tag ' + c.nr + ": " + esc(c.title) + "</h2>";
+      c.dialogues.forEach(function (g, gi) {
+        var speakers = [];
+        g.lines.forEach(function (l) { if (speakers.indexOf(l.s) < 0) speakers.push(l.s); });
+        html += '<article class="block dlg" data-dlg="' + c.id + "-" + gi + '"><h2>' + esc(g.title) + "</h2>" +
+          (g.situation ? '<p class="muted dlg-sit">' + esc(g.situation) + "</p>" : "") +
+          '<p class="dlg-roles">Rolle 1: <b>' + esc(speakers[0] || "") + "</b>" + (speakers[1] ? " · Rolle 2: <b>" + esc(speakers[1]) + "</b>" : "") + "</p>" +
+          '<ol class="dlg-lines">' + g.lines.map(function (l) {
+            var r = speakers.indexOf(l.s) + 1;
+            return '<li class="dlg-line r' + r + '" data-r="' + r + '"><span class="dlg-who">' + esc(l.s) + "</span>" +
+              '<div class="dlg-text"><button type="button" class="dlg-de" aria-label="Satz zeigen">' + esc(l.de) + "</button>" +
+              '<span class="dlg-en">' + esc(l.en) + "</span></div>" +
+              '<button class="say" type="button" data-say="' + esc(l.de) + '" aria-label="Anhören" title="Anhören">' + ICON_SAY + "</button></li>";
+          }).join("") + "</ol>" +
+          (g.phrases && g.phrases.length ? '<div class="dlg-phrases"><h3>Wichtige Sätze</h3><ul>' + g.phrases.map(function (ph) {
+            return '<li><b>' + esc(ph.de) + '</b><span class="dlg-en">' + esc(ph.en) + "</span></li>";
+          }).join("") + "</ul></div>" : "") + "</article>";
+      });
     });
+    if (cls.length) html += '<p class="muted dlg-tip">Tipp: Die wichtigen Sätze gibt es auch als Karteikarten (Karten → „Nur Sätze aus den Gesprächen“).</p>';
+    html += "</section>";
+    app.innerHTML = html;
+    wireDays(app, function () { runCleanups(); renderDialogues(app); });
+    var panel = $("#panel");
+    var apply = function () {
+      panel.classList.toggle("hide-en", !showEn);
+      panel.setAttribute("data-role", role);
+      $$(".dlg-line", panel).forEach(function (li) { li.classList.remove("shown"); });
+      $$("[data-role]", panel).forEach(function (b) { if (b.tagName === "BUTTON") b.setAttribute("aria-pressed", String(b.dataset.role === role)); });
+    };
+    $("#dlg-en").addEventListener("change", function (e) { showEn = e.target.checked; store.set("b2dlgEn", showEn); apply(); });
+    $$("button[data-role]", panel).forEach(function (b) { b.addEventListener("click", function () { role = b.dataset.role; store.set("b2dlgRole", role); apply(); }); });
+    $$(".dlg-de", panel).forEach(function (b) { b.addEventListener("click", function () { b.closest(".dlg-line").classList.toggle("shown"); }); });
+    apply();
   }
 
   document.addEventListener("DOMContentLoaded", function () {

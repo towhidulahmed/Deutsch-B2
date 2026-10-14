@@ -328,12 +328,35 @@ input.gap.hinted::placeholder { color: var(--good); opacity: 1; font-weight: 600
 }
 .ex-actions .ex-score { margin-left: auto; padding-right: 6px; }
 
-/* ---------- notes ---------- */
-.notes-box { width: 100%; min-height: 260px; resize: vertical; font-family: var(--f-body); font-size: 16px; line-height: 1.6;
-  background-image: repeating-linear-gradient(transparent 0 25.6px, var(--rule) 25.6px 26.6px); background-attachment: local; padding-top: 4px; }
 .saved { font-size: 0.8rem; color: var(--ink-soft); font-family: var(--f-mono); }
-.note-item { display: grid; gap: 6px; }
-.note-item pre { white-space: pre-wrap; font-family: var(--f-body); margin: 0; }
+
+/* ---------- Gespräche ---------- */
+.dlg-controls .toolbar { gap: 10px 14px; }
+.seg { display: flex; gap: 6px; flex-wrap: wrap; }
+.seg .chip[aria-pressed="true"] { background: var(--pen); color: var(--pen-ink); }
+.dlg-day { font-family: var(--f-display); font-size: 1.15rem; margin: 26px 2px 10px; }
+.dlg h2 { margin-bottom: 2px; }
+.dlg-sit { margin: 0 0 6px; font-size: 0.9rem; }
+.dlg-roles { margin: 0 0 12px; font-size: 0.82rem; color: var(--ink-soft); font-family: var(--f-ui); }
+.dlg-lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.dlg-line { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: start; padding: 10px 12px; border-radius: 14px; max-width: 92%; background: var(--paper); border: 1px solid var(--rule); }
+.dlg-line.r2 { margin-left: auto; background: var(--pen-soft); border-color: transparent; }
+.dlg-who { grid-column: 1 / -1; font-family: var(--f-ui); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
+.dlg-text { display: grid; gap: 3px; min-width: 0; }
+.dlg-de { all: unset; font-family: var(--f-body); font-size: 1.02rem; line-height: 1.45; color: var(--ink); cursor: default; -webkit-tap-highlight-color: transparent; }
+.dlg-en { display: block; font-family: var(--f-ui); font-size: 0.84rem; line-height: 1.4; color: var(--ink-soft); }
+.dlg-line .say { align-self: center; }
+.hide-en .dlg-en { display: none; }
+/* Role practice: hide that speaker's German until tapped */
+[data-role="1"] .dlg-line.r1:not(.shown) .dlg-de,
+[data-role="2"] .dlg-line.r2:not(.shown) .dlg-de { color: transparent; background: var(--rule); border-radius: 6px; cursor: pointer; user-select: none; }
+[data-role="1"] .dlg-line.r1 .dlg-de, [data-role="2"] .dlg-line.r2 .dlg-de { cursor: pointer; }
+[data-role="1"] .dlg-line.r1:not(.shown) .say, [data-role="2"] .dlg-line.r2:not(.shown) .say { visibility: hidden; }
+.dlg-phrases { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--rule); }
+.dlg-phrases h3 { font-family: var(--f-ui); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 8px; }
+.dlg-phrases ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.dlg-phrases b { font-family: var(--f-body); font-weight: 600; }
+.dlg-tip { margin: 12px 4px 0; font-size: 0.85rem; }
 
 footer {
   max-width: 920px; margin: 0 auto; font-size: 0.8rem; color: var(--ink-soft);

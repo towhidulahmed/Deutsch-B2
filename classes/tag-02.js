@@ -335,6 +335,323 @@ B2.addClass({
     {"de": "Konj. II Vergangenheit: du + mir das sagen können", "gram": "hätte + Infinitiv + Modalverb", "en": "Du hättest mir das sagen können."}
   ],
 
+  // Gespräche zum Lesen und Auswendiglernen (Seite „Gespräche“).
+  dialogues: [
+    {
+      "title": "Höflich bitten im Büro",
+      "situation": "Mit einer Kollegin. Übt: Konjunktiv II für höfliche Bitten (könnten, würden, hätten).",
+      "lines": [
+        {
+          "s": "Sie",
+          "de": "Entschuldigung, hätten Sie kurz Zeit?",
+          "en": "Excuse me, would you have a moment?"
+        },
+        {
+          "s": "Frau Lang",
+          "de": "Ja, natürlich. Worum geht es?",
+          "en": "Yes, of course. What's it about?"
+        },
+        {
+          "s": "Sie",
+          "de": "Könnten Sie mir zeigen, wie der Drucker funktioniert?",
+          "en": "Could you show me how the printer works?"
+        },
+        {
+          "s": "Frau Lang",
+          "de": "Gern. Sie müssen zuerst Ihre Karte hier hinhalten.",
+          "en": "Sure. First you have to hold your card here."
+        },
+        {
+          "s": "Sie",
+          "de": "Ah, danke. Und würden Sie mir noch einen Gefallen tun?",
+          "en": "Ah, thanks. And would you do me another favour?"
+        },
+        {
+          "s": "Frau Lang",
+          "de": "Kommt darauf an. Was denn?",
+          "en": "Depends. What is it?"
+        },
+        {
+          "s": "Sie",
+          "de": "Ich müsste morgen etwas früher gehen. Wäre es möglich, dass Sie das Meeting um 15 Uhr übernehmen?",
+          "en": "I'd have to leave a bit earlier tomorrow. Would it be possible for you to take over the 3 pm meeting?"
+        },
+        {
+          "s": "Frau Lang",
+          "de": "Das dürfte kein Problem sein. Schicken Sie mir einfach die Unterlagen.",
+          "en": "That shouldn't be a problem. Just send me the documents."
+        },
+        {
+          "s": "Sie",
+          "de": "Das wäre super. Vielen Dank, das ist sehr nett von Ihnen!",
+          "en": "That would be great. Thanks a lot, that's very kind of you!"
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Hätten Sie kurz Zeit?",
+          "en": "Would you have a moment?"
+        },
+        {
+          "de": "Könnten Sie mir zeigen, wie …?",
+          "en": "Could you show me how …?"
+        },
+        {
+          "de": "Würden Sie mir einen Gefallen tun?",
+          "en": "Would you do me a favour?"
+        },
+        {
+          "de": "Wäre es möglich, dass …?",
+          "en": "Would it be possible that …?"
+        },
+        {
+          "de": "Das dürfte kein Problem sein.",
+          "en": "That shouldn't be a problem."
+        },
+        {
+          "de": "Das wäre super. / Das ist sehr nett von Ihnen.",
+          "en": "That would be great. / That's very kind of you."
+        }
+      ]
+    },
+    {
+      "title": "Was hat der Arzt gesagt?",
+      "situation": "Zu Hause erzählen. Übt: indirekte Rede mit Konjunktiv I.",
+      "lines": [
+        {
+          "s": "Jonas",
+          "de": "Du warst doch heute beim Arzt. Was hat er gesagt?",
+          "en": "You were at the doctor's today, weren't you? What did he say?"
+        },
+        {
+          "s": "Sara",
+          "de": "Er hat gesagt, ich hätte eine Bronchitis. Ich solle mich ein paar Tage schonen.",
+          "en": "He said I have bronchitis. I should take it easy for a few days."
+        },
+        {
+          "s": "Jonas",
+          "de": "Oh je. Bist du krankgeschrieben?",
+          "en": "Oh dear. Are you on sick leave?"
+        },
+        {
+          "s": "Sara",
+          "de": "Ja, bis Freitag. Er meinte, es sei nichts Schlimmes.",
+          "en": "Yes, until Friday. He said it was nothing serious."
+        },
+        {
+          "s": "Jonas",
+          "de": "Brauchst du Medikamente?",
+          "en": "Do you need medicine?"
+        },
+        {
+          "s": "Sara",
+          "de": "Er hat gesagt, es gebe ein neues Spray. Das müsse ich dreimal am Tag nehmen.",
+          "en": "He said there was a new spray. I'd have to take it three times a day."
+        },
+        {
+          "s": "Jonas",
+          "de": "Und wann geht es dir wieder besser?",
+          "en": "And when will you feel better?"
+        },
+        {
+          "s": "Sara",
+          "de": "Er meint, es werde in einer Woche besser. Ich dürfe aber keinen Sport machen.",
+          "en": "He thinks it will get better in a week. But I mustn't do any sport."
+        },
+        {
+          "s": "Jonas",
+          "de": "Dann koche ich dir heute eine Suppe.",
+          "en": "Then I'll cook you some soup today."
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Er hat gesagt, ich hätte … (ich habe = Indikativ)",
+          "en": "He said I have …"
+        },
+        {
+          "de": "Er meinte, es sei nichts Schlimmes.",
+          "en": "He said it was nothing serious."
+        },
+        {
+          "de": "Ich solle mich schonen.",
+          "en": "I should take it easy."
+        },
+        {
+          "de": "Laut Arzt … / Er meint, …",
+          "en": "According to the doctor … / He thinks …"
+        },
+        {
+          "de": "Bist du krankgeschrieben?",
+          "en": "Are you on sick leave?"
+        },
+        {
+          "de": "Ich dürfe keinen Sport machen.",
+          "en": "I mustn't do any sport (he said)."
+        }
+      ]
+    },
+    {
+      "title": "Ein Rat unter Freunden",
+      "situation": "Im Café. Übt: Konjunktiv II für Ratschläge und Wünsche.",
+      "lines": [
+        {
+          "s": "Nina",
+          "de": "Du siehst müde aus. Was ist los?",
+          "en": "You look tired. What's wrong?"
+        },
+        {
+          "s": "Tom",
+          "de": "Ich arbeite zu viel. Ich hätte so gern mal wieder Zeit für mich.",
+          "en": "I work too much. I'd so love to have time for myself again."
+        },
+        {
+          "s": "Nina",
+          "de": "Du solltest mit deinem Chef sprechen.",
+          "en": "You should talk to your boss."
+        },
+        {
+          "s": "Tom",
+          "de": "Meinst du? Ich habe ein bisschen Angst davor.",
+          "en": "Do you think so? I'm a bit scared of it."
+        },
+        {
+          "s": "Nina",
+          "de": "An deiner Stelle würde ich nicht länger warten. Wenn ich du wäre, würde ich weniger Überstunden machen.",
+          "en": "If I were you, I wouldn't wait any longer. If I were you, I'd do less overtime."
+        },
+        {
+          "s": "Tom",
+          "de": "Du hast recht. Ich hätte das schon früher machen sollen.",
+          "en": "You're right. I should have done it earlier."
+        },
+        {
+          "s": "Nina",
+          "de": "Und wie wäre es mit einem Wochenende am Meer?",
+          "en": "And how about a weekend by the sea?"
+        },
+        {
+          "s": "Tom",
+          "de": "Das wäre ein Traum! Wenn ich mehr Geld hätte, würde ich sofort fahren.",
+          "en": "That would be a dream! If I had more money, I'd go straight away."
+        },
+        {
+          "s": "Nina",
+          "de": "Dann fahren wir zusammen. Das würde dir bestimmt guttun.",
+          "en": "Then let's go together. That would certainly do you good."
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Du solltest …",
+          "en": "You should …"
+        },
+        {
+          "de": "An deiner Stelle würde ich …",
+          "en": "If I were you, I would …"
+        },
+        {
+          "de": "Wenn ich du wäre, …",
+          "en": "If I were you, …"
+        },
+        {
+          "de": "Ich hätte das früher machen sollen.",
+          "en": "I should have done that earlier."
+        },
+        {
+          "de": "Wie wäre es mit …?",
+          "en": "How about …?"
+        },
+        {
+          "de": "Das würde dir guttun.",
+          "en": "That would do you good."
+        }
+      ]
+    },
+    {
+      "title": "Im Vorstellungsgespräch",
+      "situation": "Bewerbung. Übt: Konjunktiv II (würde, könnte, hätte) und Fragen aus Übung 4.",
+      "lines": [
+        {
+          "s": "Frau Krüger",
+          "de": "Warum haben Sie sich bei uns beworben?",
+          "en": "Why did you apply to us?"
+        },
+        {
+          "s": "Sie",
+          "de": "Ihre Firma interessiert mich sehr. Ich würde gern in einem internationalen Team arbeiten.",
+          "en": "Your company interests me a lot. I'd like to work in an international team."
+        },
+        {
+          "s": "Frau Krüger",
+          "de": "Was wissen Sie über unsere Firma?",
+          "en": "What do you know about our company?"
+        },
+        {
+          "s": "Sie",
+          "de": "Sie entwickeln Software für Krankenhäuser. Das finde ich sehr sinnvoll.",
+          "en": "You develop software for hospitals. I find that very meaningful."
+        },
+        {
+          "s": "Frau Krüger",
+          "de": "Wie sieht es mit Stress aus? Vertragen Sie Stress gut?",
+          "en": "What about stress? Do you cope well with stress?"
+        },
+        {
+          "s": "Sie",
+          "de": "Ja, ich kann gut unter Druck arbeiten. Ich plane meine Aufgaben genau.",
+          "en": "Yes, I can work well under pressure. I plan my tasks carefully."
+        },
+        {
+          "s": "Frau Krüger",
+          "de": "Was für Gehaltsvorstellungen haben Sie?",
+          "en": "What are your salary expectations?"
+        },
+        {
+          "s": "Sie",
+          "de": "Ich hätte gern etwa 45.000 Euro im Jahr.",
+          "en": "I'd like about 45,000 euros a year."
+        },
+        {
+          "s": "Frau Krüger",
+          "de": "Wann könnten Sie anfangen?",
+          "en": "When could you start?"
+        },
+        {
+          "s": "Sie",
+          "de": "Ich könnte am 1. Dezember anfangen. Darf ich auch eine Frage stellen? Wie sieht ein typischer Arbeitstag aus?",
+          "en": "I could start on 1 December. May I ask a question too? What does a typical working day look like?"
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Ich würde gern in … arbeiten.",
+          "en": "I would like to work in …"
+        },
+        {
+          "de": "Ich kann gut unter Druck arbeiten.",
+          "en": "I can work well under pressure."
+        },
+        {
+          "de": "Ich hätte gern etwa … im Jahr.",
+          "en": "I'd like about … a year."
+        },
+        {
+          "de": "Ich könnte am … anfangen.",
+          "en": "I could start on …"
+        },
+        {
+          "de": "Darf ich auch eine Frage stellen?",
+          "en": "May I ask a question too?"
+        },
+        {
+          "de": "Wie sieht ein typischer Arbeitstag aus?",
+          "en": "What does a typical working day look like?"
+        }
+      ]
+    }
+  ],
+
   drills: [
     {
       title: "Übung 1B (Hausaufgabe): In die Tabelle einordnen",

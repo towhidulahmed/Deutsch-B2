@@ -225,6 +225,236 @@ B2.addClass({
     { de: "die WG (Wohngemeinschaft)", gram: "Pl. die WGs", en: "shared flat", ex: "Ich möchte mich daran gewöhnen, in einer WG zu wohnen." }
   ],
 
+  // Gespräche zum Lesen und Auswendiglernen (Seite „Gespräche“).
+  dialogues: [
+    {
+      "title": "Der erste Tag im neuen Job",
+      "situation": "In der Kaffeeküche mit einer Kollegin. Übt: gespannt auf, zufrieden mit, zuständig für, bekannt mit.",
+      "lines": [
+        {
+          "s": "Frau Roth",
+          "de": "Hallo, Sie sind neu hier, oder? Ich bin Sabine Roth aus der Buchhaltung.",
+          "en": "Hello, you're new here, aren't you? I'm Sabine Roth from accounting."
+        },
+        {
+          "s": "Sie",
+          "de": "Ja, heute ist mein erster Tag. Ich bin schon sehr gespannt auf die Arbeit.",
+          "en": "Yes, today is my first day. I'm already really looking forward to the work."
+        },
+        {
+          "s": "Frau Roth",
+          "de": "Für welchen Bereich sind Sie zuständig?",
+          "en": "Which area are you responsible for?"
+        },
+        {
+          "s": "Sie",
+          "de": "Ich bin für die Kundenbetreuung zuständig. Sind Sie mit Herrn Klein bekannt?",
+          "en": "I'm responsible for customer support. Do you know Mr Klein?"
+        },
+        {
+          "s": "Frau Roth",
+          "de": "Ja, natürlich, er ist Ihr Chef. Er ist bei allen sehr beliebt.",
+          "en": "Yes, of course, he's your boss. Everyone likes him a lot."
+        },
+        {
+          "s": "Sie",
+          "de": "Das freut mich. Und sind Sie mit der Firma zufrieden?",
+          "en": "I'm glad. And are you happy with the company?"
+        },
+        {
+          "s": "Frau Roth",
+          "de": "Sehr. Nur bin ich am Montag immer müde von den vielen Meetings.",
+          "en": "Very. It's just that on Mondays I'm always tired from all the meetings."
+        },
+        {
+          "s": "Sie",
+          "de": "Das kann ich mir vorstellen. Danke, dass Sie so freundlich zu mir sind.",
+          "en": "I can imagine. Thank you for being so friendly to me."
+        },
+        {
+          "s": "Frau Roth",
+          "de": "Gern. Wenn Sie Hilfe brauchen, bin ich Ihnen gern behilflich.",
+          "en": "You're welcome. If you need help, I'm happy to help you."
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Ich bin gespannt auf …",
+          "en": "I'm curious about / looking forward to …"
+        },
+        {
+          "de": "Ich bin für … zuständig.",
+          "en": "I'm responsible for …"
+        },
+        {
+          "de": "Sind Sie mit … bekannt?",
+          "en": "Do you know …?"
+        },
+        {
+          "de": "Ich bin mit … zufrieden.",
+          "en": "I'm satisfied with …"
+        },
+        {
+          "de": "Ich bin Ihnen gern behilflich.",
+          "en": "I'm happy to help you."
+        },
+        {
+          "de": "Das kann ich mir vorstellen.",
+          "en": "I can imagine that."
+        }
+      ]
+    },
+    {
+      "title": "Ärger mit dem Nachbarn",
+      "situation": "Im Treppenhaus. Übt: gewohnt, entsetzt über, einverstanden mit, besorgt um.",
+      "lines": [
+        {
+          "s": "Sie",
+          "de": "Guten Abend, Herr Berger. Haben Sie kurz Zeit?",
+          "en": "Good evening, Mr Berger. Do you have a moment?"
+        },
+        {
+          "s": "Herr Berger",
+          "de": "Ja, was gibt's?",
+          "en": "Yes, what's up?"
+        },
+        {
+          "s": "Sie",
+          "de": "Gestern war es bis zwei Uhr nachts sehr laut. Ich bin so einen Lärm nicht gewohnt.",
+          "en": "Yesterday it was very loud until two in the morning. I'm not used to that kind of noise."
+        },
+        {
+          "s": "Herr Berger",
+          "de": "Oh, das tut mir leid. Wir hatten eine Geburtstagsfeier.",
+          "en": "Oh, I'm sorry. We had a birthday party."
+        },
+        {
+          "s": "Sie",
+          "de": "Ich verstehe das, aber ich muss um sechs aufstehen. Ich war ehrlich gesagt ein bisschen entsetzt.",
+          "en": "I understand, but I have to get up at six. To be honest I was a bit shocked."
+        },
+        {
+          "s": "Herr Berger",
+          "de": "Das ist mir peinlich. Ab 22 Uhr machen wir die Musik leiser. Sind Sie damit einverstanden?",
+          "en": "That's embarrassing. From 10 pm we'll turn the music down. Is that okay with you?"
+        },
+        {
+          "s": "Sie",
+          "de": "Ja, damit bin ich einverstanden. Danke für Ihr Verständnis.",
+          "en": "Yes, I agree with that. Thanks for your understanding."
+        },
+        {
+          "s": "Herr Berger",
+          "de": "Kein Problem. Sagen Sie mir einfach Bescheid, wenn es wieder zu laut ist.",
+          "en": "No problem. Just let me know if it's too loud again."
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Haben Sie kurz Zeit?",
+          "en": "Do you have a moment?"
+        },
+        {
+          "de": "Ich bin so einen Lärm nicht gewohnt.",
+          "en": "I'm not used to that kind of noise."
+        },
+        {
+          "de": "Ich war ein bisschen entsetzt über …",
+          "en": "I was a bit shocked about …"
+        },
+        {
+          "de": "Sind Sie damit einverstanden?",
+          "en": "Is that okay with you?"
+        },
+        {
+          "de": "Danke für Ihr Verständnis.",
+          "en": "Thanks for your understanding."
+        },
+        {
+          "de": "Sagen Sie mir Bescheid.",
+          "en": "Let me know."
+        }
+      ]
+    },
+    {
+      "title": "Nach der Prüfung",
+      "situation": "Zwei Freunde telefonieren. Übt: stolz auf, froh über, dankbar für, überzeugt von, neidisch auf.",
+      "lines": [
+        {
+          "s": "Mia",
+          "de": "Und? Wie war die Prüfung?",
+          "en": "So? How was the exam?"
+        },
+        {
+          "s": "Ali",
+          "de": "Ich habe bestanden! Ich bin so froh über das Ergebnis.",
+          "en": "I passed! I'm so happy about the result."
+        },
+        {
+          "s": "Mia",
+          "de": "Glückwunsch! Ich bin wirklich stolz auf dich.",
+          "en": "Congratulations! I'm really proud of you."
+        },
+        {
+          "s": "Ali",
+          "de": "Danke! Ohne deine Hilfe hätte ich das nicht geschafft. Ich bin dir sehr dankbar dafür.",
+          "en": "Thanks! I couldn't have done it without your help. I'm very grateful to you for it."
+        },
+        {
+          "s": "Mia",
+          "de": "Ach was, du hast viel gelernt. Ich war immer von dir überzeugt.",
+          "en": "Oh come on, you studied a lot. I always believed in you."
+        },
+        {
+          "s": "Ali",
+          "de": "Mein Bruder ist jetzt ein bisschen neidisch auf mich. Er muss die Prüfung noch machen.",
+          "en": "My brother is a bit jealous of me now. He still has to take the exam."
+        },
+        {
+          "s": "Mia",
+          "de": "Dann kannst du ihm ja helfen. Du bist jetzt reich an Erfahrung!",
+          "en": "Then you can help him. You're rich in experience now!"
+        },
+        {
+          "s": "Ali",
+          "de": "Stimmt. Heute Abend feiern wir. Hast du Lust?",
+          "en": "True. We're celebrating tonight. Do you fancy it?"
+        },
+        {
+          "s": "Mia",
+          "de": "Na klar, ich bin dabei!",
+          "en": "Of course, count me in!"
+        }
+      ],
+      "phrases": [
+        {
+          "de": "Ich bin froh über …",
+          "en": "I'm happy about …"
+        },
+        {
+          "de": "Ich bin stolz auf dich.",
+          "en": "I'm proud of you."
+        },
+        {
+          "de": "Ich bin dir dankbar für …",
+          "en": "I'm grateful to you for …"
+        },
+        {
+          "de": "Ich war immer von dir überzeugt.",
+          "en": "I always believed in you."
+        },
+        {
+          "de": "Hast du Lust?",
+          "en": "Do you fancy it?"
+        },
+        {
+          "de": "Ich bin dabei!",
+          "en": "Count me in!"
+        }
+      ]
+    }
+  ],
+
   drills: [
     {
       title: "Schnelltest: Welche Präposition?",
