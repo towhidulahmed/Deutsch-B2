@@ -45,7 +45,7 @@ B2.addClass({
       title: "2. Bildung des Konjunktiv I",
       html:
         '<div class="prose"><p>Infinitivstamm + Endung <b>-e, -est, -e, -en, -et, -en</b>. Es gibt keinen Vokalwechsel und keinen Umlaut: <em>er hat → er habe</em>, <em>er muss → er müsse</em>, <em>es gibt → es gebe</em>. Am häufigsten braucht man die 3. Person Singular.</p></div>' +
-        '<div class="table-wrap"><table><thead><tr><th>Person</th><th>Endung</th><th>Beispiel: machen</th><th>Indikativ</th></tr></thead><tbody>' +
+        '<div class="table-wrap"><table class="forms"><thead><tr><th>Person</th><th>Endung</th><th>Beispiel: machen</th><th>Indikativ</th></tr></thead><tbody>' +
         '<tr><td>ich</td><td>-e</td><td>ich mache</td><td>ich mache*</td></tr>' +
         '<tr><td>du</td><td>-est</td><td>du machest</td><td>du machst</td></tr>' +
         '<tr><td><b>er/sie/es</b></td><td><b>-e</b></td><td><b>er mache</b></td><td>er macht</td></tr>' +
@@ -54,7 +54,7 @@ B2.addClass({
         '<tr><td>sie/Sie</td><td>-en</td><td>sie machen</td><td>sie machen*</td></tr>' +
         '</tbody></table></div>' +
         '<div class="callout"><strong>Merke: er mache, nicht er macht</strong><br>Die 3. Person Singular ist die wichtigste Form, weil man in der indirekten Rede meistens über eine andere Person spricht: <em>Er sagt, er <b>mache</b> heute Sport.</em> Bei ich, wir und sie/Sie ist der Konjunktiv I gleich wie der Indikativ (*).</div>' +
-        '<div class="table-wrap"><table><thead><tr><th>Person</th><th>sein</th><th>haben</th><th>werden</th><th>können</th><th>müssen</th></tr></thead><tbody>' +
+        '<div class="table-wrap"><table class="forms"><thead><tr><th>Person</th><th>sein</th><th>haben</th><th>werden</th><th>können</th><th>müssen</th></tr></thead><tbody>' +
         '<tr><td>ich</td><td><b>sei</b></td><td>habe*</td><td>werde*</td><td>könne</td><td>müsse</td></tr>' +
         '<tr><td>du</td><td><b>seist</b></td><td>habest</td><td>werdest</td><td>könnest</td><td>müssest</td></tr>' +
         '<tr><td>er/sie/es</td><td><b>sei</b></td><td><b>habe</b></td><td><b>werde</b></td><td><b>könne</b></td><td><b>müsse</b></td></tr>' +
@@ -93,7 +93,7 @@ B2.addClass({
       title: "4. Wenn Konjunktiv I = Indikativ: Konjunktiv II",
       html:
         '<div class="prose"><p>Bei <em>wir</em> und <em>sie/Sie</em> sieht der Konjunktiv I oft aus wie der Indikativ: <em>sie haben, sie kommen</em>. Dann merkt niemand, dass es indirekte Rede ist. Deshalb nimmt man den <b>Konjunktiv II</b> oder <b>würde + Infinitiv</b>.</p></div>' +
-        '<div class="table-wrap"><table><thead><tr><th>Indikativ</th><th>Konjunktiv I</th><th>besser</th></tr></thead><tbody>' +
+        '<div class="table-wrap"><table class="forms"><thead><tr><th>Indikativ</th><th>Konjunktiv I</th><th>besser</th></tr></thead><tbody>' +
         '<tr><td>sie haben keine Zeit</td><td>sie haben (gleich!)</td><td>sie <b>hätten</b> keine Zeit</td></tr>' +
         '<tr><td>sie kommen</td><td>sie kommen (gleich!)</td><td>sie <b>kämen</b> / sie <b>würden kommen</b></td></tr>' +
         '<tr><td>wir haben ihm nichts gesagt</td><td>wir haben (gleich!)</td><td>wir <b>hätten</b> ihm nichts gesagt</td></tr>' +
@@ -106,7 +106,7 @@ B2.addClass({
       title: "5. Indirekte Rede in der Praxis: welche Form?",
       html:
         '<div class="prose"><p>In der Praxis mischt man Konjunktiv I und II. <b>Fett</b> = Konjunktiv I, normal = Konjunktiv II. Die Regel: Man nimmt den Konjunktiv I, wenn er anders klingt als der Indikativ. Sonst nimmt man den Konjunktiv II (bei normalen Verben: <em>würde</em> + Infinitiv).</p></div>' +
-        '<div class="table-wrap"><table><thead><tr><th></th><th>sein</th><th>haben</th><th>Modalverben</th><th>andere Verben</th></tr></thead><tbody>' +
+        '<div class="table-wrap"><table class="forms"><thead><tr><th></th><th>sein</th><th>haben</th><th>Modalverben</th><th>andere Verben</th></tr></thead><tbody>' +
         '<tr><td>ich</td><td><b>sei</b></td><td>hätte</td><td><b>könne</b></td><td>würde machen</td></tr>' +
         '<tr><td>du</td><td><b>sei(e)st</b></td><td>hättest</td><td>könntest</td><td>würdest machen</td></tr>' +
         '<tr><td>er/sie/es</td><td><b>sei</b></td><td><b>habe</b></td><td><b>könne</b></td><td><b>mache</b></td></tr>' +
@@ -155,7 +155,7 @@ B2.addClass({
         '<p><b>Option 2: die eigene Form des Verbs.</b> In drei Schritten, Beispiel <em>können</em>: Präteritum <em>ich konnte</em> → Stamm <em>konnt-</em> → Umlaut <em>könnt-</em> → Endung: <em>ich könnte, du könntest, er könnte, wir könnten, ihr könntet, sie könnten</em>. Die Endungen sind <b>-e, -est, -e, -en, -et, -en</b>.</p>' +
         '<p><b>Warum so oft würde?</b> Bei regelmäßigen Verben ist die eigene Form genau gleich wie das Präteritum: <em>ich machte</em> kann Präteritum oder Konjunktiv II sein. Damit man nichts verwechselt, sagt man <em>ich würde machen</em>. Die würde-Form klingt außerdem normaler und gesprochener, die eigene Form oft gehobener oder schriftlicher. Die Bedeutung ist meistens gleich: <em>Ich <b>würde</b> gerne besser Deutsch <b>sprechen</b>.</em></p>' +
         '<p><b>Eigene Form oder würde?</b> Fast immer die eigene Form: <em>sein → wäre</em>, <em>haben → hätte</em> und die Modalverben <em>könnte, müsste, sollte, dürfte, wollte</em> und <em>möchte</em> (von mögen). Bei a, o, u kommt ein Umlaut dazu: <em>kam → käme</em>, <em>hatte → hätte</em>, <em>gab → gäbe</em>. Bei manchen Verben hört man beides: <em>es gäbe / es würde geben</em>, <em>ich ginge / ich würde gehen</em>, <em>ich käme / ich würde kommen</em>. Die eigene Form ist kürzer und gehobener, die würde-Form gesprochener.</p></div>' +
-        '<div class="table-wrap"><table><thead><tr><th>Person</th><th>sein</th><th>haben</th></tr></thead><tbody>' +
+        '<div class="table-wrap"><table class="forms"><thead><tr><th>Person</th><th>sein</th><th>haben</th></tr></thead><tbody>' +
         '<tr><td>ich</td><td>wäre</td><td>hätte</td></tr><tr><td>du</td><td>wärst</td><td>hättest</td></tr><tr><td>er/sie/es</td><td>wäre</td><td>hätte</td></tr>' +
         '<tr><td>wir</td><td>wären</td><td>hätten</td></tr><tr><td>ihr</td><td>wärt</td><td>hättet</td></tr><tr><td>sie/Sie</td><td>wären</td><td>hätten</td></tr>' +
         '</tbody></table></div>' +
@@ -164,7 +164,7 @@ B2.addClass({
         '<tr><td>wollen · sollen</td><td><b>wollte · sollte</b> (ohne Umlaut, gleich wie Präteritum)</td></tr>' +
         '<tr><td>kommen · gehen · wissen · geben</td><td><b>käme · ginge · wüsste · gäbe</b></td></tr>' +
         '</tbody></table></div>' +
-        '<div class="table-wrap"><table><thead><tr><th>Modalverben</th><th>können</th><th>dürfen</th><th>wollen</th><th>sollen</th><th>müssen</th></tr></thead><tbody>' +
+        '<div class="table-wrap"><table class="forms"><thead><tr><th></th><th>können</th><th>dürfen</th><th>wollen</th><th>sollen</th><th>müssen</th></tr></thead><tbody>' +
         '<tr><td>ich</td><td>könnte</td><td>dürfte</td><td>wollte</td><td>sollte</td><td>müsste</td></tr>' +
         '<tr><td>du</td><td>könntest</td><td>dürftest</td><td>wolltest</td><td>solltest</td><td>müsstest</td></tr>' +
         '<tr><td>er/sie/es</td><td>könnte</td><td>dürfte</td><td>wollte</td><td>sollte</td><td>müsste</td></tr>' +

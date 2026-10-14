@@ -73,7 +73,8 @@
   function stackTables(root) {
     $$("table", root).forEach(function (t) {
       var heads = $$("thead th", t).map(function (th) { return th.textContent; });
-      if (!heads.length) return;
+      // Conjugation grids (class "forms") stay real tables: rows = persons, columns = verbs.
+      if (!heads.length || t.classList.contains("forms")) return;
       t.classList.add("stack");
       $$("tbody tr", t).forEach(function (tr) {
         $$("td", tr).forEach(function (td, i) { if (heads[i] && !td.hasAttribute("data-label")) td.setAttribute("data-label", heads[i]); });
