@@ -474,3 +474,9 @@ s { color: var(--bad); text-decoration-thickness: 1.5px; }
 .missed { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
 .ex-mini { display: block; font-family: var(--f-body); font-size: 0.9rem; color: var(--ink-soft); }
 .ex-note { font-family: var(--f-ui); font-size: 0.85rem; color: var(--ink-soft); }
+
+/* ---------- A1–B1 word list ---------- */
+.lvl-bar { margin-bottom: 10px; }
+.lvl { font-family: var(--f-mono); font-size: 0.68rem; font-weight: 600; padding: 1px 6px; border-radius: 6px; border: 1px solid var(--rule); color: var(--ink-soft); vertical-align: 1px; }
+.more-row { justify-content: center; margin-top: 12px; }
+#vtopic { max-width: 100%; }

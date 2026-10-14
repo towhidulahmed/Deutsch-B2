@@ -3,8 +3,10 @@
   "use strict";
 
   var CLASSES = [];
+  var WORDS = {};  // extra word lists per day, e.g. the A1–B1 Grundwortschatz in Tag 0
   window.B2 = {
-    addClass: function (c) { CLASSES.push(c); }
+    addClass: function (c) { CLASSES.push(c); },
+    addWords: function (id, list) { WORDS[id] = (WORDS[id] || []).concat(list); }
   };
 
   /* ---------- storage (fails quietly in private windows) ---------- */
@@ -20,7 +22,8 @@
   function stripTags(s) { var d = document.createElement("div"); d.innerHTML = s; return d.textContent || ""; }
   function byId(id) { for (var i = 0; i < CLASSES.length; i++) if (CLASSES[i].id === id) return CLASSES[i]; return null; }
   function sorted() { return CLASSES.slice().sort(function (a, b) { return a.nr - b.nr; }); }
-  function classVocab(c) { return (c.vocab || []).map(function (v) { return Object.assign({ cls: c }, v); }); }
+  function classVocab(c) { return (c.vocab || []).concat(WORDS[c.id] || []).map(function (v) { return Object.assign({ cls: c }, v); }); }
+  var LEVELS = ["A1", "A2", "B1"];
   function allVocab() { var out = []; sorted().forEach(function (c) { out = out.concat(classVocab(c)); }); return out; }
   // Flashcards = vocabulary + grammar form cards (c.cards, only in Karten, not in Wortschatz).
   function classPhrases(c) {
@@ -362,7 +365,7 @@
     if (!list.length) return '<p class="muted">Keine Treffer. Versuch ein anderes Wort.</p>';
     return '<div class="table-wrap"><table class="stack"><thead><tr><th>Deutsch</th><th>Bedeutung</th><th>Beispiel</th>' + (showClass ? "<th>Tag</th>" : "") + "</tr></thead><tbody>" +
       list.map(function (v) {
-        return '<tr><td><span class="word-cell">' + sayButton(v.de + (v.ex ? ". " + v.ex : ""), v.de + " anhören") + '<span><span class="de">' + esc(v.de) + "</span>" + (v.gram ? ' <span class="gram">' + esc(v.gram) + "</span>" : "") + "</span></span></td>" +
+        return '<tr><td><span class="word-cell">' + sayButton(v.de + (v.ex ? ". " + v.ex : ""), v.de + " anhören") + '<span><span class="de">' + esc(v.de) + "</span>" + (v.lvl ? ' <span class="lvl">' + esc(v.lvl) + "</span>" : "") + (v.gram ? ' <span class="gram">' + esc(v.gram) + "</span>" : "") + "</span></span></td>" +
           '<td data-label="Bedeutung">' + esc(v.en) + "</td>" +
           '<td class="ex-cell" data-label="Beispiel">' + esc(v.ex || "") + "</td>" +
           (showClass ? '<td data-label="Tag"><a href="#' + v.cls.id + '-wortschatz">Tag ' + v.cls.nr + "</a></td>" : "") + "</tr>";
@@ -374,14 +377,44 @@
     return list.filter(function (v) { return fold(v.de + " " + v.en + " " + (v.ex || "") + " " + (v.gram || "")).indexOf(q) !== -1; });
   }
   function vocabUI(p, list, showClass) {
-    p.innerHTML = '<div class="toolbar"><input type="search" id="vq" placeholder="Wort oder Bedeutung suchen …" aria-label="Wort suchen" enterkeyhint="search" autocomplete="off"><span class="muted" id="vcount"></span></div><div id="vt"></div>';
+    // Long lists (the A1–B1 word list) get a level and topic filter and are shown in pages.
+    var hasLvl = list.some(function (v) { return v.lvl; });
+    var lvl = hasLvl ? store.get("b2lvl", "alle") : "alle";
+    if (lvl !== "alle" && lvl !== "tag" && LEVELS.indexOf(lvl) < 0) lvl = "alle";
+    var topics = [];
+    list.forEach(function (v) { if (v.t && topics.indexOf(v.t) < 0) topics.push(v.t); });
+    topics.sort(function (a, b) { return a.localeCompare(b, "de"); });
+    var PAGE = 150, shown = PAGE;
+    var levelBar = !hasLvl ? "" : '<div class="seg lvl-bar" role="group" aria-label="Niveau">' +
+      [["alle", "Alle"], ["A1", "A1"], ["A2", "A2"], ["B1", "B1"], ["tag", "Wörter der Tage"]].map(function (o) {
+        return '<button type="button" class="chip" data-lvl="' + o[0] + '" aria-pressed="' + (lvl === o[0]) + '">' + o[1] + "</button>";
+      }).join("") + "</div>";
+    var topicSel = !topics.length ? "" : '<select id="vtopic" aria-label="Thema"><option value="">Alle Themen</option>' +
+      topics.map(function (t) { return '<option value="' + esc(t) + '">' + esc(t) + "</option>"; }).join("") + "</select>";
+    p.innerHTML = levelBar + '<div class="toolbar"><input type="search" id="vq" placeholder="Wort oder Bedeutung suchen …" aria-label="Wort suchen" enterkeyhint="search" autocomplete="off">' + topicSel + '<span class="muted" id="vcount"></span></div><div id="vt"></div>';
     var draw = function () {
-      var res = filterVocab(list, $("#vq").value);
-      $("#vt").innerHTML = vocabTable(res, showClass);
-      $("#vcount").textContent = res.length + " von " + list.length;
+      var topic = topicSel ? $("#vtopic", p).value : "";
+      var base = list.filter(function (v) {
+        if (lvl === "tag" ? v.lvl : lvl !== "alle" && v.lvl !== lvl) return false;
+        return !topic || v.t === topic;
+      });
+      var res = filterVocab(base, $("#vq", p).value);
+      $("#vt", p).innerHTML = vocabTable(res.slice(0, shown), showClass) +
+        (res.length > shown ? '<div class="btn-row more-row"><button class="btn" id="vmore">Mehr anzeigen (' + (res.length - shown) + " weitere)</button></div>" : "");
+      $("#vcount", p).textContent = res.length + " von " + base.length;
+      var more = $("#vmore", p); if (more) more.addEventListener("click", function () { shown += PAGE * 2; draw(); });
     };
-    $("#vq").addEventListener("input", draw);
-    $("#vq").addEventListener("keydown", function (e) { if (e.key === "Enter") e.target.blur(); });
+    var reset = function () { shown = PAGE; draw(); };
+    $$("[data-lvl]", p).forEach(function (b) {
+      b.addEventListener("click", function () {
+        lvl = b.dataset.lvl; store.set("b2lvl", lvl);
+        $$("[data-lvl]", p).forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
+        reset();
+      });
+    });
+    if (topicSel) $("#vtopic", p).addEventListener("change", reset);
+    $("#vq", p).addEventListener("input", reset);
+    $("#vq", p).addEventListener("keydown", function (e) { if (e.key === "Enter") e.target.blur(); });
     draw();
   }
   function panelVocab(p, c) { vocabUI(p, classVocab(c), false); }
@@ -390,8 +423,8 @@
   function cardsUI(p, full, title) {
     var known = store.get("b2known", {});
     // Deck: words, grammar forms, or both (only offered when there are form cards).
-    var kindOf = function (v) { return v.form ? "formen" : v.phrase ? "saetze" : "woerter"; };
-    var kinds = ["woerter", "formen", "saetze"].filter(function (k) { return full.some(function (v) { return kindOf(v) === k; }); });
+    var kindOf = function (v) { return v.form ? "formen" : v.phrase ? "saetze" : v.lvl ? v.lvl : "woerter"; };
+    var kinds = ["woerter", "A1", "A2", "B1", "formen", "saetze"].filter(function (k) { return full.some(function (v) { return kindOf(v) === k; }); });
     var hasForms = kinds.length > 1;
     var kind = store.get("b2deck", "alle");
     if (kind !== "alle" && kinds.indexOf(kind) < 0) kind = "alle";
@@ -425,7 +458,7 @@
       var nKnown = list.filter(function (v) { return known[cardKey(v)]; }).length;
       var settings = '<div class="toolbar fc-settings">' +
         (hasForms ? '<select id="fc-kind" aria-label="Welcher Stapel"><option value="alle"' + (kind === "alle" ? " selected" : "") + ">Alle Karten</option>" +
-          [["woerter", "Nur Wörter"], ["formen", "Nur Grammatik-Formen"], ["saetze", "Nur Sätze aus den Gesprächen"]].filter(function (o) { return kinds.indexOf(o[0]) >= 0; }).map(function (o) {
+          [["woerter", kinds.indexOf("A1") >= 0 ? "Nur Wörter der Tage" : "Nur Wörter"], ["A1", "Wortliste A1"], ["A2", "Wortliste A2"], ["B1", "Wortliste B1"], ["formen", "Nur Grammatik-Formen"], ["saetze", "Nur Sätze aus den Gesprächen"]].filter(function (o) { return kinds.indexOf(o[0]) >= 0; }).map(function (o) {
             return '<option value="' + o[0] + '"' + (kind === o[0] ? " selected" : "") + ">" + o[1] + "</option>";
           }).join("") + "</select>" : "") +
         '<select id="fc-mode" aria-label="Welche Karten"><option value="alle"' + (mode === "alle" ? " selected" : "") + '>Alle</option><option value="offen"' + (mode === "offen" ? " selected" : "") + ">Nur noch nicht gewusst</option></select>" +

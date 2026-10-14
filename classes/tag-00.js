@@ -12,7 +12,7 @@ B2.addClass({
     "Präpositionen",
     "Präteritum"
   ],
-  "summary": "<p>Tag 0 ist eine <span class=\"mark\">Wiederholung</span> der Grammatik, die man für B2 sicher können muss. Hier stehen die Grundlagen kompakt zusammen: die vier Fälle mit allen Artikeln und Pronomen, welche Verben Dativ oder Akkusativ brauchen, die Präpositionen und ihr Fall, Präteritum und Perfekt, die Wortstellung und die Adjektivendungen.</p><p>Die Beispiele sind allgemeine Lernbeispiele, nicht aus dem Unterricht. Am besten zuerst die Tabellen in <b>Grammatik</b> lesen, dann die Schnelltests und Übungen machen und die Formen mit den <b>Karteikarten</b> üben.</p>",
+  "summary": "<p>Tag 0 ist eine <span class=\"mark\">Wiederholung</span> der Grammatik, die man für B2 sicher können muss. Hier stehen die Grundlagen kompakt zusammen: die vier Fälle mit allen Artikeln und Pronomen, welche Verben Dativ oder Akkusativ brauchen, die Präpositionen und ihr Fall, Präteritum und Perfekt, die Wortstellung und die Adjektivendungen.</p><p>Die Beispiele sind allgemeine Lernbeispiele, nicht aus dem Unterricht. Am besten zuerst die Tabellen in <b>Grammatik</b> lesen, dann die Schnelltests und Übungen machen und die Formen mit den <b>Karteikarten</b> üben.</p><p>Unter <b>Wortschatz</b> steht außerdem der <span class=\"mark\">Grundwortschatz A1 bis B1</span> mit Artikel, Plural, Verbformen und Beispielsatz. Man kann nach Niveau und Thema filtern und jedes Niveau als eigenen Kartenstapel üben.</p>",
   "keyPoints": [
     "Den Fall erkennt man an der Frage: <b>Wer?</b> (Nom), <b>Wen?</b> (Akk), <b>Wem?</b> (Dat), <b>Wessen?</b> (Gen).",
     "Nur maskulin ändert sich im Akkusativ: <b>der → den, ein → einen</b>. Dativ Plural: <b>den + Nomen-n</b>.",
