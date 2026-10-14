@@ -227,7 +227,7 @@
     var nKnown = allCards().filter(function (v) { return known[cardKey(v)]; }).length;
     var html = '<section class="hero"><span class="eyebrow">Deutsch · Niveau B2</span>' +
       "<h1>Alle Kurstage auf einen Blick</h1>" +
-      '<p class="lede">Zusammenfassung, Grammatik, Wortschatz, Karteikarten und Übungen zu jedem Kurstag. Alle Beispiele stammen aus dem Unterricht. Deine Notizen bleiben auf deinem Gerät.</p>' +
+      '<p class="lede">Zusammenfassung, Grammatik, Wortschatz, Karteikarten und Übungen zu jedem Kurstag. Die Beispiele stammen aus dem Unterricht, Tag 0 wiederholt die Grundlagen. Deine Notizen bleiben auf deinem Gerät.</p>' +
       '<div class="stats"><div><strong>' + cls.length + "</strong>Tage</div><div><strong>" + vocab.length + "</strong>Wörter</div><div><strong>" + nKnown + "</strong>Karten gewusst</div></div></section>";
     html += '<div id="install-slot"></div>';
     html += '<section class="class-list" aria-label="Kurstage">';
@@ -350,7 +350,7 @@
 
   function vocabTable(list, showClass) {
     if (!list.length) return '<p class="muted">Keine Treffer. Versuch ein anderes Wort.</p>';
-    return '<div class="table-wrap"><table class="stack"><thead><tr><th>Deutsch</th><th>Bedeutung</th><th>Beispiel aus dem Unterricht</th>' + (showClass ? "<th>Tag</th>" : "") + "</tr></thead><tbody>" +
+    return '<div class="table-wrap"><table class="stack"><thead><tr><th>Deutsch</th><th>Bedeutung</th><th>Beispiel</th>' + (showClass ? "<th>Tag</th>" : "") + "</tr></thead><tbody>" +
       list.map(function (v) {
         return '<tr><td><span class="word-cell">' + sayButton(v.de + (v.ex ? ". " + v.ex : ""), v.de + " anhören") + '<span><span class="de">' + esc(v.de) + "</span>" + (v.gram ? ' <span class="gram">' + esc(v.gram) + "</span>" : "") + "</span></span></td>" +
           '<td data-label="Bedeutung">' + esc(v.en) + "</td>" +
