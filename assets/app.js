@@ -132,8 +132,9 @@
     $$('meta[name="theme-color"]').forEach(function (m) { m.setAttribute("content", color); m.removeAttribute("media"); });
   }
   function initTheme() {
-    var t = store.get("b2theme", null);
-    if (t) { document.documentElement.setAttribute("data-theme", t); syncThemeColor(); }
+    // Light is the default; dark only after the person picks it.
+    document.documentElement.setAttribute("data-theme", store.get("b2theme", "light") === "dark" ? "dark" : "light");
+    syncThemeColor();
     var btn = $("#theme-toggle");
     if (!btn) return;
     btn.addEventListener("click", function () {
