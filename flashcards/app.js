@@ -17,7 +17,7 @@
   };
   // Box per card: 0 = not known yet, 1–5 = known that many times in a row.
   var boxes = store.get("fcBox", {});
-  var settings = Object.assign({ reverse: false, auto: true, slow: false, size: 20 }, store.get("fcSettings", {}));
+  var settings = Object.assign({ reverse: false, slow: false, size: 20 }, store.get("fcSettings", {}));
   function saveSettings() { store.set("fcSettings", settings); }
 
   /* ---------- helpers ---------- */
@@ -218,7 +218,6 @@
         }).join("") + '<a class="chip" href="#/">Alle Tage …</a></div>' +
         "<h2>Optionen</h2>" +
         check("o-rev", "Bedeutung zuerst zeigen", settings.reverse) +
-        check("o-auto", "Wörter automatisch vorlesen", settings.auto) +
         check("o-slow", "Langsam sprechen", settings.slow) +
         '<label class="row"><span>Karten pro Runde</span><select id="o-size">' + sizes.map(function (s) {
           return '<option value="' + s + '"' + (settings.size === s ? " selected" : "") + ">" + (s || "Alle") + "</option>";
@@ -231,7 +230,6 @@
     function wireOptions() {
       var on = function (id, fn) { var el = $("#" + id, app); if (el) el.addEventListener("change", function () { fn(el); saveSettings(); }); };
       on("o-rev", function (el) { settings.reverse = el.checked; render(); });
-      on("o-auto", function (el) { settings.auto = el.checked; });
       on("o-slow", function (el) { settings.slow = el.checked; });
       on("o-size", function (el) { settings.size = +el.value; newRound(); });
       on("o-dark", function () { toggleTheme(); });
@@ -247,7 +245,6 @@
       if (!top || busy) return;
       flipped = !flipped;
       top.classList.toggle("flipped", flipped);
-      if (flipped && settings.auto && settings.reverse) sayCur("w");
     }
 
     function wire() {
@@ -257,7 +254,6 @@
       $$(".say[data-say]", top).forEach(function (b) {
         b.addEventListener("click", function (e) { e.stopPropagation(); sayCur(b.getAttribute("data-say")); });
       });
-      if (settings.auto && !settings.reverse) sayCur("w");
 
       /* Swiping. The card follows the finger (pointer capture keeps it attached even
          when the finger leaves the card); a fast flick or a long drag answers, anything
