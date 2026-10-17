@@ -28,10 +28,8 @@
   function reduced() { return window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; }
   var ICON = {
     say: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>',
-    yes: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>',
-    no: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/></svg>',
     undo: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.5 8c-2.6 0-5 1-6.9 2.6L2 7v9h9l-3.6-3.6A7.5 7.5 0 0 1 19.5 16l2.4-.8A10 10 0 0 0 12.5 8z"/></svg>',
-    gear: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.5 7.5 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.5 7.5 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.4-2.7a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg>',
+    down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg>',
     back: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 5.4 14 4l-8 8 8 8 1.4-1.4L8.8 12z"/></svg>',
     theme: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2v16a8 8 0 0 1 0-16z"/></svg>'
   };
@@ -47,20 +45,24 @@
     var everyDay = [];
     sorted().forEach(function (c) {
       var words = (c.vocab || []).map(function (v) { return card(c, v, "wort"); });
+      var all = words.slice();
       everyDay = everyDay.concat(words);
-      if (words.length) DECKS.push({ id: c.id + "-w", day: c, name: "Wörter des Tages", cards: words });
+      if (words.length) DECKS.push({ id: c.id + "-w", day: c, name: "Nur Wörter", cards: words });
       var extra = WORDS[c.id] || [];
       ["A1", "A2", "B1"].forEach(function (l) {
         var list = extra.filter(function (v) { return v.lvl === l; }).map(function (v) { return card(c, v, "wort"); });
         if (list.length) DECKS.push({ id: c.id + "-" + l, day: c, name: "Grundwortschatz " + l, cards: list });
+        all = all.concat(list);
       });
       var phrases = [];
       (c.dialogues || []).forEach(function (d) {
         (d.phrases || []).forEach(function (ph) { phrases.push(card(c, { de: ph.de, en: ph.en, t: d.title }, "satz")); });
       });
       if (phrases.length) DECKS.push({ id: c.id + "-s", day: c, name: "Sätze aus den Gesprächen", cards: phrases });
+      all = all.concat(phrases);
+      if (all.length > words.length) DECKS.push({ id: c.id + "-alle", day: c, name: "Alles", cards: all });
     });
-    if (everyDay.length) DECKS.unshift({ id: "alle", day: null, name: "Alle Wörter der Tage", cards: everyDay });
+    if (everyDay.length) DECKS.unshift({ id: "alle", day: null, name: "Alle Wörter von Tag 0 bis " + sorted()[sorted().length - 1].nr, cards: everyDay });
   }
   function deckById(id) { for (var i = 0; i < DECKS.length; i++) if (DECKS[i].id === id) return DECKS[i]; return null; }
   function known(d) { return d.cards.filter(function (v) { return boxes[v.key] > 0; }).length; }
@@ -145,6 +147,7 @@
   /* ---------- study: one round of swiping ---------- */
   function study(d) {
     document.title = d.name + " · B2 Karteikarten";
+    window.scrollTo(0, 0);
     var round, history;
 
     function newRound() {
@@ -180,7 +183,7 @@
     function cardHtml(v, depth) {
       var fb = frontBack(v);
       return '<div class="card' + (depth ? " under" : "") + '" style="--depth:' + depth + '"' + (depth ? ' aria-hidden="true"' : ' tabindex="0" role="button" aria-label="Karte umdrehen" id="top"') + ">" +
-        '<div class="card-inner"><div class="face front">' + fb.front + '<div class="c-hint">Tippen zum Umdrehen</div></div>' +
+        '<div class="card-inner"><div class="face front">' + fb.front + "</div>" +
         '<div class="face back">' + fb.back + "</div></div>" +
         '<div class="stamp s-yes">Gewusst</div><div class="stamp s-no">Nochmal</div></div>';
     }
@@ -191,19 +194,50 @@
       var stack = "";
       // Draw the two next cards under the current one so the stack looks real.
       for (var k = Math.min(2, q.length - i - 1); k >= 0; k--) stack += cardHtml(q[i + k], k);
-      app.innerHTML = '<div class="study">' +
+      app.innerHTML = '<div class="study"><div class="s-screen">' +
         '<header class="s-top"><a class="icon-btn" href="#/" aria-label="Zurück zur Übersicht">' + ICON.back + "</a>" +
         '<div class="s-title">' + esc(title()) + '</div><div class="s-count">' + (i + 1) + " / " + q.length + "</div>" +
-        '<button class="icon-btn" id="opts" aria-label="Einstellungen">' + ICON.gear + "</button></header>" +
+        '<button class="icon-btn" id="b-undo" aria-label="Letzte Karte zurück" title="Letzte Karte zurück"' + (history.length ? "" : " disabled") + ">" + ICON.undo + "</button></header>" +
         '<div class="s-bar"><span style="width:' + Math.round(i / q.length * 100) + '%"></span></div>' +
         '<div class="stage" id="stage">' + stack + "</div>" +
-        '<div class="s-actions">' +
-        '<button class="round no" id="b-no" aria-label="Noch nicht gewusst">' + ICON.no + "</button>" +
-        '<button class="round small" id="b-undo" aria-label="Rückgängig"' + (history.length ? "" : " disabled") + ">" + ICON.undo + "</button>" +
-        '<button class="round small" id="b-say" aria-label="Anhören">' + ICON.say + "</button>" +
-        '<button class="round yes" id="b-yes" aria-label="Gewusst">' + ICON.yes + "</button></div>" +
-        '<div class="s-keys">Leertaste umdrehen · ← nochmal · → gewusst · S anhören · Z zurück</div></div>';
+        '<div class="s-swipe"><span class="t-bad">← nochmal</span><span>tippen = umdrehen</span><span class="t-good">gewusst →</span></div>' +
+        '<a class="s-more" href="#opts" id="to-opts">Stapel und Optionen ' + ICON.down + "</a></div>" +
+        optionsHtml() + "</div>";
       wire();
+      wireOptions();
+    }
+
+    /* Below the card (scroll down): pick another deck of the same day, and the options. */
+    function optionsHtml() {
+      var sizes = [10, 20, 30, 50, 0];
+      var near = DECKS.filter(function (x) { return d.day ? x.day === d.day : x.id === "alle" || /-alle$/.test(x.id); });
+      var check = function (id, label, on) { return '<label class="row"><span>' + label + '</span><input type="checkbox" id="' + id + '"' + (on ? " checked" : "") + "></label>"; };
+      return '<section class="s-opts" id="opts"><h2>Stapel' + (d.day ? " von Tag " + d.day.nr : "") + "</h2>" +
+        '<div class="chips">' + near.map(function (x) {
+          return '<a class="chip" href="#/' + encodeURIComponent(x.id) + '"' + (x === d ? ' aria-current="true"' : "") + ">" + esc(!d.day && x.day ? "Tag " + x.day.nr + " · " + x.name : x.name) + " <small>" + x.cards.length + "</small></a>";
+        }).join("") + '<a class="chip" href="#/">Alle Tage …</a></div>' +
+        "<h2>Optionen</h2>" +
+        check("o-rev", "Bedeutung zuerst zeigen", settings.reverse) +
+        check("o-auto", "Wörter automatisch vorlesen", settings.auto) +
+        check("o-slow", "Langsam sprechen", settings.slow) +
+        '<label class="row"><span>Karten pro Runde</span><select id="o-size">' + sizes.map(function (s) {
+          return '<option value="' + s + '"' + (settings.size === s ? " selected" : "") + ">" + (s || "Alle") + "</option>";
+        }).join("") + "</select></label>" +
+        check("o-dark", "Dunkles Design", document.documentElement.getAttribute("data-theme") === "dark") +
+        (!speech.ok ? '<p class="note">Dieser Browser kann nicht vorlesen.</p>' : !speech.hasGerman() ? '<p class="note">Keine deutsche Stimme gefunden. Installiere in den Geräteeinstellungen eine deutsche Sprachausgabe für die beste Aussprache.</p>' : "") +
+        '<p class="note keys">Tastatur: Leertaste umdrehen · ← nochmal · → gewusst · S anhören · Z zurück</p>' +
+        '<button class="btn" id="o-up">Zurück zur Karte</button></section>';
+    }
+    function wireOptions() {
+      var on = function (id, fn) { var el = $("#" + id, app); if (el) el.addEventListener("change", function () { fn(el); saveSettings(); }); };
+      on("o-rev", function (el) { settings.reverse = el.checked; render(); });
+      on("o-auto", function (el) { settings.auto = el.checked; });
+      on("o-slow", function (el) { settings.slow = el.checked; });
+      on("o-size", function (el) { settings.size = +el.value; newRound(); });
+      on("o-dark", function () { toggleTheme(); });
+      var scrollTo = function (el) { if (el) el.scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "start" }); };
+      var more = $("#to-opts", app); if (more) more.addEventListener("click", function (e) { e.preventDefault(); scrollTo($("#opts", app)); });
+      var up = $("#o-up", app); if (up) up.addEventListener("click", function () { scrollTo($(".s-screen", app)); });
     }
 
     var top, flipped, busy;
@@ -219,10 +253,6 @@
     function wire() {
       top = $("#top", app); flipped = false; busy = false;
       var under = $$(".card.under", app);
-      $("#opts", app).addEventListener("click", openSettings);
-      $("#b-yes", app).addEventListener("click", function () { fly(true, 0, 0); });
-      $("#b-no", app).addEventListener("click", function () { fly(false, 0, 0); });
-      $("#b-say", app).addEventListener("click", function () { sayCur("w"); });
       $("#b-undo", app).addEventListener("click", undo);
       $$(".say[data-say]", top).forEach(function (b) {
         b.addEventListener("click", function (e) { e.stopPropagation(); sayCur(b.getAttribute("data-say")); });
@@ -328,7 +358,7 @@
     function finished() {
       top = null;
       var k = known(d), n = d.cards.length;
-      app.innerHTML = '<div class="study">' +
+      app.innerHTML = '<div class="study"><div class="s-screen">' +
         '<header class="s-top"><a class="icon-btn" href="#/" aria-label="Zurück zur Übersicht">' + ICON.back + '</a><div class="s-title">' + esc(title()) + '</div><div class="s-count"></div><span class="icon-btn-space"></span></header>' +
         '<div class="done"><div class="done-big">Runde fertig</div>' +
         '<div class="done-stats"><div><b class="t-good">' + round.yes + '</b><span>gewusst</span></div><div><b class="t-bad">' + round.no + "</b><span>nochmal</span></div></div>" +
@@ -336,48 +366,13 @@
         '<div class="deck-bar wide"><span style="width:' + (n ? Math.round(k / n * 100) : 0) + '%"></span></div>' +
         '<div class="done-btns"><button class="btn primary" id="again">Nächste Runde</button>' +
         (history.length ? '<button class="btn" id="b-undo">Letzte Karte zurück</button>' : "") +
-        '<a class="btn" href="#/">Anderer Stapel</a></div></div></div>';
+        '<a class="btn" href="#opts" id="to-opts">Anderer Stapel</a></div></div>' + optionsHtml() + "</div>";
       $("#again", app).addEventListener("click", newRound);
+      wireOptions();
       var u = $("#b-undo", app); if (u) u.addEventListener("click", undo);
     }
 
-    function openSettings() {
-      var sizes = [10, 20, 30, 50, 0];
-      var box = document.createElement("div");
-      box.className = "sheet-wrap";
-      box.innerHTML = '<div class="sheet" role="dialog" aria-modal="true" aria-label="Einstellungen"><h2>Einstellungen</h2>' +
-        '<label class="row"><span>Bedeutung zuerst zeigen</span><input type="checkbox" id="o-rev"' + (settings.reverse ? " checked" : "") + "></label>" +
-        '<label class="row"><span>Wörter automatisch vorlesen</span><input type="checkbox" id="o-auto"' + (settings.auto ? " checked" : "") + "></label>" +
-        '<label class="row"><span>Langsam sprechen</span><input type="checkbox" id="o-slow"' + (settings.slow ? " checked" : "") + "></label>" +
-        '<label class="row"><span>Karten pro Runde</span><select id="o-size">' + sizes.map(function (s) {
-          return '<option value="' + s + '"' + (settings.size === s ? " selected" : "") + ">" + (s || "Alle") + "</option>";
-        }).join("") + "</select></label>" +
-        '<label class="row"><span>Dunkles Design</span><input type="checkbox" id="o-dark"' + (document.documentElement.getAttribute("data-theme") === "dark" ? " checked" : "") + "></label>" +
-        (!speech.ok ? '<p class="note">Dieser Browser kann nicht vorlesen.</p>' : !speech.hasGerman() ? '<p class="note">Keine deutsche Stimme gefunden. Installiere in den Geräteeinstellungen eine deutsche Sprachausgabe für die beste Aussprache.</p>' : "") +
-        '<button class="btn primary" id="o-close">Fertig</button></div>';
-      document.body.appendChild(box);
-      var size0 = settings.size, rev0 = settings.reverse;
-      function close() {
-        settings.reverse = $("#o-rev", box).checked;
-        settings.auto = $("#o-auto", box).checked;
-        settings.slow = $("#o-slow", box).checked;
-        settings.size = +$("#o-size", box).value;
-        saveSettings();
-        box.remove();
-        document.removeEventListener("keydown", esc_);
-        if (settings.size !== size0) newRound();
-        else if (settings.reverse !== rev0) render();
-      }
-      function esc_(e) { if (e.key === "Escape") close(); }
-      $("#o-dark", box).addEventListener("change", toggleTheme);
-      $("#o-close", box).addEventListener("click", close);
-      box.addEventListener("click", function (e) { if (e.target === box) close(); });
-      document.addEventListener("keydown", esc_);
-      $("#o-close", box).focus();
-    }
-
     function onKey(e) {
-      if ($(".sheet-wrap")) return;
       if (/input|select|textarea/i.test(e.target.tagName)) return;
       if (!top) return;
       if (e.key === " ") { e.preventDefault(); flip(); }
@@ -387,7 +382,7 @@
       else if (e.key === "z" || e.key === "Z" || e.key === "Backspace") undo();
     }
     document.addEventListener("keydown", onKey);
-    cleanup = function () { document.removeEventListener("keydown", onKey); var s = $(".sheet-wrap"); if (s) s.remove(); };
+    cleanup = function () { document.removeEventListener("keydown", onKey); };
     newRound();
   }
 
