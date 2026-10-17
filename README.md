@@ -16,6 +16,12 @@ Once installed it opens full screen and works without internet. The speaker butt
 
 Notes, flashcard progress and exercise answers are saved only on your own device. Classmates who use the same link each have their own.
 
+## Karteikarten site
+
+`flashcards/` is a separate site just for vocabulary flashcards: one big card at a time, tap to flip, swipe right for *gewusst* and left for *nochmal*, and a speaker button that reads the word and the example sentence aloud. Online it is at `https://towhidulahmed.github.io/Deutsch-B2/flashcards/` and can be installed as its own app.
+
+It reads the words straight from `classes/*.js`, so a new day shows up there too once its script line is added to `flashcards/index.html` (and to `SHELL` in `flashcards/sw.js` for offline use). Its progress is saved separately from the main site's Karten tab.
+
 ## Add a new day
 
 1. Copy `classes/tag-01.js` to `classes/tag-02.js`.
