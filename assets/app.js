@@ -499,23 +499,57 @@
         $("#fc-yes", p).addEventListener("click", function () { answer(true); });
         $("#fc-no", p).addEventListener("click", function () { answer(false); });
         // Swipe: right = gewusst, left = noch nicht. A short tap flips.
-        var sx = 0, sy = 0, dx = 0, moving = false;
-        fc.addEventListener("pointerdown", function (e) { sx = e.clientX; sy = e.clientY; dx = 0; moving = true; });
-        fc.addEventListener("pointermove", function (e) {
-          if (!moving) return;
-          dx = e.clientX - sx;
-          if (Math.abs(dx) > Math.abs(e.clientY - sy) && Math.abs(dx) > 10) {
-            fc.style.transform = "translateX(" + dx + "px) rotate(" + dx / 30 + "deg)";
-            fc.classList.toggle("swipe-right", dx > 60); fc.classList.toggle("swipe-left", dx < -60);
-          }
-        });
-        var end = function () {
-          if (!moving) return; moving = false;
-          fc.style.transform = ""; fc.classList.remove("swipe-right", "swipe-left");
-          if (dx > 80) answer(true); else if (dx < -80) answer(false); else if (Math.abs(dx) < 8) flip();
+        // Touch uses touch events with an axis lock: once the finger moves sideways the page
+        // is not allowed to scroll, so the browser can no longer cancel the swipe halfway.
+        // A quick flick counts too, not only a long drag.
+        var sx = 0, sy = 0, dx = 0, dy = 0, axis = "", active = false, trail = [];
+        var setDrag = function () {
+          fc.style.transform = "translateX(" + dx + "px) rotate(" + dx / 30 + "deg)";
+          fc.classList.toggle("swipe-right", dx > 60); fc.classList.toggle("swipe-left", dx < -60);
         };
-        fc.addEventListener("pointerup", end);
-        fc.addEventListener("pointercancel", function () { moving = false; fc.style.transform = ""; fc.classList.remove("swipe-right", "swipe-left"); });
+        var reset = function () {
+          active = false; fc.classList.remove("dragging", "swipe-right", "swipe-left"); fc.style.transform = "";
+        };
+        var start = function (x, y) { sx = x; sy = y; dx = 0; dy = 0; axis = ""; active = true; trail = [[Date.now(), x]]; };
+        var move = function (x, y) {
+          if (!active) return false;
+          dx = x - sx; dy = y - sy;
+          trail.push([Date.now(), x]); if (trail.length > 6) trail.shift();
+          if (!axis && (Math.abs(dx) > 10 || Math.abs(dy) > 10)) axis = Math.abs(dx) >= Math.abs(dy) * 0.8 ? "x" : "y";
+          if (axis !== "x") return false;
+          fc.classList.add("dragging"); setDrag();
+          return true;
+        };
+        var finish = function () {
+          if (!active) return;
+          var wasAxis = axis, d = dx, first = trail[0], last = trail[trail.length - 1];
+          var speed = Math.abs(last[1] - first[1]) / Math.max(16, last[0] - first[0]);  // px/ms over the last moves
+          reset();
+          if (!wasAxis) { flip(); return; }
+          // A swipe that began a little vertical still counts when it ends clearly sideways.
+          var sideways = wasAxis === "x" || Math.abs(d) > Math.abs(dy) * 1.5;
+          var far = Math.abs(d) > Math.min(90, fc.offsetWidth * 0.25), flick = Math.abs(d) > 40 && speed > 0.3;
+          if (sideways && (far || flick)) answer(d > 0);
+        };
+        fc.addEventListener("touchstart", function (e) {
+          if (e.touches.length > 1) { reset(); return; }
+          start(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+        fc.addEventListener("touchmove", function (e) {
+          if (e.touches.length > 1) { reset(); return; }
+          if (move(e.touches[0].clientX, e.touches[0].clientY) && e.cancelable) e.preventDefault();
+        }, { passive: false });
+        fc.addEventListener("touchend", function (e) { if (active && e.cancelable) e.preventDefault(); finish(); });
+        fc.addEventListener("touchcancel", reset);
+        // Mouse and pen: the same gesture with pointer events (touch is handled above).
+        fc.addEventListener("pointerdown", function (e) {
+          if (e.pointerType === "touch" || e.button !== 0) return;
+          start(e.clientX, e.clientY);
+          try { fc.setPointerCapture(e.pointerId); } catch (err) {}
+        });
+        fc.addEventListener("pointermove", function (e) { if (e.pointerType !== "touch") move(e.clientX, e.clientY); });
+        fc.addEventListener("pointerup", function (e) { if (e.pointerType !== "touch") finish(); });
+        fc.addEventListener("pointercancel", function (e) { if (e.pointerType !== "touch") reset(); });
         fc.addEventListener("click", function (e) { if (e.detail === 0) flip(); }); // keyboard activation only
       }
     }
