@@ -17,7 +17,7 @@
   };
   // Box per card: 0 = not known yet, 1–5 = known that many times in a row.
   var boxes = store.get("fcBox", {});
-  var settings = Object.assign({ reverse: false, auto: true, slow: false, size: 20 }, store.get("fcSettings", {}));
+  var settings = Object.assign({ reverse: false, slow: false, size: 20 }, store.get("fcSettings", {}));
   function saveSettings() { store.set("fcSettings", settings); }
 
   /* ---------- helpers ---------- */
@@ -29,9 +29,7 @@
   var ICON = {
     say: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>',
     undo: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.5 8c-2.6 0-5 1-6.9 2.6L2 7v9h9l-3.6-3.6A7.5 7.5 0 0 1 19.5 16l2.4-.8A10 10 0 0 0 12.5 8z"/></svg>',
-    down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg>',
-    back: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 5.4 14 4l-8 8 8 8 1.4-1.4L8.8 12z"/></svg>',
-    theme: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2v16a8 8 0 0 1 0-16z"/></svg>'
+    down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 8.6 12 13.2l4.6-4.6L18 10l-6 6-6-6z"/></svg>'
   };
 
   /* ---------- decks ---------- */
@@ -110,43 +108,26 @@
   /* ---------- routing ---------- */
   var app;
   var cleanup = null;
+  // There is no start page: the site opens on the last deck used (or Tag 0's words).
   function route() {
     if (cleanup) { cleanup(); cleanup = null; }
     speech.stop();
     var m = location.hash.match(/^#\/(.+)$/);
-    var d = m && deckById(decodeURIComponent(m[1]));
-    if (d) study(d); else home();
+    var d = (m && deckById(decodeURIComponent(m[1]))) || deckById(store.get("fcDeck", "")) || DECKS.filter(function (x) { return x.day; })[0] || DECKS[0];
+    if (!d) { app.innerHTML = '<p class="empty">Keine Karten gefunden.</p>'; return; }
+    store.set("fcDeck", d.id);
+    study(d);
   }
-
-  /* ---------- home: pick a deck ---------- */
-  function tile(d) {
-    var n = d.cards.length, k = known(d);
-    return '<a class="deck" href="#/' + encodeURIComponent(d.id) + '"><span class="deck-name">' + esc(d.name) + '</span>' +
-      '<span class="deck-meta">' + n + " Karten · " + k + " gewusst</span>" +
-      '<span class="deck-bar"><span style="width:' + (n ? Math.round(k / n * 100) : 0) + '%"></span></span></a>';
-  }
-  function home() {
-    document.title = "Deutsch B2 Karteikarten";
-    var html = '<div class="home"><header class="home-top"><a class="brand" href="../">Deutsch <b>B2</b></a>' +
-      '<button class="icon-btn" id="theme" aria-label="Hell oder dunkel umschalten">' + ICON.theme + "</button></header>" +
-      '<h1>Karteikarten</h1><p class="lead">Wähle einen Stapel. Tippe auf die Karte zum Umdrehen, wische nach <b class="t-good">rechts</b>, wenn du das Wort weißt, und nach <b class="t-bad">links</b>, wenn du es noch üben willst.</p>';
-    var all = deckById("alle");
-    if (all) html += '<section class="day"><div class="decks">' + tile(all) + "</div></section>";
-    sorted().forEach(function (c) {
-      var list = DECKS.filter(function (d) { return d.day === c; });
-      if (!list.length) return;
-      html += '<section class="day"><h2><span class="day-nr">Tag ' + c.nr + "</span> " + esc(c.title) + '</h2><div class="decks">' + list.map(tile).join("") + "</div></section>";
-    });
-    if (!DECKS.length) html += '<p class="lead">Keine Karten gefunden.</p>';
-    html += '<p class="foot">Dein Lernstand wird nur auf deinem Gerät gespeichert. <a href="../">Zur Lernseite</a></p></div>';
-    app.innerHTML = html;
-    $("#theme", app).addEventListener("click", toggleTheme);
-    window.scrollTo(0, 0);
+  // Same kind of deck on another day (e.g. Alles → Alles), else that day's words.
+  function deckForDay(c, cur) {
+    var kind = cur.day ? cur.id.slice(cur.day.id.length) : "-w";
+    return deckById(c.id + kind) || deckById(c.id + "-w") || DECKS.filter(function (x) { return x.day === c; })[0];
   }
 
   /* ---------- study: one round of swiping ---------- */
   function study(d) {
-    document.title = d.name + " · B2 Karteikarten";
+    function title() { return (d.day ? "Tag " + d.day.nr + " · " : "") + d.name; }
+    document.title = title() + " · B2 Karteikarten";
     window.scrollTo(0, 0);
     var round, history;
 
@@ -159,7 +140,12 @@
       render();
     }
 
-    function title() { return (d.day ? "Tag " + d.day.nr + " · " : "") + d.name; }
+    // Top of the screen: just the days.
+    function dayChips() {
+      return '<nav class="days" aria-label="Tag wählen">' + sorted().filter(function (c) { return deckForDay(c, d); }).map(function (c) {
+        return '<a class="day-chip" href="#/' + encodeURIComponent(deckForDay(c, d).id) + '"' + (d.day === c ? ' aria-current="true"' : "") + ' title="' + esc(c.title) + '">Tag ' + c.nr + "</a>";
+      }).join("") + "</nav>";
+    }
 
     function frontBack(v) {
       var de = '<div class="w-de">' + article(v.de, v.gram) + "</div>" + (v.gram ? '<div class="w-gram">' + esc(v.gram) + "</div>" : "");
@@ -195,12 +181,10 @@
       // Draw the two next cards under the current one so the stack looks real.
       for (var k = Math.min(2, q.length - i - 1); k >= 0; k--) stack += cardHtml(q[i + k], k);
       app.innerHTML = '<div class="study"><div class="s-screen">' +
-        '<header class="s-top"><a class="icon-btn" href="#/" aria-label="Zurück zur Übersicht">' + ICON.back + "</a>" +
-        '<div class="s-title">' + esc(title()) + '</div><div class="s-count">' + (i + 1) + " / " + q.length + "</div>" +
+        '<header class="s-top">' + dayChips() + '<div class="s-count">' + (i + 1) + " / " + q.length + "</div>" +
         '<button class="icon-btn" id="b-undo" aria-label="Letzte Karte zurück" title="Letzte Karte zurück"' + (history.length ? "" : " disabled") + ">" + ICON.undo + "</button></header>" +
         '<div class="s-bar"><span style="width:' + Math.round(i / q.length * 100) + '%"></span></div>' +
         '<div class="stage" id="stage">' + stack + "</div>" +
-        '<div class="s-swipe"><span class="t-bad">← nochmal</span><span>tippen = umdrehen</span><span class="t-good">gewusst →</span></div>' +
         '<a class="s-more" href="#opts" id="to-opts">Stapel und Optionen ' + ICON.down + "</a></div>" +
         optionsHtml() + "</div>";
       wire();
@@ -215,10 +199,9 @@
       return '<section class="s-opts" id="opts"><h2>Stapel' + (d.day ? " von Tag " + d.day.nr : "") + "</h2>" +
         '<div class="chips">' + near.map(function (x) {
           return '<a class="chip" href="#/' + encodeURIComponent(x.id) + '"' + (x === d ? ' aria-current="true"' : "") + ">" + esc(!d.day && x.day ? "Tag " + x.day.nr + " · " + x.name : x.name) + " <small>" + x.cards.length + "</small></a>";
-        }).join("") + '<a class="chip" href="#/">Alle Tage …</a></div>' +
+        }).join("") + (d.day && deckById("alle") ? '<a class="chip" href="#/alle">Wörter aller Tage <small>' + deckById("alle").cards.length + "</small></a>" : "") + "</div>" +
         "<h2>Optionen</h2>" +
         check("o-rev", "Bedeutung zuerst zeigen", settings.reverse) +
-        check("o-auto", "Wörter automatisch vorlesen", settings.auto) +
         check("o-slow", "Langsam sprechen", settings.slow) +
         '<label class="row"><span>Karten pro Runde</span><select id="o-size">' + sizes.map(function (s) {
           return '<option value="' + s + '"' + (settings.size === s ? " selected" : "") + ">" + (s || "Alle") + "</option>";
@@ -226,12 +209,12 @@
         check("o-dark", "Dunkles Design", document.documentElement.getAttribute("data-theme") === "dark") +
         (!speech.ok ? '<p class="note">Dieser Browser kann nicht vorlesen.</p>' : !speech.hasGerman() ? '<p class="note">Keine deutsche Stimme gefunden. Installiere in den Geräteeinstellungen eine deutsche Sprachausgabe für die beste Aussprache.</p>' : "") +
         '<p class="note keys">Tastatur: Leertaste umdrehen · ← nochmal · → gewusst · S anhören · Z zurück</p>' +
-        '<button class="btn" id="o-up">Zurück zur Karte</button></section>';
+        '<button class="btn" id="o-up">Zurück zur Karte</button>' +
+        '<p class="note">Dein Lernstand wird nur auf deinem Gerät gespeichert. <a href="../">Zur Lernseite</a></p></section>';
     }
     function wireOptions() {
       var on = function (id, fn) { var el = $("#" + id, app); if (el) el.addEventListener("change", function () { fn(el); saveSettings(); }); };
       on("o-rev", function (el) { settings.reverse = el.checked; render(); });
-      on("o-auto", function (el) { settings.auto = el.checked; });
       on("o-slow", function (el) { settings.slow = el.checked; });
       on("o-size", function (el) { settings.size = +el.value; newRound(); });
       on("o-dark", function () { toggleTheme(); });
@@ -247,7 +230,6 @@
       if (!top || busy) return;
       flipped = !flipped;
       top.classList.toggle("flipped", flipped);
-      if (flipped && settings.auto && settings.reverse) sayCur("w");
     }
 
     function wire() {
@@ -257,7 +239,6 @@
       $$(".say[data-say]", top).forEach(function (b) {
         b.addEventListener("click", function (e) { e.stopPropagation(); sayCur(b.getAttribute("data-say")); });
       });
-      if (settings.auto && !settings.reverse) sayCur("w");
 
       /* Swiping. The card follows the finger (pointer capture keeps it attached even
          when the finger leaves the card); a fast flick or a long drag answers, anything
@@ -359,7 +340,7 @@
       top = null;
       var k = known(d), n = d.cards.length;
       app.innerHTML = '<div class="study"><div class="s-screen">' +
-        '<header class="s-top"><a class="icon-btn" href="#/" aria-label="Zurück zur Übersicht">' + ICON.back + '</a><div class="s-title">' + esc(title()) + '</div><div class="s-count"></div><span class="icon-btn-space"></span></header>' +
+        '<header class="s-top">' + dayChips() + "</header>" +
         '<div class="done"><div class="done-big">Runde fertig</div>' +
         '<div class="done-stats"><div><b class="t-good">' + round.yes + '</b><span>gewusst</span></div><div><b class="t-bad">' + round.no + "</b><span>nochmal</span></div></div>" +
         '<p>Im ganzen Stapel: <b>' + k + " von " + n + "</b> Karten gewusst.</p>" +
