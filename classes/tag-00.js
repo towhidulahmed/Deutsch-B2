@@ -262,7 +262,7 @@ B2.addClass({
     {
       "de": "setzen / sitzen",
       "gram": "wohin + Akk / wo + Dat",
-      "en": "to sit down / to be sitting",
+      "en": "to put, to seat (sich setzen = to sit down) / to be sitting",
       "ex": "Ich setze mich auf den Stuhl. Ich sitze auf dem Stuhl."
     }
   ],
@@ -897,7 +897,7 @@ B2.addClass({
         },
         {
           "de": "Kannst du sie mir zeigen?",
-          "en": "Can you show it to me?"
+          "en": "Can you show it / them to me?"
         }
       ]
     },
