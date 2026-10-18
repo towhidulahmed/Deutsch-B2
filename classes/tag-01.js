@@ -204,7 +204,7 @@ B2.addClass({
     { de: "müde von", gram: "+ Dat", en: "tired from", ex: "Ich bin müde von der Arbeit." },
     { de: "neidisch auf", gram: "+ Akk", en: "jealous of, envious of (wanting what others have)", ex: "Sie ist auf ihre jüngere Schwester neidisch." },
     { de: "nützlich für", gram: "+ Akk", en: "useful for", ex: "Fremdsprachenkenntnisse sind für alle nützlich." },
-    { de: "(be)nutzen", en: "to use", ex: "Dieses Buch ist nützlich, es nutzt mir." },
+    { de: "(be)nutzen", en: "to use; nutzen + Dat = to be of use to", ex: "Dieses Buch ist nützlich, es nutzt mir." },
     { de: "reich an", gram: "+ Dat", en: "rich in", ex: "Dieses Land ist reich an Bodenschätzen." },
     { de: "die Bodenschätze", gram: "Pl.", en: "natural resources (oil, gold … in the ground)", ex: "Es gibt Länder, die sind reich an Bodenschätzen." },
     { de: "der Schatz", gram: "Pl. die Schätze", en: "treasure", ex: "Bodenschätze sind Schätze in der Erde, nicht auf der Erde." },

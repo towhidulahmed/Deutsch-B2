@@ -260,10 +260,10 @@ B2.addClass({
     { de: "das Cerankochfeld", gram: "Pl. die Cerankochfelder", en: "ceramic glass hob", ex: "Ich habe ein Cerankochfeld, aber ich möchte demnächst Induktion." },
     { de: "die Induktion", gram: "das Induktionskochfeld", en: "induction (hob)", ex: "Heute haben viele Leute ein Cerankochfeld oder Induktion." },
     { de: "der Gasherd", gram: "Pl. die Gasherde", en: "gas stove", ex: "Gibt es keine Gasherde in Deutschland?" },
-    { de: "das Teeglas", gram: "Pl. die Teegläser", en: "tea glass", ex: "Die Türken trinken aus kleinen Teegläsern." },
+    { de: "das Teeglas", gram: "Pl. die Teegläser", en: "tea glass", ex: "In der Türkei trinkt man Tee aus kleinen Teegläsern." },
     { de: "der Zimt", en: "cinnamon", ex: "Kardamom und Zimt machst du in den Tee, oder?" },
     { de: "der Kardamom", en: "cardamom", ex: "Kardamom und Zimt machst du in den Tee, oder?" },
-    { de: "der Safran", en: "saffron", ex: "Mit Safran wird das Essen gelb oder rot." }
+    { de: "der Safran", en: "saffron", ex: "Mit Safran wird der Reis gelb." }
   ],
 
   // Grammatik-Formen: erscheinen nur bei den Karteikarten, nicht im Wortschatz.
