@@ -1,6 +1,6 @@
 /* Offline support for the flashcard site. Its own scope (flashcards/), so offline it
    falls back to this site's page, not the main site's. Network first, then the saved copy. */
-var CACHE = "b2-karten-v3";
+var CACHE = "b2-karten-v4";
 var SHELL = [
   "./",
   "index.html",
@@ -11,7 +11,9 @@ var SHELL = [
   "../assets/icons/apple-touch-icon.png",
   "../classes/tag-00.js", "../classes/wortliste-a1-b1.js",
   "../classes/tag-01.js",
-  "../classes/tag-02.js"
+  "../classes/tag-02.js",
+  "../classes/tag-03.js",
+  "../classes/tag-04.js"
 ];
 
 self.addEventListener("install", function (e) {
