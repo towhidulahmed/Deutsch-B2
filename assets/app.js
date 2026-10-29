@@ -3,10 +3,12 @@
   "use strict";
 
   var CLASSES = [];
+  var PATTERNS = []; // 100 Sprechmuster: speaking help, not a course day
   var WORDS = {};  // extra word lists per day, e.g. the A1–B1 Grundwortschatz in Tag 0
   window.B2 = {
     addClass: function (c) { CLASSES.push(c); },
-    addWords: function (id, list) { WORDS[id] = (WORDS[id] || []).concat(list); }
+    addWords: function (id, list) { WORDS[id] = (WORDS[id] || []).concat(list); },
+    addPatterns: function (cats) { PATTERNS = PATTERNS.concat(cats); }
   };
 
   /* ---------- storage (fails quietly in private windows) ---------- */
@@ -212,6 +214,7 @@
     if (h === "wortschatz") return renderAllVocab(app);
     if (h === "karteikarten") return renderAllCards(app);
     if (h === "gespraeche") return renderDialogues(app);
+    if (h === "muster") return renderPatterns(app);
     if (h === "notizen") { location.replace("#gespraeche"); return; }
     var parts = h.split("-");
     var c = byId(parts[0]);
@@ -224,7 +227,7 @@
     $$(".mainnav a").forEach(function (a) {
       if (a.getAttribute("href") === "#" + key) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
-    var titles = { wortschatz: "Wortschatz", karteikarten: "Karteikarten", gespraeche: "Gespräche" };
+    var titles = { wortschatz: "Wortschatz", karteikarten: "Karteikarten", gespraeche: "Gespräche", muster: "100 Sprechmuster" };
     var c = h && byId(h.split("-")[0]);
     document.title = (c ? "Tag " + c.nr + ": " + c.title : titles[h] || "Deutsch B2 Lernseite") + (c || titles[h] ? " · Deutsch B2" : "");
   }
@@ -240,6 +243,12 @@
       '<p class="lede">Zusammenfassung, Grammatik, Wortschatz, Karteikarten und Übungen zu jedem Kurstag. Die Beispiele stammen aus dem Unterricht, Tag 0 wiederholt die Grundlagen. Zu jedem Tag gibt es Gespräche aus dem Alltag zum Auswendiglernen.</p>' +
       '<div class="stats"><div><strong>' + cls.length + "</strong>Tage</div><div><strong>" + vocab.length + "</strong>Wörter</div><div><strong>" + nKnown + "</strong>Karten gewusst</div></div></section>";
     html += '<div id="install-slot"></div>';
+    var nPat = allPatterns().length;
+    if (nPat) {
+      var nDone = allPatterns().filter(function (pt) { return patDone()[pt.n]; }).length;
+      html += '<a class="class-card extra-card" href="#muster"><span class="class-no">Sprechen</span><div><h3>' + nPat + ' Sprechmuster</h3><div class="meta">Satzmuster für freies Sprechen, A1–B1 · mit eigenen Sätzen</div>' +
+        '<div class="progress-line"><span class="pill' + (nDone === nPat ? " done" : "") + '">Geübt ' + nDone + "/" + nPat + '</span></div></div><span class="go" aria-hidden="true">→</span></a>';
+    }
     html += '<section class="class-list" aria-label="Kurstage">';
     cls.slice().reverse().forEach(function (c) {
       var nv = classCards(c).length, nk = cardsKnown(c), best = drillBest(c);
@@ -876,6 +885,94 @@
     $$("button[data-role]", panel).forEach(function (b) { b.addEventListener("click", function () { role = b.dataset.role; store.set("b2dlgRole", role); apply(); }); });
     $$(".dlg-de", panel).forEach(function (b) { b.addEventListener("click", function () { b.closest(".dlg-line").classList.toggle("shown"); }); });
     apply();
+  }
+
+  /* ---------- 100 Sprechmuster ---------- */
+  function allPatterns() { var out = []; PATTERNS.forEach(function (k) { k.patterns.forEach(function (pt) { out.push(Object.assign({ cat: k }, pt)); }); }); return out; }
+  function patDone() { return store.get("b2musterDone", {}); }
+  function renderPatterns(app) {
+    var cat = store.get("b2musterCat", "alle");
+    if (cat !== "alle" && !PATTERNS.some(function (k) { return k.id === cat; })) cat = "alle";
+    var mode = store.get("b2musterMode", "lesen"), showEn = store.get("b2musterEn", true);
+    var done = patDone(), mine = store.get("b2musterMine", {});
+    var html = '<header class="lesson-head"><span class="eyebrow">Sprechen · A1–B1</span><h1>100 Sprechmuster</h1>' +
+      '<nav class="daybar" aria-label="Kategorie wählen">' + [["alle", "Alle", ""]].concat(PATTERNS.map(function (k, i) { return [k.id, (i + 1) + ". " + (k.short || k.title), k.title + " · " + k.en]; })).map(function (o) {
+        return '<button type="button" class="chip day-chip" data-cat="' + esc(o[0]) + '" aria-pressed="' + (cat === o[0]) + '"' + (o[2] ? ' title="' + esc(o[2]) + '"' : "") + ">" + esc(o[1]) + "</button>";
+      }).join("") + "</nav></header>" +
+      '<section class="panel" id="panel"><div class="block dlg-controls">' +
+      '<p class="muted">So übst du: 1. Formel und Beispiel verstehen. 2. Drei eigene Sätze aus deinem Leben schreiben. 3. Sie laut sagen, bis sie automatisch kommen. Im Modus „Üben“ siehst du nur die englische Bedeutung: Sag den Satz zuerst selbst und tippe dann, um das deutsche Beispiel zu sehen.</p>' +
+      '<div class="toolbar"><input type="search" id="mq" placeholder="Muster suchen …" aria-label="Muster suchen" enterkeyhint="search" autocomplete="off"><span class="muted" id="mcount"></span></div>' +
+      '<div class="toolbar"><div class="seg" role="group" aria-label="Modus">' + [["lesen", "Lesen"], ["ueben", "Üben"]].map(function (o) {
+        return '<button type="button" class="chip" data-mode="' + o[0] + '" aria-pressed="' + (mode === o[0]) + '">' + o[1] + "</button>";
+      }).join("") + '</div><label class="check"><input type="checkbox" id="m-en"' + (showEn ? " checked" : "") + '> Englisch zeigen</label><span class="pill" id="mdone"></span></div></div><div id="mlist" class="pat-list"></div></section>';
+    app.innerHTML = html;
+    var panel = $("#panel"), list = $("#mlist");
+    var count = function () {
+      var n = allPatterns().filter(function (pt) { return done[pt.n]; }).length;
+      $("#mdone").textContent = "Geübt " + n + "/" + allPatterns().length;
+      $("#mdone").classList.toggle("done", n === allPatterns().length);
+    };
+    var draw = function () {
+      var q = fold($("#mq").value.trim());
+      var res = allPatterns().filter(function (pt) {
+        if (cat !== "alle" && pt.cat.id !== cat) return false;
+        return !q || fold(pt.frame + " " + pt.note + " " + pt.de + " " + pt.en + " " + pt.turn.join(" ")).indexOf(q) !== -1;
+      });
+      var lastCat = null;
+      list.innerHTML = res.map(function (pt) {
+        var head = "";
+        if (pt.cat !== lastCat) { lastCat = pt.cat; head = '<h2 class="dlg-day">' + esc(pt.cat.title) + ' <span class="muted pat-cat-en">' + esc(pt.cat.en) + "</span></h2>"; }
+        var own = mine[pt.n] || [];
+        return head + '<article class="block pat' + (done[pt.n] ? " is-done" : "") + '" id="m' + pt.n + '">' +
+          '<div class="pat-head"><span class="class-no">#' + (pt.n < 10 ? "0" : "") + pt.n + '</span><h3 class="pat-frame">' + esc(pt.frame) + "</h3></div>" +
+          '<p class="muted pat-note">' + esc(pt.note) + "</p>" +
+          '<div class="pat-ex"><div class="dlg-text"><button type="button" class="dlg-de pat-de" aria-label="Beispiel zeigen">' + esc(pt.de) + '</button><span class="dlg-en">' + esc(pt.en) + "</span></div>" +
+          '<button class="say" type="button" data-say="' + esc(pt.de) + '" aria-label="Anhören" title="Anhören">' + ICON_SAY + "</button></div>" +
+          '<div class="pat-own"><h4>Deine Sätze</h4>' + pt.turn.map(function (t, i) {
+            return '<div class="pat-row"><input type="text" data-n="' + pt.n + '" data-i="' + i + '" value="' + esc(own[i] || "") + '" placeholder="' + esc(t) + '" aria-label="Eigener Satz ' + (i + 1) + '" autocomplete="off" autocapitalize="sentences" spellcheck="true" lang="de">' +
+              '<button class="say" type="button" data-own="1" aria-label="Eigenen Satz anhören" title="Anhören">' + ICON_SAY + "</button></div>";
+          }).join("") + "</div>" +
+          '<label class="check pat-check"><input type="checkbox" data-done="' + pt.n + '"' + (done[pt.n] ? " checked" : "") + "> Laut geübt</label></article>";
+      }).join("") || '<p class="muted">Kein Muster gefunden.</p>';
+      $("#mcount").textContent = res.length + " von " + allPatterns().length;
+    };
+    var apply = function () {
+      panel.classList.toggle("hide-en", !showEn && mode !== "ueben");
+      panel.setAttribute("data-mode", mode);
+      $$(".pat", panel).forEach(function (a) { a.classList.remove("shown"); });
+      $$("button[data-mode]", panel).forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.mode === mode)); });
+    };
+    $$("[data-cat]", app).forEach(function (b) {
+      b.addEventListener("click", function () {
+        cat = b.dataset.cat; store.set("b2musterCat", cat);
+        $$("[data-cat]", app).forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        draw(); apply();
+      });
+    });
+    $$("button[data-mode]", panel).forEach(function (b) { b.addEventListener("click", function () { mode = b.dataset.mode; store.set("b2musterMode", mode); apply(); }); });
+    $("#m-en").addEventListener("change", function (e) { showEn = e.target.checked; store.set("b2musterEn", showEn); apply(); });
+    $("#mq").addEventListener("input", function () { draw(); apply(); });
+    $("#mq").addEventListener("keydown", function (e) { if (e.key === "Enter") e.target.blur(); });
+    list.addEventListener("click", function (e) {
+      var de = e.target.closest(".pat-de"); if (de) de.closest(".pat").classList.toggle("shown");
+      var own = e.target.closest("[data-own]");
+      if (own) { var v = own.previousElementSibling.value.trim(); if (v) speech.say(v); e.stopPropagation(); }
+    });
+    list.addEventListener("input", function (e) {
+      var t = e.target; if (!t.dataset.i) return;
+      var arr = mine[t.dataset.n] || []; arr[+t.dataset.i] = t.value; mine[t.dataset.n] = arr;
+      store.set("b2musterMine", mine);
+    });
+    list.addEventListener("change", function (e) {
+      var t = e.target; if (!t.dataset.done) return;
+      if (t.checked) done[t.dataset.done] = true; else delete done[t.dataset.done];
+      store.set("b2musterDone", done);
+      t.closest(".pat").classList.toggle("is-done", t.checked);
+      count();
+    });
+    var on = $('.daybar [aria-pressed="true"]', app);
+    if (on && on.scrollIntoView) on.scrollIntoView({ block: "nearest", inline: "center" });
+    draw(); apply(); count();
   }
 
   document.addEventListener("DOMContentLoaded", function () {

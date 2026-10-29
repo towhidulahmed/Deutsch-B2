@@ -22,6 +22,10 @@ Notes, flashcard progress and exercise answers are saved only on your own device
 
 It reads the words straight from `classes/*.js`, so a new day shows up there too once its script line is added to `flashcards/index.html` (and to `SHELL` in `flashcards/sw.js` for offline use). Its progress is saved separately from the main site's Karten tab.
 
+## 100 Sprechmuster
+
+`classes/muster-100.js` holds the 100 speaking patterns from the *100 Spoken German Patterns* workbook (A1–B1). They are speaking help, not a course day, so they have their own page (`#muster`, **Muster** in the navigation) instead of a Tag number. Each pattern shows the formula, a grammar note and an example you can listen to, plus three boxes for your own sentences. **Üben** hides the German example until you tap it, and **Laut geübt** ticks the pattern off. Your sentences and ticks are saved on your device and included in the backup file.
+
 ## Add a new day
 
 1. Copy `classes/tag-01.js` to `classes/tag-02.js`.
