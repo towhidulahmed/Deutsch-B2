@@ -1,6 +1,6 @@
 /* Offline support. When online, pages and class files always come fresh from the
    server (new classes appear right away); offline, the last saved copy is used. */
-var CACHE = "b2-v6";
+var CACHE = "b2-v7";
 var SHELL = [
   "./",
   "index.html",
@@ -13,7 +13,8 @@ var SHELL = [
   "classes/tag-01.js",
   "classes/tag-02.js",
   "classes/tag-03.js",
-  "classes/tag-04.js"
+  "classes/tag-04.js",
+  "classes/muster-100.js"
 ];
 
 self.addEventListener("install", function (e) {

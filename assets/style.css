@@ -101,7 +101,7 @@ svg { flex: none; }
   .topbar { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--sheet); }
   .mainnav {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
     padding: 4px max(6px, env(safe-area-inset-right, 0px)) env(safe-area-inset-bottom, 0px) max(6px, env(safe-area-inset-left, 0px));
     background: color-mix(in srgb, var(--sheet) 92%, transparent);
     -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
@@ -359,6 +359,27 @@ input.gap.hinted::placeholder { color: var(--good); opacity: 1; font-weight: 600
 .dlg-phrases ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .dlg-phrases b { font-family: var(--f-body); font-weight: 600; }
 .dlg-tip { margin: 12px 4px 0; font-size: 0.85rem; }
+
+/* ---------- 100 Sprechmuster ---------- */
+.extra-card { margin-bottom: 12px; }
+.pat-list { display: grid; gap: 12px; }
+.pat-list .dlg-day { margin-top: 14px; }
+.pat-cat-en { font-family: var(--f-ui); font-size: 0.8rem; font-weight: 400; }
+.pat { gap: 10px; }
+.pat.is-done { border-color: var(--good); }
+.pat-head { display: flex; gap: 10px; align-items: baseline; }
+.pat-frame { font-size: 1.12rem; }
+.pat-note { margin: 0; font-size: 0.88rem; }
+.pat-ex { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; padding: 10px 12px; border-radius: 12px; background: var(--pen-soft); }
+.pat-own { display: grid; gap: 6px; }
+.pat-own h4 { font-family: var(--f-ui); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); margin: 4px 0 0; }
+.pat-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; }
+.pat-row input { width: 100%; font-family: var(--f-body); }
+.pat-check { justify-self: start; min-height: 36px; }
+/* Practice mode: only the English is shown until the German example is tapped */
+[data-mode="ueben"] .pat-de { cursor: pointer; }
+[data-mode="ueben"] .pat:not(.shown) .pat-de { color: transparent; background: var(--rule); border-radius: 6px; user-select: none; }
+[data-mode="ueben"] .pat:not(.shown) .pat-ex .say { visibility: hidden; }
 
 footer {
   max-width: 920px; margin: 0 auto; font-size: 0.8rem; color: var(--ink-soft);
