@@ -1,14 +1,14 @@
 /* Offline support. When online, pages and class files always come fresh from the
    server (new classes appear right away); offline, the last saved copy is used. */
-var CACHE = "b2-v11";
+var CACHE = "b2-v12";
 var SHELL = [
   "./",
   "index.html",
   "manifest.webmanifest",
   "assets/style.css",
-  "assets/app.js",
-  "assets/audio-index.js",
-  "assets/audio.js",
+  "assets/app.js?v=audio1",
+  "assets/audio-index.js?v=audio1",
+  "assets/audio.js?v=audio1",
   "assets/icons/icon-192.png",
   "assets/icons/apple-touch-icon.png",
   "classes/tag-00.js", "classes/wortliste-a1-b1.js",

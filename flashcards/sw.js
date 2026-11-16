@@ -1,14 +1,14 @@
 /* Offline support for the flashcard site. Its own scope (flashcards/), so offline it
    falls back to this site's page, not the main site's. Network first, then the saved copy. */
-var CACHE = "b2-karten-v8";
+var CACHE = "b2-karten-v9";
 var SHELL = [
   "./",
   "index.html",
   "manifest.webmanifest",
   "style.css",
-  "app.js",
-  "../assets/audio-index.js",
-  "../assets/audio.js",
+  "app.js?v=audio1",
+  "../assets/audio-index.js?v=audio1",
+  "../assets/audio.js?v=audio1",
   "../assets/icons/icon-192.png",
   "../assets/icons/apple-touch-icon.png",
   "../classes/tag-00.js", "../classes/wortliste-a1-b1.js",
