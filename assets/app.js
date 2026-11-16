@@ -96,36 +96,35 @@
   var speech = (function () {
     var synth = window.speechSynthesis;
     var voice = null;
-    var ok = !!synth && typeof window.SpeechSynthesisUtterance === "function";
+    var ok = (!!synth && typeof window.SpeechSynthesisUtterance === "function") || B2Audio.hasSaved();
     function pick() {
-      if (!ok) return;
+      if (!synth) return;
       var vs = synth.getVoices();
       var de = vs.filter(function (v) { return /^de([-_]|$)/i.test(v.lang); });
       de.sort(function (a, b) { return (/de[-_]DE/i.test(b.lang) ? 1 : 0) - (/de[-_]DE/i.test(a.lang) ? 1 : 0) || (b.localService ? 1 : 0) - (a.localService ? 1 : 0); });
       voice = de[0] || null;
     }
-    if (!ok) {
-      document.documentElement.classList.add("no-speech");
+    if (!synth || typeof window.SpeechSynthesisUtterance !== "function") {
+      if (!ok) document.documentElement.classList.add("no-speech");
     } else {
       pick();
       if (synth.addEventListener) synth.addEventListener("voiceschanged", pick); else synth.onvoiceschanged = pick;
     }
-    function clean(t) {
-      return String(t).replace(/\([^)]*\)/g, "").replace(/\s*\/\s*/g, ", ").replace(/[+]\s*(Akk|Dat)\w*/g, "").replace(/\s+/g, " ").trim();
-    }
     return {
       say: function (text) {
-        if (!ok) return;
-        var spoken = clean(text);
+        var spoken = B2Audio.clean(text);
         if (!spoken) return;
-        pick(); // iOS may only expose voices after the first user interaction.
-        // A home-screen app can inherit iOS's silent audio session after reopening.
-        if (navigator.audioSession) { try { navigator.audioSession.type = "playback"; } catch (e) {} }
-        if (synth.speaking || synth.pending) synth.cancel();
-        if (synth.paused) synth.resume();
-        var u = new SpeechSynthesisUtterance(spoken);
-        u.lang = "de-DE"; if (voice) u.voice = voice; u.rate = 0.9;
-        synth.speak(u);
+        if (synth && (synth.speaking || synth.pending)) synth.cancel();
+        B2Audio.say(spoken, function () {
+          if (!synth || typeof window.SpeechSynthesisUtterance !== "function") return;
+          pick(); // iOS may only expose voices after the first user interaction.
+          if (navigator.audioSession) { try { navigator.audioSession.type = "playback"; } catch (e) {} }
+          if (synth.speaking || synth.pending) synth.cancel();
+          if (synth.paused) synth.resume();
+          var u = new SpeechSynthesisUtterance(spoken);
+          u.lang = "de-DE"; if (voice) u.voice = voice; u.rate = 0.9;
+          synth.speak(u);
+        });
       }
     };
   })();
@@ -506,7 +505,7 @@
       var fc = $("#fc", p);
       if (fc) {
         var cur = deck[i];
-        $("#fc-say", p).addEventListener("click", function () { speech.say(cur.de + (flipped && cur.ex ? ". " + cur.ex : "")); });
+        $("#fc-say", p).addEventListener("click", function () { speech.say(cur.de + (flipped && cur.ex && !cur.phrase ? ". " + cur.ex : "")); });
         $("#fc-flip", p).addEventListener("click", flip);
         $("#fc-yes", p).addEventListener("click", function () { answer(true); });
         $("#fc-no", p).addEventListener("click", function () { answer(false); });

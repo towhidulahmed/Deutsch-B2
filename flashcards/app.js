@@ -69,37 +69,38 @@
   var speech = (function () {
     var synth = window.speechSynthesis;
     var voice = null;
-    var ok = !!synth && typeof window.SpeechSynthesisUtterance === "function";
+    var ok = (!!synth && typeof window.SpeechSynthesisUtterance === "function") || B2Audio.hasSaved();
     function pick() {
-      if (!ok) return;
+      if (!synth) return;
       var vs = synth.getVoices();
       var de = vs.filter(function (v) { return /^de([-_]|$)/i.test(v.lang); });
       de.sort(function (a, b) { return (/de[-_]DE/i.test(b.lang) ? 1 : 0) - (/de[-_]DE/i.test(a.lang) ? 1 : 0) || (b.localService ? 1 : 0) - (a.localService ? 1 : 0); });
       voice = de[0] || null;
     }
-    if (ok) {
+    if (synth && typeof window.SpeechSynthesisUtterance === "function") {
       pick();
       if (synth.addEventListener) synth.addEventListener("voiceschanged", pick); else synth.onvoiceschanged = pick;
-    } else document.documentElement.classList.add("no-speech");
-    function clean(t) {
-      return String(t).replace(/\([^)]*\)/g, "").replace(/\s*\/\s*/g, ", ").replace(/[+]\s*(Akk|Dat)\w*/g, "").replace(/…/g, "").replace(/\s+/g, " ").trim();
-    }
+    } else if (!ok) document.documentElement.classList.add("no-speech");
     return {
       ok: ok,
-      hasGerman: function () { return !!voice; },
+      hasGerman: function () { return !!voice || B2Audio.hasSaved(); },
       say: function (text) {
-        if (!ok || !text) return;
-        var spoken = clean(text);
+        if (!text) return;
+        var spoken = B2Audio.clean(text);
         if (!spoken) return;
-        pick(); // iOS may only expose voices after the first user interaction.
-        if (navigator.audioSession) { try { navigator.audioSession.type = "playback"; } catch (e) {} }
-        if (synth.speaking || synth.pending) synth.cancel();
-        if (synth.paused) synth.resume();
-        var u = new SpeechSynthesisUtterance(spoken);
-        u.lang = "de-DE"; if (voice) u.voice = voice; u.rate = settings.slow ? 0.65 : 0.9;
-        synth.speak(u);
+        if (synth && (synth.speaking || synth.pending)) synth.cancel();
+        B2Audio.say(spoken, function () {
+          if (!synth || typeof window.SpeechSynthesisUtterance !== "function") return;
+          pick(); // iOS may only expose voices after the first user interaction.
+          if (navigator.audioSession) { try { navigator.audioSession.type = "playback"; } catch (e) {} }
+          if (synth.speaking || synth.pending) synth.cancel();
+          if (synth.paused) synth.resume();
+          var u = new SpeechSynthesisUtterance(spoken);
+          u.lang = "de-DE"; if (voice) u.voice = voice; u.rate = settings.slow ? 0.65 : 0.9;
+          synth.speak(u);
+        }, settings.slow);
       },
-      stop: function () { if (ok) synth.cancel(); }
+      stop: function () { B2Audio.stop(); if (synth) synth.cancel(); }
     };
   })();
 

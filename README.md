@@ -12,7 +12,27 @@ A study site for the German B2 course. Each course day has a summary, grammar no
 - **iPhone / iPad (Safari):** open the site, tap **Share**, then **Add to Home Screen**.
 - **Android (Chrome):** open the site and tap **Install** on the home page banner, or use the menu → **Install app**.
 
-Once installed it opens full screen and works without internet. The speaker buttons read German words aloud with your device's German voice.
+Once installed it opens full screen and works without internet. Speaker buttons use saved German pronunciation clips when available, with your device's German voice as a fallback.
+
+### Saved German pronunciation
+
+The site can play saved MP3 pronunciation clips in both the main site and the separate flashcard site. A clip is generated once, then reused on every play without another Text-to-Speech request. If a clip has not been generated or cannot load, the speaker button uses the device's voice. Saved clips can be used offline when cached by the installed app; otherwise playback falls back to the device voice.
+
+The generator uses the free German `de_DE-thorsten-medium` Piper voice. It reads the German words, example sentences, dialogue phrases and speaking patterns from `classes/*.js`. No API key or Cloud account is needed. Install `piper-tts` and `lameenc` in a Python environment, then download the voice:
+
+```sh
+python3 -m pip install piper-tts lameenc
+python3 -m piper.download_voices --download-dir tools/models de_DE-thorsten-medium
+python3 tools/generate-audio.py
+```
+
+Generate a few clips first and listen to them:
+
+```sh
+python3 tools/generate-audio.py --generate --limit 10
+```
+
+Then run the same command without `--limit` to finish. Existing MP3s are skipped, so interrupted runs can resume. The voice model stays in the ignored `tools/models/` folder; only the generated MP3 files and index are published. The [Thorsten voice model](https://huggingface.co/rhasspy/piper-voices/blob/main/de/de_DE/thorsten/medium/MODEL_CARD) uses a CC0 dataset.
 
 Notes, flashcard progress and exercise answers are saved only on your own device. Classmates who use the same link each have their own.
 
