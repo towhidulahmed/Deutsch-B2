@@ -197,7 +197,7 @@ B2.addClass({
     { de: "gespannt auf", gram: "+ Akk", en: "curious about, eager to see", ex: "Ich bin gespannt auf Wetzlar." },
     { de: "spannend", en: "exciting, thrilling", ex: "Der Film ist spannend. Ich will wissen, was passiert." },
     { de: "sich entspannen", en: "to relax", ex: "Nach einem langen Tag muss ich mich erst mal entspannen." },
-    { de: "sich erholen", en: "to recover, to rest (≈ sich entspannen)", ex: "" },
+    { de: "sich erholen", en: "to recover, to rest (≈ sich entspannen)", ex: "Nach der Prüfung erhole ich mich am Wochenende." },
     { de: "glücklich über", gram: "+ Akk", en: "happy about", ex: "Er ist glücklich über die Geburt seines Sohnes." },
     { de: "interessant für", gram: "+ Akk", en: "interesting for", ex: "Der Vortrag war interessant für uns." },
     { de: "interessiert an", gram: "+ Dat", en: "interested in", ex: "Wir sind an einer Reise nach Spanien interessiert." },

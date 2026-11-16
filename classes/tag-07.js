@@ -1,0 +1,130 @@
+/* Tag 7: Reflexive Verben, Arbeitsblatt S. 40–43 (zweiter Teil). */
+B2.addClass({
+  id:"s07", nr:7,
+  title:"Reflexive Verben: Bedeutung und Präpositionen",
+  topic:"Arbeitsblatt S. 40–43; Übungen 32–34",
+  tags:["Reflexivpronomen","Präpositionen","Satzbildung","Bedeutung"],
+  summary:'<p>Wir erweitern den Wortschatz um reflexive Verben für Politik, Wirtschaft und Alltag. In den Übungen setzen wir das passende Pronomen und die feste Präposition ein, prüfen den <b>Kasus</b> und wandeln nominale Aussagen in vollständige Sätze um.</p>',
+  keyPoints:[
+    "<em>sich verlassen <b>auf</b> + Akk.</em> = auf jemanden zählen; <em>etwas verlassen</em> = einen Ort verlassen.",
+    "<em>sich verändern</em> = anders werden; <em>etwas verändern</em> = etwas anders machen.",
+    "<em>sich verschlechtern</em> und <em>sich verbessern</em> beschreiben eine Entwicklung; mit Objekt kann man eine Sache verbessern oder verschlechtern.",
+    "<em>sich vor etwas schützen</em>, <em>sich um etwas kümmern</em>, <em>sich auf etwas vorbereiten</em>: Präposition und Kasus gehören zum Lernwort.",
+    "Bei <em>Es handelt sich um …</em> ist <b>es</b> ein festes formales Subjekt."
+  ],
+  grammar:[
+    {title:"1. Weitere Verben mit und ohne sich",html:
+      '<div class="table-wrap"><table><thead><tr><th>Mit sich</th><th>Ohne sich</th></tr></thead><tbody><tr><td>Die Lage <b>verbessert sich</b>.</td><td>Die Maßnahme <b>verbessert</b> die Lage.</td></tr><tr><td>Die Lage <b>verschlechtert sich</b>.</td><td>Die Krise <b>verschlechtert</b> die Lage.</td></tr><tr><td>Die Stadt <b>verändert sich</b>.</td><td>Die Politik <b>verändert</b> die Stadt.</td></tr><tr><td>Er <b>verlässt sich auf</b> die Kollegin.</td><td>Er <b>verlässt</b> das Büro.</td></tr><tr><td>Sie <b>bereitet sich auf</b> die Prüfung vor.</td><td>Sie <b>bereitet</b> die Prüfung <b>vor</b>.</td></tr></tbody></table></div>'},
+    {title:"2. Sätze aus Stichwörtern bilden",html:
+      '<div class="prose"><p>Beim Umformen wird das Nomen zum Verb und das Bezugswort zum Subjekt: <em>die Entscheidung des Personalchefs für zwei Bewerber → Der Personalchef <b>entschied sich für</b> zwei Bewerber.</em> Die Zeitform ergibt sich aus dem Kontext. Bei <em>das Festhalten eines großen Teils der Bevölkerung an der traditionellen Denkweise</em> heißt es: <em>Ein großer Teil der Bevölkerung <b>hält an</b> der traditionellen Denkweise <b>fest</b>.</em> <em>festhalten an</em> ist hier nicht reflexiv.</p></div>'},
+    {title:"3. Bedeutung im Kontext",html:
+      '<div class="callout"><strong>Typische Stolperstellen</strong><br><em>Die Mietpreise <b>lassen sich</b> nicht unmittelbar senken</em> ist ein Passiversatz (= können nicht unmittelbar gesenkt werden). <em>Die Opposition <b>zeichnet sich durch</b> große Zugewinne <b>aus</b></em> ist eine feste Verbindung. <em>Die Geschäfte wollen <b>sich nicht mit</b> der bloßen Arbeitsplatzsicherung <b>begnügen</b></em> verlangt <em>mit + Dativ</em>.</div>'}
+  ],
+  vocab:[
+    {de:"sich stabilisieren",en:"to stabilize",ex:"Das System hat sich stabilisiert."},
+    {de:"sich verbessern",en:"to improve",ex:"Die Situation verbessert sich."},
+    {de:"sich vergrößern",en:"to grow / enlarge",ex:"Der Abstand vergrößert sich."},
+    {de:"sich verhalten",en:"to behave",ex:"Wie soll man sich im Notfall verhalten?"},
+    {de:"sich verlassen auf",gram:"+ Akk",en:"to rely on",ex:"Ich verlasse mich auf deine Zusage."},
+    {de:"sich verpflichten zu",gram:"+ Dat",en:"to commit to",ex:"Sie verpflichtet sich zur Einhaltung der Regeln."},
+    {de:"sich verschlechtern",en:"to deteriorate",ex:"Die Lage hat sich verschlechtert."},
+    {de:"sich verspäten",en:"to be late",ex:"Der Zug verspätet sich."},
+    {de:"sich vorbereiten auf",gram:"+ Akk",en:"to prepare for",ex:"Ich bereite mich auf die Prüfung vor."},
+    {de:"sich wandeln",en:"to change",ex:"Die Lage hat sich gewandelt."},
+    {de:"sich wehren gegen",gram:"+ Akk",en:"to resist",ex:"Die Ärzte wehren sich gegen Einschränkungen."},
+    {de:"sich weigern",en:"to refuse",ex:"Er weigert sich, die Aufgabe zu übernehmen."},
+    {de:"sich erhöhen",en:"to rise / increase",ex:"Die Zahl der Unfälle hat sich erhöht."},
+    {de:"sich ernähren",en:"to nourish oneself / eat",ex:"Sie ernährt sich gesund."},
+    {de:"sich erwärmen",en:"to warm up",ex:"Das Klima erwärmt sich."},
+    {de:"sich freuen auf",gram:"+ Akk",en:"to look forward to",ex:"Ich freue mich auf den Urlaub."},
+    {de:"sich freuen über",gram:"+ Akk",en:"to be pleased about",ex:"Sie freut sich über den Erfolg."},
+    {de:"sich fühlen",en:"to feel",ex:"Ich fühle mich heute besser."},
+    {de:"sich irren",en:"to be mistaken",ex:"Ich habe mich geirrt."},
+    {de:"sich informieren über",gram:"+ Akk",en:"to get information about",ex:"Informieren Sie sich über den Kurs."},
+    {de:"sich streiten um",gram:"+ Akk",en:"to argue over",ex:"Sie streiten sich um die Arbeitsplätze."},
+    {de:"sich lohnen",en:"to be worth it",ex:"Die Vorbereitung lohnt sich."},
+    {de:"sich richten gegen",gram:"+ Akk",en:"to be directed against",ex:"Die Proteste richten sich gegen die Reform."},
+    {de:"sich schützen vor",gram:"+ Dat",en:"to protect oneself from",ex:"Sie schützen sich vor der Kälte."},
+    {de:"sich sehnen nach",gram:"+ Dat",en:"to long for",ex:"Er sehnt sich nach seiner Heimat."},
+    {de:"sich beschäftigen mit",gram:"+ Dat",en:"to deal with",ex:"Sie beschäftigt sich mit dem Thema."},
+    {de:"sich bewerben um",gram:"+ Akk",en:"to apply for",ex:"Sie bewirbt sich um eine Stelle."},
+    {de:"sich beteiligen an",gram:"+ Dat",en:"to participate in",ex:"Er beteiligt sich an der Diskussion."},
+    {de:"sich entscheiden für",gram:"+ Akk",en:"to choose",ex:"Sie entscheiden sich für das Angebot."},
+    {de:"sich einigen auf",gram:"+ Akk",en:"to agree on",ex:"Sie einigen sich auf einen Termin."},
+    {de:"sich ergeben aus",gram:"+ Dat",en:"to follow from",ex:"Daraus ergeben sich neue Fragen."},
+    {de:"sich abzeichnen",en:"to emerge",ex:"Eine Einigung zeichnet sich ab."},
+    {de:"sich durchsetzen",en:"to prevail",ex:"Sie konnte sich nicht durchsetzen."},
+    {de:"sich auszeichnen durch",gram:"+ Akk",en:"to be characterized by",ex:"Das Modell zeichnet sich durch Qualität aus."}
+  ],
+  dialogues:[{
+    title:"Vor dem Examen",situation:"Zwei Freunde sprechen über Vorbereitung und Unterstützung.",
+    lines:[
+      {s:"Nina",de:"Ich bereite mich auf das Examen vor, aber ich fühle mich noch unsicher.",en:"I'm preparing for the exam, but I still feel unsure."},
+      {s:"Ali",de:"Du kannst dich auf mich verlassen. Ich frage dich morgen ab.",en:"You can count on me. I'll quiz you tomorrow."},
+      {s:"Nina",de:"Danke! Ich muss mich besser auf die wichtigsten Themen konzentrieren.",en:"Thanks! I need to focus more on the most important topics."},
+      {s:"Ali",de:"Dann einigen wir uns auf drei Themen für morgen.",en:"Then let's agree on three topics for tomorrow."}
+    ],
+    phrases:[{de:"sich auf etwas vorbereiten",en:"to prepare for something"},{de:"sich auf jemanden verlassen",en:"to rely on someone"}]
+  }],
+  exercises:[
+    {title:"Übung 32: Das richtige Reflexivpronomen",intro:"Ergänze Pronomen und feste Präpositionen aus dem Arbeitsblatt.",items:[
+      {q:"Die Deutschen beschweren [[sich]] [[über]] den Euro."},
+      {q:"Auf solche Umfragen kann man [[sich]] nicht unbedingt [[verlassen]]."},
+      {q:"Die Ministerpräsidenten [[setzten]] [[sich]] gegen den Vorwurf [[zur Wehr]]."},
+      {q:"Bei den Hochrechnungen [[zeichnen]] [[sich]] große Zugewinne der Opposition [[ab]]."},
+      {q:"Ein Politiker darf [[sich]] nicht [[scheuen]], unbequeme Wahrheiten auszusprechen."},
+      {q:"Die Gewerkschaften wollen [[sich]] nicht [[mit]] der bloßen Arbeitsplatzsicherung [[begnügen]]."},
+      {q:"Auch ein Experte kann [[sich]] mit seiner Theorie [[auf]] eine bekannte Autorität [[stützen]]."},
+      {q:"Wir sollten [[uns]] nicht [[um]] vorgefertigte Meinungen streiten."},
+      {q:"Wer [[sich]] lange [[bewährt]] hat, wird nicht so leicht aufgegeben."},
+      {q:"Von rechtsextremen Äußerungen kann man [[sich]] nicht deutlich genug [[distanzieren]]."},
+      {q:"Die Gewerkschaften haben [[sich]] [[auf]] einen langen Arbeitskampf [[eingestellt]]."}
+    ]},
+    {title:"Übung 33: Reflexiv oder nicht?",intro:"Bilde Sätze zu den sechzehn Angaben des Arbeitsblatts.",items:[
+      {q:"Die Regierungschefs [[entschieden sich]] für den Bau eines Eisenbahntunnels."},
+      {q:"Es ist schwierig, [[sich]] immer richtig zu [[verhalten]]."},
+      {q:"Die Klimaveränderungen [[wirken sich]] auf Flora und Fauna [[aus]]."},
+      {q:"Wir [[bemühen uns]], unsere Kenntnisse zu vertiefen."},
+      {q:"Zurzeit [[beschäftigt er sich]] mit Fragen der künstlichen Intelligenz."},
+      {q:"Mehrere Staaten [[beteiligen sich]] an dem Entwicklungshilfeprojekt."},
+      {q:"Zahlreiche Staaten [[haben sich]] zu Industrieländern [[entwickelt]]."},
+      {q:"Das Pharmaunternehmen Bayer [[entwickelt]] ein neues Medikament."},
+      {q:"Im Sommer [[erhöht sich]] der Ozongehalt der Luft."},
+      {q:"Manche Politiker können [[sich]] nur schlecht [[an]] Vergangenes [[erinnern]]."},
+      {q:"Wir müssen [[uns]] an die veränderte Arbeitswelt [[gewöhnen]]."},
+      {q:"Seine Kritik [[richtet sich]] gegen Korruption in der Politik."},
+      {q:"Die Arbeitslosigkeit [[hat sich verringert]]."},
+      {q:"Die Regierung [[verringerte]] die Arbeitslosigkeit.",note:"Mit einem Akkusativobjekt ist verringern nicht reflexiv."},
+      {q:"Er [[hat sich]] gut auf sein Referat [[vorbereitet]]."},
+      {q:"Manche [[zweifeln]] daran, dass sich ein Studium [[lohnt]]."}
+    ]},
+    {title:"Übung 34: Nominalgruppe → Satz",intro:"Ergänze die Verbform. Einige Verben sind nicht reflexiv.",items:[
+      {q:"Die Luftverschmutzung [[wirkt sich]] auf die Umwelt [[aus]]."},
+      {q:"Der Text [[wurde verfälscht]]."},
+      {q:"Die Unternehmer [[orientieren sich]] an den Bedürfnissen der Arbeitnehmer."},
+      {q:"Der Verfasser [[konzentriert sich]] auf das Wesentliche."},
+      {q:"Die politische Lage [[hat sich verschärft]]."},
+      {q:"Die Verkehrsteilnehmer [[wurden]] vor Schnee und Eis [[gewarnt]]."},
+      {q:"Die Firma [[brach]] zusammen."},
+      {q:"Der Kandidat [[bereitete sich]] auf das Examen [[vor]]."},
+      {q:"Das Visum [[wurde verlängert]]."},
+      {q:"Die Opposition [[stimmte]] den Plänen der Regierung [[zu]]."},
+      {q:"Das Unternehmen [[orientiert sich]] an der Entwicklung der Wirtschaft."},
+      {q:"Der Kanzler [[entschloss sich]], Reformen durchzuführen."},
+      {q:"Die Zweigstelle [[wurde geschlossen]]."},
+      {q:"Der Gemeinderat [[bemühte sich]] um die Freilassung der Geiseln."},
+      {q:"Neue Produktionsmethoden [[wurden entwickelt]]."},
+      {q:"Die Bevölkerung [[wurde]] durch den Selbstmordattentäter [[gefährdet]]."},
+      {q:"Der Euro-Kurs [[hat sich erholt]]."},
+      {q:"Die Niederschläge [[ließen nach]]."},
+      {q:"Die Zeugen [[entlasteten]] den Angeklagten."},
+      {q:"Die Organisation [[setzt sich]] für Menschenrechte [[ein]]."},
+      {q:"Die Alten [[erinnern sich]] an ihre Kindheit."},
+      {q:"Der Bewerber [[eignet sich]] für Führungspositionen."},
+      {q:"Ein großer Teil der Bevölkerung [[hält]] an der traditionellen Denkweise [[fest]].",note:"An etwas festhalten ist hier nicht reflexiv."},
+      {q:"Der Raubbau an natürlichen Ressourcen [[wurde fortgesetzt]]."},
+      {q:"Man [[zweifelt]] am Ergebnis der Untersuchung."},
+      {q:"Der Finanzminister [[entschied sich]], die UMTS-Rechte zu verkaufen."}
+    ]}
+  ]
+});

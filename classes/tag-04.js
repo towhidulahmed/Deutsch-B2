@@ -86,7 +86,8 @@ B2.addClass({
         '<tr><td>Gegenwart</td><td><b>Wenn</b> ich einen Hund <b>hätte</b>, wäre ich weniger allein.</td><td><b>Hätte</b> ich einen Hund, wäre ich weniger allein.</td></tr>' +
         '<tr><td>Gegenwart</td><td><b>Wenn</b> wir mal nach München reisen <b>würden</b>, würden wir ins Hofbräuhaus gehen.</td><td><b>Würden</b> wir mal nach München reisen, würden wir ins Hofbräuhaus gehen.</td></tr>' +
         '<tr><td>Vergangenheit</td><td><b>Wenn</b> ich an die Ostsee <b>gefahren wäre</b>, wäre ich segeln gegangen.</td><td><b>Wäre</b> ich an die Ostsee <b>gefahren</b>, wäre ich segeln gegangen.</td></tr>' +
-        '<tr><td>Passiv</td><td><b>Wenn</b> ich nach Bayern <b>eingeladen würde</b>, …</td><td>Vergangenheit: <b>Wenn</b> ich nach Bayern <b>eingeladen worden wäre</b>, …</td></tr>' +
+        '<tr><td>Passiv, Gegenwart</td><td><b>Wenn</b> ich nach Bayern <b>eingeladen würde</b>, …</td><td><b>Würde</b> ich nach Bayern <b>eingeladen</b>, …</td></tr>' +
+        '<tr><td>Passiv, Vergangenheit</td><td><b>Wenn</b> ich nach Bayern <b>eingeladen worden wäre</b>, …</td><td><b>Wäre</b> ich nach Bayern <b>eingeladen worden</b>, …</td></tr>' +
         '</tbody></table></div>' +
         '<div class="callout"><strong>Wünsche an andere: Es wäre schön, wenn …</strong><br>So sagt man Kritik freundlich: <em>Du räumst dein Zimmer nie auf. → Es wäre nett, wenn du regelmäßig dein Zimmer <b>aufräumen würdest</b>.</em> In der Vergangenheit: <em>Es wäre gut gewesen, wenn du regelmäßig dein Zimmer <b>aufgeräumt hättest</b>.</em></div>' +
         '<div class="callout"><strong>Zwei Mal würde?</strong><br><em>Wenn wir reisen würden, würden wir …</em> ist richtig, klingt aber schwer. Man kann im Wenn-Satz die eigene Form nehmen, wenn es eine gibt: <em>Wenn ich Zeit <b>hätte</b> …, Wenn ich in Berlin zu tun <b>hätte</b> …</em></div>'

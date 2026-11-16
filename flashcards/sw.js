@@ -1,6 +1,6 @@
 /* Offline support for the flashcard site. Its own scope (flashcards/), so offline it
    falls back to this site's page, not the main site's. Network first, then the saved copy. */
-var CACHE = "b2-karten-v4";
+var CACHE = "b2-karten-v5";
 var SHELL = [
   "./",
   "index.html",
@@ -13,7 +13,8 @@ var SHELL = [
   "../classes/tag-01.js",
   "../classes/tag-02.js",
   "../classes/tag-03.js",
-  "../classes/tag-04.js"
+  "../classes/tag-04.js",
+  "../classes/tag-05.js", "../classes/tag-06.js", "../classes/tag-07.js", "../classes/tag-08.js"
 ];
 
 self.addEventListener("install", function (e) {

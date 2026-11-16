@@ -1,6 +1,6 @@
 /* Offline support. When online, pages and class files always come fresh from the
    server (new classes appear right away); offline, the last saved copy is used. */
-var CACHE = "b2-v7";
+var CACHE = "b2-v8";
 var SHELL = [
   "./",
   "index.html",
@@ -14,6 +14,7 @@ var SHELL = [
   "classes/tag-02.js",
   "classes/tag-03.js",
   "classes/tag-04.js",
+  "classes/tag-05.js", "classes/tag-06.js", "classes/tag-07.js", "classes/tag-08.js",
   "classes/muster-100.js"
 ];
 
