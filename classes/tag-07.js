@@ -54,7 +54,20 @@ B2.addClass({
     {de:"sich ergeben aus",gram:"+ Dat",en:"to follow from",ex:"Daraus ergeben sich neue Fragen."},
     {de:"sich abzeichnen",en:"to emerge",ex:"Eine Einigung zeichnet sich ab."},
     {de:"sich durchsetzen",en:"to prevail",ex:"Sie konnte sich nicht durchsetzen."},
-    {de:"sich auszeichnen durch",gram:"+ Akk",en:"to be characterized by",ex:"Das Modell zeichnet sich durch Qualität aus."}
+    {de:"sich auszeichnen durch",gram:"+ Akk",en:"to be characterized by",ex:"Das Modell zeichnet sich durch Qualität aus."},
+    {de:"die Umfrage",en:"survey / poll",ex:"Die Umfrage zeigt unterschiedliche Meinungen."},
+    {de:"skeptisch",en:"skeptical",ex:"Sie ist gegenüber dem Ergebnis der Umfrage skeptisch."},
+    {de:"auf der Hut sein",en:"to be on one's guard",ex:"Bei unbekannten Angeboten sollte man auf der Hut sein."},
+    {de:"bloß",en:"mere / only",ex:"Die bloße Behauptung reicht als Beweis nicht aus."},
+    {de:"der Vorwurf",en:"accusation / reproach",ex:"Der Minister wies den Vorwurf zurück."},
+    {de:"verdächtig",en:"suspicious",ex:"Sein plötzliches Verschwinden war verdächtig."},
+    {de:"die Schüchternheit",en:"shyness",ex:"Ihre Schüchternheit hinderte sie nicht an der Teilnahme."},
+    {de:"sich scheuen",en:"to shy away from",ex:"Er scheut sich, vor vielen Menschen zu sprechen."},
+    {de:"berühmt",en:"famous",ex:"Die Stadt ist für ihre Museen berühmt."},
+    {de:"berüchtigt",en:"notorious",ex:"Die Straße ist für ihre vielen Unfälle berüchtigt."},
+    {de:"befürchten",en:"to fear / expect something bad",ex:"Sie befürchtet, dass der Zug ausfällt."},
+    {de:"die Furcht",en:"fear",ex:"Die Furcht vor einem Unfall ist verständlich."},
+    {de:"beschwipst",en:"slightly tipsy",ex:"Nach einem Glas Wein war er ein wenig beschwipst."}
   ],
   dialogues:[{
     title:"Vor dem Examen",situation:"Zwei Freunde sprechen über Vorbereitung und Unterstützung.",

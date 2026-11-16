@@ -34,7 +34,7 @@ B2.addClass({
     {de:"sich ausdehnen",en:"to expand",ex:"Die Wüste dehnt sich aus."},
     {de:"sich auseinandersetzen mit",gram:"+ Dat",en:"to engage with / deal with",ex:"Sie setzt sich mit dem Problem auseinander."},
     {de:"sich auswirken auf",gram:"+ Akk",en:"to affect",ex:"Die Erwärmung wirkt sich auf das Klima aus."},
-    {de:"sich befinden",en:"to be located",ex:"Die Firma befindet sich im Hochhaus."},
+    {de:"sich befinden in",gram:"+ Dat",en:"to be located in",ex:"Die Firma befindet sich im Hochhaus."},
     {de:"sich begnügen mit",gram:"+ Dat",en:"to be content with",ex:"Wir dürfen uns nicht mit Provisorien begnügen."},
     {de:"sich bemühen um",gram:"+ Akk",en:"to strive for",ex:"Sie bemühen sich um Verbesserungen."},
     {de:"sich berufen auf",gram:"+ Akk",en:"to invoke / cite",ex:"Der Botschafter beruft sich auf Anweisungen."},
@@ -71,7 +71,17 @@ B2.addClass({
     {de:"sich erregen über",gram:"+ Akk",en:"to get upset about",ex:"Er erregt sich über die Nachricht."},
     {de:"sich schämen für",gram:"+ Akk",en:"to be ashamed of",ex:"Sie schämt sich für ihren Fehler."},
     {de:"sich streiten über",gram:"+ Akk",en:"to argue about",ex:"Sie streiten sich über den Plan."},
-    {de:"sich steigern",en:"to increase",ex:"Seine Leistung hat sich gesteigert."}
+    {de:"sich steigern",en:"to increase",ex:"Seine Leistung hat sich gesteigert."},
+    {de:"das Provisorium",en:"temporary arrangement",ex:"Die Schule ist bis zum Neubau ein Provisorium."},
+    {de:"das Bildungswesen",en:"education system",ex:"Die Reform soll das Bildungswesen verbessern."},
+    {de:"das Verfahren",en:"procedure / process",ex:"Das neue Verfahren hat sich bewährt."},
+    {de:"die Schranke",en:"barrier / gate",ex:"Vor dem Bahnübergang ist die Schranke geschlossen."},
+    {de:"erläutern",en:"to explain in detail",ex:"Die Lehrerin erläutert das Verfahren."},
+    {de:"sanft",en:"gentle / gently",ex:"Die Ärztin erklärt den Eingriff mit sanfter Stimme."},
+    {de:"das Schmiergeld",en:"bribe money",ex:"Der Beamte nahm kein Schmiergeld an."},
+    {de:"das Styropor",en:"polystyrene foam",ex:"Die Verpackung besteht aus Styropor."},
+    {de:"unvorstellbar",en:"unimaginable",ex:"Eine Welt ohne Sprache ist unvorstellbar."},
+    {de:"anstreben",en:"to strive for / aim at",ex:"Die Regierung strebt eine Reform an."}
   ],
   dialogues:[{
     title:"Ein neuer Kollege",situation:"Vorstellen und sich vorstellen im Büro.",

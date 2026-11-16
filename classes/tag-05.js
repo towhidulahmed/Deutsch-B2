@@ -12,7 +12,8 @@ B2.addClass({
     "Possessivartikel werden wie <em>ein</em> dekliniert: <em>sein Auto</em> (Akk. Neutrum), <em>seinen Beruf</em> (Akk. Maskulinum), <em>seinem Rucksack</em> (Dat. Maskulinum).",
     "<b>indem</b> antwortet auf <em>Wie? / Wodurch?</em>: <em>Man lernt, indem man täglich übt.</em> Das finite Verb steht am Ende.",
     "<b>damit</b> drückt ein Ziel aus; <b>sodass</b> eine Folge. <em>Ich schließe das Rad ab, damit es nicht gestohlen wird.</em>",
-    "Nominale Angaben und Nebensätze: <em>Wegen des Regens … → Weil es stark regnete, …</em>; <em>Beim Abschied … → Als sie sich verabschiedeten, …</em>"
+    "Nominale Angaben und Nebensätze: <em>Wegen des Regens … → Weil es stark regnete, …</em>; <em>Beim Abschied … → Als sie sich verabschiedeten, …</em>",
+    "<b>wenn</b> leitet eine Bedingung oder einen wiederholten Zeitpunkt ein; <b>wann</b> fragt nach einem Zeitpunkt: <em>Wenn es regnet, bleiben wir zu Hause. Wann beginnt der Kurs?</em>"
   ],
   grammar: [
     { title: "1. Besitzer und Endung getrennt bestimmen", html:
@@ -24,7 +25,7 @@ B2.addClass({
       '<div class="table-wrap"><table><thead><tr><th>Nebensatz</th><th>Nominale Angabe</th></tr></thead><tbody><tr><td>indem man täglich trainiert</td><td>durch tägliches Training</td></tr><tr><td>indem man sparsam ist</td><td>durch Sparsamkeit</td></tr><tr><td>indem man sich teilt</td><td>durch Teilung</td></tr></tbody></table></div>' },
     { title: "3. Welche Subjunktion passt?", html:
       '<div class="table-wrap"><table><thead><tr><th>Bedeutung</th><th>Wort</th><th>Beispiel</th></tr></thead><tbody><tr><td>Ziel</td><td>damit / um … zu</td><td>Ich lerne, damit ich die Prüfung bestehe.</td></tr><tr><td>Folge</td><td>sodass / so … dass</td><td>Es war so dunkel, dass ich nichts sah.</td></tr><tr><td>Grund</td><td>weil / da</td><td>Weil es regnet, bleiben wir hier.</td></tr><tr><td>Gegensatz</td><td>obwohl</td><td>Obwohl es regnet, gehen wir los.</td></tr><tr><td>Zeit</td><td>als, wenn, während, bevor, nachdem, bis, seitdem, solange</td><td>Als ich das Abitur machte, war ich 18.</td></tr><tr><td>Bedingung</td><td>wenn / falls</td><td>Wenn ich Zeit habe, komme ich.</td></tr><tr><td>Art und Weise</td><td>indem</td><td>Ich lerne, indem ich übe.</td></tr></tbody></table></div>' +
-      '<div class="callout"><strong>Wichtig</strong><br>Ein einmaliges Ereignis in der Vergangenheit: <em>als</em>. Wiederholung, Gegenwart oder Zukunft: <em>wenn</em>. Bei gleichem Subjekt kann ein Ziel mit <em>um … zu</em> formuliert werden.</div>' },
+      '<div class="callout"><strong>Wichtig</strong><br>Ein einmaliges Ereignis in der Vergangenheit: <em>als</em>. Wiederholung, Gegenwart oder Zukunft: <em>wenn</em>. <em>Wann?</em> ist dagegen eine Frage nach der Zeit; auch in indirekten Fragen: <em>Ich weiß nicht, wann er kommt.</em> Bei gleichem Subjekt kann ein Ziel mit <em>um … zu</em> formuliert werden.</div>' },
     { title: "4. Nominale Angaben in Nebensätze umformen", html:
       '<div class="table-wrap"><table><thead><tr><th>Angabe</th><th>Nebensatz</th></tr></thead><tbody><tr><td>wegen des starken Regens</td><td>weil es stark regnete</td></tr><tr><td>trotz seiner Einladung</td><td>obwohl er uns eingeladen hatte</td></tr><tr><td>seit der Öffnung der Grenze</td><td>seitdem die Grenze geöffnet wurde</td></tr><tr><td>vor dem Verlassen des Büros</td><td>bevor Sie das Büro verlassen</td></tr><tr><td>nach dem Vorzeigen des Passes</td><td>nachdem er seinen Pass vorgezeigt hatte</td></tr><tr><td>bei genauer Beachtung der Regeln</td><td>wenn man die Regeln genau beachtet</td></tr></tbody></table></div>' }
   ],
@@ -45,7 +46,15 @@ B2.addClass({
     {de:"das Abiturzeugnis",en:"school-leaving certificate",ex:"Ich brauche eine Kopie meines Abiturzeugnisses."},
     {de:"die Gehaltserhöhung",en:"pay raise",ex:"Er bat um eine Gehaltserhöhung."},
     {de:"der Kreditsachbearbeiter",en:"loan officer",ex:"Die Bank sucht einen Kreditsachbearbeiter."},
-    {de:"der Spielplatz",en:"playground",ex:"Die Kinder gehen zum Spielplatz."}
+    {de:"der Spielplatz",en:"playground",ex:"Die Kinder gehen zum Spielplatz."},
+    {de:"das Missgeschick",en:"mishap",ex:"Ein kleines Missgeschick kann jedem passieren."},
+    {de:"ungeschickt",en:"clumsy",ex:"Er war ungeschickt und ließ die Tasse fallen."},
+    {de:"begabt",en:"talented / gifted",ex:"Sie ist sprachlich sehr begabt."},
+    {de:"die Begabung",en:"talent / aptitude",ex:"Ihre Begabung für Sprachen hilft ihr beim Lernen."},
+    {de:"der Schiedsrichter",en:"referee",ex:"Der Schiedsrichter unterbrach das Spiel nach dem Foul."},
+    {de:"jemanden foulen",en:"to foul someone",ex:"Der Spieler foulte seinen Gegner."},
+    {de:"geschwind",en:"quick / swiftly",ex:"Er lief geschwind zum Bahnhof."},
+    {de:"spiegelglatt",en:"slippery as ice",ex:"Nach dem Frost ist die Straße spiegelglatt."}
   ],
   dialogues: [{
     title:"Vor der Prüfung", situation:"Zwei Lernende wiederholen Possessivartikel und indem-Sätze.",

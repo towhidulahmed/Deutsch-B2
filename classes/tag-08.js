@@ -44,7 +44,18 @@ B2.addClass({
     {de:"verantwortlich sein für",gram:"+ Akk",en:"to be responsible for",ex:"Der Sturm ist für die Schäden verantwortlich."},
     {de:"zurückzuführen sein auf",gram:"+ Akk",en:"to be attributable to",ex:"Die Schäden sind auf den Sturm zurückzuführen."},
     {de:"infolgedessen",en:"consequently",ex:"Es regnete; infolgedessen fiel das Spiel aus."},
-    {de:"deshalb",en:"therefore",ex:"Es regnete; deshalb blieben wir zu Hause."}
+    {de:"deshalb",en:"therefore",ex:"Es regnete; deshalb blieben wir zu Hause."},
+    {de:"anspruchsvoll",en:"demanding / sophisticated",ex:"Die Aufgabe ist anspruchsvoll, aber lösbar."},
+    {de:"der Anspruch",en:"claim / expectation",ex:"Die Kunden haben hohe Ansprüche an die Qualität."},
+    {de:"auf Wünsche eingehen",gram:"+ Akk",en:"to respond to wishes",ex:"Die Lehrerin geht auf die Wünsche der Gruppe ein."},
+    {de:"der Mangel",en:"shortage / deficiency",ex:"Es besteht ein Mangel an Fachkräften."},
+    {de:"es mangelt an",gram:"+ Dat",en:"there is a lack of",ex:"Es mangelt uns an Zeit."},
+    {de:"der Defekt",en:"technical fault",ex:"Wegen eines Defekts blieb der Aufzug stehen."},
+    {de:"der technische Mangel",en:"technical defect",ex:"Der technische Mangel muss behoben werden."},
+    {de:"abwenden",en:"to avert",ex:"Die Maßnahmen konnten die Gefahr abwenden."},
+    {de:"verwalten",en:"to administer / manage",ex:"Die Stadt verwaltet mehrere Gebäude."},
+    {de:"die Verwaltung",en:"administration",ex:"Die Verwaltung bearbeitet den Antrag."},
+    {de:"das Verhalten",en:"behavior",ex:"Sein Verhalten war in der Situation angemessen."}
   ],
   dialogues:[{
     title:"Warum steigen die Kosten?",situation:"Grund und Folge in einem Gespräch erklären.",
