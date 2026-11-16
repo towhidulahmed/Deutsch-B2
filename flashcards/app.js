@@ -71,6 +71,7 @@
     var voice = null;
     var ok = !!synth && typeof window.SpeechSynthesisUtterance === "function";
     function pick() {
+      if (!ok) return;
       var vs = synth.getVoices();
       var de = vs.filter(function (v) { return /^de([-_]|$)/i.test(v.lang); });
       de.sort(function (a, b) { return (/de[-_]DE/i.test(b.lang) ? 1 : 0) - (/de[-_]DE/i.test(a.lang) ? 1 : 0) || (b.localService ? 1 : 0) - (a.localService ? 1 : 0); });
@@ -88,8 +89,13 @@
       hasGerman: function () { return !!voice; },
       say: function (text) {
         if (!ok || !text) return;
-        synth.cancel();
-        var u = new SpeechSynthesisUtterance(clean(text));
+        var spoken = clean(text);
+        if (!spoken) return;
+        pick(); // iOS may only expose voices after the first user interaction.
+        if (navigator.audioSession) { try { navigator.audioSession.type = "playback"; } catch (e) {} }
+        if (synth.speaking || synth.pending) synth.cancel();
+        if (synth.paused) synth.resume();
+        var u = new SpeechSynthesisUtterance(spoken);
         u.lang = "de-DE"; if (voice) u.voice = voice; u.rate = settings.slow ? 0.65 : 0.9;
         synth.speak(u);
       },

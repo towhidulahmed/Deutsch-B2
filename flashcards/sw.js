@@ -1,6 +1,6 @@
 /* Offline support for the flashcard site. Its own scope (flashcards/), so offline it
    falls back to this site's page, not the main site's. Network first, then the saved copy. */
-var CACHE = "b2-karten-v6";
+var CACHE = "b2-karten-v7";
 var SHELL = [
   "./",
   "index.html",

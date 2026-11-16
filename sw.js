@@ -1,6 +1,6 @@
 /* Offline support. When online, pages and class files always come fresh from the
    server (new classes appear right away); offline, the last saved copy is used. */
-var CACHE = "b2-v9";
+var CACHE = "b2-v10";
 var SHELL = [
   "./",
   "index.html",

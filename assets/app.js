@@ -96,31 +96,34 @@
   var speech = (function () {
     var synth = window.speechSynthesis;
     var voice = null;
+    var ok = !!synth && typeof window.SpeechSynthesisUtterance === "function";
     function pick() {
-      if (!synth) return;
+      if (!ok) return;
       var vs = synth.getVoices();
-      if (!vs.length) return;
       var de = vs.filter(function (v) { return /^de([-_]|$)/i.test(v.lang); });
       de.sort(function (a, b) { return (/de[-_]DE/i.test(b.lang) ? 1 : 0) - (/de[-_]DE/i.test(a.lang) ? 1 : 0) || (b.localService ? 1 : 0) - (a.localService ? 1 : 0); });
       voice = de[0] || null;
-      document.documentElement.classList.toggle("no-speech", !voice);
     }
-    if (!synth || typeof window.SpeechSynthesisUtterance !== "function") {
+    if (!ok) {
       document.documentElement.classList.add("no-speech");
     } else {
       pick();
       if (synth.addEventListener) synth.addEventListener("voiceschanged", pick); else synth.onvoiceschanged = pick;
-      // No voices at all after a while: hide the buttons (they come back if voices load later).
-      setTimeout(function () { if (!synth.getVoices().length) document.documentElement.classList.add("no-speech"); }, 3000);
     }
     function clean(t) {
       return String(t).replace(/\([^)]*\)/g, "").replace(/\s*\/\s*/g, ", ").replace(/[+]\s*(Akk|Dat)\w*/g, "").replace(/\s+/g, " ").trim();
     }
     return {
       say: function (text) {
-        if (!synth) return;
-        synth.cancel();
-        var u = new SpeechSynthesisUtterance(clean(text));
+        if (!ok) return;
+        var spoken = clean(text);
+        if (!spoken) return;
+        pick(); // iOS may only expose voices after the first user interaction.
+        // A home-screen app can inherit iOS's silent audio session after reopening.
+        if (navigator.audioSession) { try { navigator.audioSession.type = "playback"; } catch (e) {} }
+        if (synth.speaking || synth.pending) synth.cancel();
+        if (synth.paused) synth.resume();
+        var u = new SpeechSynthesisUtterance(spoken);
         u.lang = "de-DE"; if (voice) u.voice = voice; u.rate = 0.9;
         synth.speak(u);
       }
